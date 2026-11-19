@@ -12,13 +12,18 @@
 }
 
 .toggleButton {
-  min-height: 40px;
+  min-height: 44px;
   padding: var(--space-1) var(--space-4);
   border: 0;
   border-radius: var(--radius-pill);
   background: transparent;
   font-weight: 600;
   cursor: pointer;
+  transition: background-color var(--duration);
+}
+
+.toggleButton:hover {
+  background: var(--color-surface);
 }
 
 .toggleButton[aria-pressed="true"] {
@@ -26,13 +31,18 @@
   color: var(--color-primary-contrast);
 }
 
+.tableWrap {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
 .table {
   width: 100%;
   border-collapse: collapse;
-  background: var(--color-surface);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  border: 1px solid var(--color-border);
+  font-variant-numeric: tabular-nums;
 }
 
 .table th,
@@ -42,20 +52,79 @@
   border-bottom: 1px solid var(--color-border);
 }
 
+.table tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
 .table thead th {
   background: var(--color-surface-alt);
   font-size: var(--text-sm);
+  color: var(--color-muted);
 }
 
 .table tbody th {
   font-weight: 600;
 }
 
-.you {
+.table tbody tr:nth-child(even) {
+  background: var(--color-bg);
+}
+
+.rank {
+  width: 4.5rem;
+  text-align: center !important;
+}
+
+.number {
+  text-align: right !important;
+}
+
+/* The signed-in learner's row: tinted, with a bar on the left and a "You" tag. */
+.table tbody tr.you {
   background: var(--color-primary-soft);
 }
 
+.you > :first-child {
+  box-shadow: inset 4px 0 0 var(--color-primary);
+}
+
+.you th,
+.you td {
+  font-weight: 800;
+}
+
 .youTag {
-  color: var(--color-muted);
-  font-weight: 400;
+  display: inline-block;
+  margin-left: var(--space-2);
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--color-primary);
+  color: var(--color-primary-contrast);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.empty {
+  padding: var(--space-5);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.join {
+  margin-top: var(--space-5);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-accent-soft);
+  border: 1px solid var(--color-accent);
+}
+
+@media (max-width: 30rem) {
+  .table th,
+  .table td {
+    padding: var(--space-3) var(--space-2);
+  }
+  .rank {
+    width: 3rem;
+  }
 }
