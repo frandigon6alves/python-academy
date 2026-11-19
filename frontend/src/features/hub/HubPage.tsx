@@ -9,7 +9,7 @@ import { Link } from "@/i18n/navigation";
 import { useMe } from "@/lib/api/hooks/auth";
 import { useCourse, useCourses } from "@/lib/api/hooks/content";
 import { useGamification, useProgress } from "@/lib/api/hooks/learning";
-import type { ProgressOverview } from "@/lib/api/types";
+import type { CourseSummary, ProgressOverview } from "@/lib/api/types";
 import { BadgeGrid } from "./BadgeGrid";
 import { LevelCard } from "./LevelCard";
 import { QuestList } from "./QuestList";
@@ -20,6 +20,8 @@ export function HubPage() {
   const { data: me } = useMe();
   const gamification = useGamification();
   const progress = useProgress();
+  // Started here, in parallel with the learner queries, rather than after them.
+  const courses = useCourses();
 
   if (gamification.isPending || progress.isPending) return <HubSkeleton />;
   if (gamification.isError)
@@ -36,7 +38,7 @@ export function HubPage() {
       <div className={styles.columns}>
         <div className={styles.stack}>
           <ContinueCard progress={progress.data} />
-          <CourseProgressList progress={progress.data} />
+          <CourseProgressList progress={progress.data} courses={courses.data} />
         </div>
         <QuestList quests={gamification.data.quests} />
       </div>
@@ -112,10 +114,15 @@ function ContinueCard({ progress }: { progress: ProgressOverview }) {
   );
 }
 
-function CourseProgressList({ progress }: { progress: ProgressOverview }) {
+interface CourseProgressListProps {
+  progress: ProgressOverview;
+  /** Course titles; the slug is shown until they have loaded. */
+  courses: CourseSummary[] | undefined;
+}
+
+function CourseProgressList({ progress, courses }: CourseProgressListProps) {
   const t = useTranslations();
-  const courses = useCourses();
-  const titleOf = (slug: string) => courses.data?.find((course) => course.slug === slug)?.title ?? slug;
+  const titleOf = (slug: string) => courses?.find((course) => course.slug === slug)?.title ?? slug;
 
   return (
     <section className={styles.card} aria-labelledby="course-progress-title">
