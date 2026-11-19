@@ -1,0 +1,37 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { api } from "../client";
+import { queryKeys } from "../query-keys";
+import type { Locale, Theme, User } from "../types";
+
+export interface SettingsChanges {
+  display_name?: string;
+  language?: Locale;
+  theme?: Theme;
+}
+
+export function useUpdateSettings() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (changes: SettingsChanges) => api<User>("/users/me", { method: "PATCH", body: changes }),
+    onSuccess: (user) => queryClient.setQueryData(queryKeys.me, user),
+  });
+}
+
+export function useChangePassword() {
+  return useMutation({
+    mutationFn: (body: { current_password: string; new_password: string }) =>
+      api<void>("/users/me/password", { method: "POST", body }),
+  });
+}
+
+export function useDeleteAccount() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (body: { password: string; confirmation: string }) =>
+      api<void>("/users/me", { method: "DELETE", body }),
+    onSuccess: () => {
+      queryClient.setQueryData(queryKeys.me, null);
+      queryClient.removeQueries({ queryKey: ["learner"] });
+    },
+  });
+}
