@@ -1,0 +1,29 @@
+[project]
+name = "python-academy-backend"
+version = "0.1.0"
+description = "REST API for Python Academy: courses, progress and gamification."
+requires-python = ">=3.12"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = [".venv"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "N", "RUF"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+packages = ["app", "tests"]
+exclude = ["\\.venv"]
+
+[[tool.mypy.overrides]]
+module = ["argon2.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+# Starlette suggests a successor to httpx for its TestClient; httpx still works fine.
+filterwarnings = ["ignore:Using `httpx` with `starlette.testclient`"]
