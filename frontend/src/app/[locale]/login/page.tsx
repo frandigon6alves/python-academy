@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { LoginForm } from "@/features/auth/LoginForm";
+import { safeNextPath } from "@/features/auth/next-path";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/login">): Promise<Metadata> {
   const { locale } = await params;
@@ -9,12 +10,13 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/login">)
   return { title: t("login") };
 }
 
-export default async function Page({ params }: PageProps<"/[locale]/login">) {
+export default async function Page({ params, searchParams }: PageProps<"/[locale]/login">) {
   const { locale } = await params;
+  const { next } = await searchParams;
   setRequestLocale(locale);
   return (
     <div className="container page">
-      <LoginForm />
+      <LoginForm next={safeNextPath(next)} />
     </div>
   );
 }
