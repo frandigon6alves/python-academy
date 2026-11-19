@@ -40,6 +40,7 @@
     "backHome": "Back to the academy"
   },
   "errors": {
+    "title": "This page could not be shown",
     "generic": "Something went wrong. Please try again.",
     "network": "We couldn't reach the server. Check your connection and try again."
   },
