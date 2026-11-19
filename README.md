@@ -4,6 +4,8 @@
 learning platform: short lessons with runnable examples, quizzes graded on the server,
 XP, levels, badges, quests, a leaderboard and printable certificates.
 
+**Live demo:** https://python-academy-omega.vercel.app (web on Vercel, API on Render's free plan, PostgreSQL on Neon). The API sleeps when idle, so the first request after a while can take about a minute.
+
 The project is also a reference for a clean full-stack layout: a FastAPI backend split
 by domain, and a Next.js frontend split by feature, both small enough to read in an afternoon.
 
