@@ -1,4 +1,4 @@
-import { api, ApiError } from "./client";
+import { api, ApiError, apiPath } from "./client";
 
 describe("api client", () => {
   afterEach(() => vi.unstubAllGlobals());
@@ -26,5 +26,26 @@ describe("api client", () => {
     expect(error).toBeInstanceOf(ApiError);
     expect((error as ApiError).code).toBe("email-taken");
     expect((error as ApiError).status).toBe(409);
+  });
+
+  it("ignores error bodies that are not problem details", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => new Response('{"detail": 1}', { status: 500 })),
+    );
+    const error = await api("/courses").catch((e: unknown) => e);
+    expect(error).toBeInstanceOf(ApiError);
+    expect((error as ApiError).problem).toBeNull();
+    expect((error as ApiError).code).toBeNull();
+  });
+});
+
+describe("apiPath", () => {
+  it("encodes each value as one path segment", () => {
+    expect(apiPath`/courses/${"python-basics"}/lessons/${"types"}`).toBe(
+      "/courses/python-basics/lessons/types",
+    );
+    expect(apiPath`/courses/${"../auth/me?x=1"}`).toBe("/courses/..%2Fauth%2Fme%3Fx%3D1");
+    expect(apiPath`/lessons/${3}/quiz`).toBe("/lessons/3/quiz");
   });
 });

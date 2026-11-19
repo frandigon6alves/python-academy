@@ -7,6 +7,17 @@ export interface Problem {
   errors?: { field: string; message: string }[];
 }
 
+function isProblem(value: unknown): value is Problem {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    "type" in value &&
+    typeof value.type === "string" &&
+    "detail" in value &&
+    typeof value.detail === "string"
+  );
+}
+
 export class ApiError extends Error {
   constructor(
     readonly status: number,
@@ -29,6 +40,18 @@ interface RequestOptions {
 
 const BASE_URL = "/api/v1";
 
+/**
+ * Tagged template for API paths that encodes every interpolated value as a single path
+ * segment, so a slug taken from the URL cannot add segments or a query string:
+ * apiPath`/courses/${slug}`.
+ */
+export function apiPath(strings: TemplateStringsArray, ...values: (string | number)[]): string {
+  return strings.reduce((path, part, index) => {
+    const value = values[index - 1];
+    return path + encodeURIComponent(String(value)) + part;
+  });
+}
+
 export async function api<T>(path: string, options: RequestOptions = {}): Promise<T> {
   const url = new URL(`${BASE_URL}${path}`, window.location.origin);
   if (options.lang) url.searchParams.set("lang", options.lang);
@@ -46,8 +69,8 @@ export async function api<T>(path: string, options: RequestOptions = {}): Promis
   });
 
   if (!response.ok) {
-    const problem = (await response.json().catch(() => null)) as Problem | null;
-    throw new ApiError(response.status, problem);
+    const body: unknown = await response.json().catch(() => null);
+    throw new ApiError(response.status, isProblem(body) ? body : null);
   }
   return (response.status === 204 ? undefined : await response.json()) as T;
 }
