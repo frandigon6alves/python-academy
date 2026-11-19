@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { TextField, validateForm } from "@/components/ui/Field";
 import { Link, useRouter } from "@/i18n/navigation";
 import { useLogin } from "@/lib/api/hooks/auth";
-import { authErrorMessage } from "./error-message";
+import { authErrorKey } from "./error-message";
 import { authHref } from "./next-path";
 import styles from "./AuthCard.module.css";
 
@@ -33,7 +33,7 @@ export function LoginForm({ next }: { next: string | null }) {
     <form className={styles.card} onSubmit={handleSubmit} noValidate>
       <h1 className="page-title">{t("auth.loginTitle")}</h1>
       <p className={styles.lead}>{t("auth.loginLead")}</p>
-      {login.isError && <Alert tone="error">{authErrorMessage(login.error, t)}</Alert>}
+      {login.isError && <Alert tone="error">{t(authErrorKey(login.error))}</Alert>}
       <TextField
         label={t("auth.email")}
         type="email"

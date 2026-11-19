@@ -7,16 +7,15 @@ import { Button } from "@/components/ui/Button";
 import { TextField, validateForm } from "@/components/ui/Field";
 import { Link, useRouter } from "@/i18n/navigation";
 import { useSignup } from "@/lib/api/hooks/auth";
-import type { Locale } from "@/lib/api/types";
 import { useTheme } from "@/theme/ThemeProvider";
-import { authErrorMessage } from "./error-message";
+import { authErrorKey } from "./error-message";
 import { authHref } from "./next-path";
 import styles from "./AuthCard.module.css";
 
 /** `next` is an already validated same-site path to return to (see next-path.ts). */
 export function SignupForm({ next }: { next: string | null }) {
   const t = useTranslations();
-  const locale = useLocale() as Locale;
+  const locale = useLocale();
   const router = useRouter();
   const signup = useSignup();
   const { preference: theme } = useTheme();
@@ -38,7 +37,7 @@ export function SignupForm({ next }: { next: string | null }) {
     <form className={styles.card} onSubmit={handleSubmit} noValidate>
       <h1 className="page-title">{t("auth.signupTitle")}</h1>
       <p className={styles.lead}>{t("auth.signupLead")}</p>
-      {signup.isError && <Alert tone="error">{authErrorMessage(signup.error, t)}</Alert>}
+      {signup.isError && <Alert tone="error">{t(authErrorKey(signup.error))}</Alert>}
       <TextField
         label={t("auth.email")}
         type="email"

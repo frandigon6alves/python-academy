@@ -1,6 +1,7 @@
 // Response shapes of the FastAPI backend (see /docs for the full OpenAPI schema).
+import type { Locale } from "@/i18n/routing";
 
-export type Locale = "en" | "es";
+export type { Locale };
 export type Theme = "system" | "light" | "dark";
 
 export interface User {

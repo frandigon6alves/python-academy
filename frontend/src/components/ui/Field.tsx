@@ -57,7 +57,7 @@ export function validateForm(form: HTMLFormElement): boolean {
   return false;
 }
 
-type Translate = ReturnType<typeof useTranslations>;
+type Translate = ReturnType<typeof useTranslations<"validation">>;
 
 function messageFor(input: HTMLInputElement, t: Translate): string | undefined {
   const { validity } = input;

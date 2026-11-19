@@ -1,22 +1,22 @@
 import { ApiError } from "@/lib/api/client";
 
-type Translate = (key: string) => string;
+const MESSAGE_BY_CODE = {
+  "invalid-credentials": "auth.invalidCredentials",
+  "email-taken": "auth.emailTaken",
+  "rate-limited": "auth.rateLimited",
+  "validation-error": "auth.checkFields",
+  "wrong-password": "settings.wrongPassword",
+} as const;
 
-/** Maps backend problem codes to friendly, translated messages. */
-export function authErrorMessage(error: unknown, t: Translate): string {
-  if (!(error instanceof ApiError)) return t("errors.network");
-  switch (error.code) {
-    case "invalid-credentials":
-      return t("auth.invalidCredentials");
-    case "email-taken":
-      return t("auth.emailTaken");
-    case "rate-limited":
-      return t("auth.rateLimited");
-    case "validation-error":
-      return t("auth.checkFields");
-    case "wrong-password":
-      return t("settings.wrongPassword");
-    default:
-      return t("errors.generic");
-  }
+type ProblemCode = keyof typeof MESSAGE_BY_CODE;
+type AuthErrorKey = (typeof MESSAGE_BY_CODE)[ProblemCode] | "errors.generic" | "errors.network";
+
+function isKnownCode(code: string | null): code is ProblemCode {
+  return code !== null && Object.hasOwn(MESSAGE_BY_CODE, code);
+}
+
+/** The translation key of a friendly message for a failed auth or settings request. */
+export function authErrorKey(error: unknown): AuthErrorKey {
+  if (!(error instanceof ApiError)) return "errors.network";
+  return isKnownCode(error.code) ? MESSAGE_BY_CODE[error.code] : "errors.generic";
 }

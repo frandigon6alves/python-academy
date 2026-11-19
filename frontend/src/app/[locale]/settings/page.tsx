@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { RequireAuth } from "@/features/auth/RequireAuth";
 import { SettingsPage } from "@/features/settings/SettingsPage";
+import { localeOf, pageLocale } from "@/i18n/locale-param";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/settings">): Promise<Metadata> {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "settings" });
+  const t = await getTranslations({ locale: await localeOf(params), namespace: "settings" });
   return { title: t("title") };
 }
 
 export default async function Page({ params }: PageProps<"/[locale]/settings">) {
-  const { locale } = await params;
-  setRequestLocale(locale);
+  await pageLocale(params);
   return (
     <div className="container page">
       <RequireAuth>

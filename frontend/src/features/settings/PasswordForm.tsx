@@ -5,7 +5,7 @@ import { useState, type FormEvent } from "react";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
 import { TextField, validateForm } from "@/components/ui/Field";
-import { authErrorMessage } from "@/features/auth/error-message";
+import { authErrorKey } from "@/features/auth/error-message";
 import { useChangePassword } from "@/lib/api/hooks/settings";
 import styles from "./SettingsPage.module.css";
 
@@ -33,7 +33,7 @@ export function PasswordForm() {
     <form className={styles.section} onSubmit={handleSubmit} noValidate aria-labelledby="password-title">
       <h2 id="password-title">{t("settings.passwordTitle")}</h2>
       {change.isSuccess && <Alert tone="success">{t("settings.passwordChanged")}</Alert>}
-      {change.isError && <Alert tone="error">{authErrorMessage(change.error, t)}</Alert>}
+      {change.isError && <Alert tone="error">{t(authErrorKey(change.error))}</Alert>}
       <TextField
         label={t("settings.currentPassword")}
         type="password"

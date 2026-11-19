@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { useMe } from "@/lib/api/hooks/auth";
 import { useUpdateSettings } from "@/lib/api/hooks/settings";
 import type { Theme } from "@/lib/api/types";
-import { THEMES } from "@/theme/theme";
+import { isTheme, THEMES } from "@/theme/theme";
 import { useTheme } from "@/theme/ThemeProvider";
 import styles from "./Header.module.css";
 
@@ -25,7 +25,9 @@ export function ThemeSelect() {
       <select
         className={styles.select}
         value={preference}
-        onChange={(event) => choose(event.target.value as Theme)}
+        onChange={(event) => {
+          if (isTheme(event.target.value)) choose(event.target.value);
+        }}
       >
         {THEMES.map((theme) => (
           <option key={theme} value={theme}>

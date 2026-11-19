@@ -1,6 +1,6 @@
 "use client";
 
-import { useLocale, useTranslations } from "next-intl";
+import { hasLocale, useLocale, useTranslations } from "next-intl";
 import { useTransition } from "react";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { locales, type Locale } from "@/i18n/routing";
@@ -32,7 +32,9 @@ export function LocaleSwitcher() {
         className={styles.select}
         value={locale}
         disabled={isPending}
-        onChange={(event) => switchTo(event.target.value as Locale)}
+        onChange={(event) => {
+          if (hasLocale(locales, event.target.value)) switchTo(event.target.value);
+        }}
       >
         {locales.map((code) => (
           <option key={code} value={code} lang={code}>

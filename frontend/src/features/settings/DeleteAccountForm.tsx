@@ -5,7 +5,7 @@ import { useState, type FormEvent } from "react";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
 import { TextField, validateForm } from "@/components/ui/Field";
-import { authErrorMessage } from "@/features/auth/error-message";
+import { authErrorKey } from "@/features/auth/error-message";
 import { useRouter } from "@/i18n/navigation";
 import { useDeleteAccount } from "@/lib/api/hooks/settings";
 import styles from "./SettingsPage.module.css";
@@ -34,7 +34,7 @@ export function DeleteAccountForm() {
     >
       <h2 id="delete-title">{t("settings.dangerTitle")}</h2>
       <p>{t("settings.dangerLead")}</p>
-      {remove.isError && <Alert tone="error">{authErrorMessage(remove.error, t)}</Alert>}
+      {remove.isError && <Alert tone="error">{t(authErrorKey(remove.error))}</Alert>}
       <TextField
         label={t("settings.deletePassword")}
         type="password"
