@@ -6,15 +6,15 @@ from contextlib import asynccontextmanager
 from fastapi import APIRouter, FastAPI
 
 from app.auth.router import router as auth_router
+from app.core.config import API_PREFIX
 from app.core.csrf import require_csrf_header
 from app.core.database import create_tables, engine
 from app.core.errors import register_error_handlers
+from app.core.security_headers import add_security_headers
 from app.courses.router import router as courses_router
 from app.gamification.router import router as gamification_router
 from app.progress.router import router as progress_router
 from app.users.router import router as users_router
-
-API_PREFIX = "/api/v1"
 
 
 @asynccontextmanager
@@ -33,6 +33,8 @@ def create_app(*, create_db: bool = True) -> FastAPI:
         lifespan=lifespan if create_db else None,
     )
     app.middleware("http")(require_csrf_header)
+    # Registered last so it wraps everything, including CSRF rejections.
+    app.middleware("http")(add_security_headers)
     register_error_handlers(app)
 
     api = APIRouter(prefix=API_PREFIX)

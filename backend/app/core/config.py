@@ -7,6 +7,7 @@ from pydantic import AliasChoices, Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 BACKEND_DIR = Path(__file__).resolve().parents[2]
+API_PREFIX = "/api/v1"
 
 
 class Settings(BaseSettings):
