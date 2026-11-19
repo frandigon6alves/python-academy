@@ -200,6 +200,7 @@
     "weekly": "Weekly",
     "questDone": "Done",
     "questProgress": "{progress} / {target}",
+    "questReward": "+{xp} XP",
     "badgesTitle": "Badges",
     "badgeEarned": "Earned",
     "badgeLocked": "Locked",

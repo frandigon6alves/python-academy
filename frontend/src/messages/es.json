@@ -200,6 +200,7 @@
     "weekly": "Semanal",
     "questDone": "Hecha",
     "questProgress": "{progress} / {target}",
+    "questReward": "+{xp} XP",
     "badgesTitle": "Insignias",
     "badgeEarned": "Conseguida",
     "badgeLocked": "Bloqueada",

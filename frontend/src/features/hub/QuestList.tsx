@@ -14,7 +14,7 @@ export function QuestList({ quests }: { quests: Quest[] }) {
             <div className={styles.questHeader}>
               <span className={styles.tag}>{t(quest.period)}</span>
               <span className={styles.questName}>{quest.name}</span>
-              <span className={styles.muted}>+{quest.xp_reward} XP</span>
+              <span className={styles.muted}>{t("questReward", { xp: quest.xp_reward })}</span>
             </div>
             <ProgressBar
               value={(100 * quest.progress) / quest.target}
