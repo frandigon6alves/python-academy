@@ -1,25 +1,32 @@
-.grid {
+.grid,
+.skeletonGrid {
   display: grid;
   gap: var(--space-4);
 }
 
 @media (min-width: 40rem) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
+  .grid,
+  .skeletonGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 72rem) {
-  .grid {
-    grid-template-columns: repeat(4, 1fr);
+  .grid,
+  .skeletonGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
+/* Cards share the grid's rows through subgrid, so titles, meta rows, summaries and
+ * calls to action line up across a row even when one title wraps onto two lines. */
 .card {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
+  display: grid;
+  grid-row: span 5;
+  grid-template-rows: subgrid;
+  row-gap: var(--space-2);
+  align-content: start;
   padding: var(--space-5);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -88,9 +95,12 @@
   font-weight: 700;
 }
 
+.withProgress {
+  grid-row: span 6;
+}
+
 .summary {
   color: var(--color-muted);
-  flex: 1;
   margin: 0;
 }
 
@@ -102,6 +112,17 @@
 }
 
 .cta {
+  align-self: end;
+  margin-top: var(--space-2);
   font-weight: 700;
   color: var(--color-primary);
+}
+
+.card:hover .cta {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.card:active {
+  transform: translateY(0);
 }

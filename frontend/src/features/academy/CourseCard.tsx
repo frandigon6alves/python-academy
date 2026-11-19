@@ -17,7 +17,7 @@ export function CourseCard({ course, position, progress }: CourseCardProps) {
     percent === 100 ? t("catalogue.review") : percent > 0 ? t("catalogue.continue") : t("catalogue.start");
 
   return (
-    <article className={styles.card}>
+    <article className={progress ? `${styles.card} ${styles.withProgress}` : styles.card}>
       <span className={styles.position} aria-hidden="true">
         {String(position).padStart(2, "0")}
       </span>

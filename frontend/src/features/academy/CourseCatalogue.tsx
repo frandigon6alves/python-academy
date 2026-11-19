@@ -1,6 +1,7 @@
 "use client";
 
 import { ErrorState, Loading } from "@/components/ui/QueryState";
+import { SkeletonCard } from "@/components/ui/Skeleton";
 import { useCourses } from "@/lib/api/hooks/content";
 import { useProgress } from "@/lib/api/hooks/learning";
 import { CourseCard } from "./CourseCard";
@@ -11,7 +12,17 @@ export function CourseCatalogue() {
   // Only fetched for signed-in learners; visitors simply see no progress bars.
   const progress = useProgress();
 
-  if (courses.isPending) return <Loading />;
+  if (courses.isPending) {
+    return (
+      <Loading>
+        <div className={styles.skeletonGrid}>
+          {Array.from({ length: 4 }, (_, index) => (
+            <SkeletonCard key={index} lines={4} height="17rem" />
+          ))}
+        </div>
+      </Loading>
+    );
+  }
   if (courses.isError) return <ErrorState error={courses.error} onRetry={() => courses.refetch()} />;
 
   return (
