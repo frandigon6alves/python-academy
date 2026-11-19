@@ -30,3 +30,12 @@ export function groupByLetter(entries: GlossaryEntry[]): [string, GlossaryEntry[
   }
   return [...groups.entries()].sort(([a], [b]) => a.localeCompare(b));
 }
+
+export const ALPHABET = [..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
+
+/** A handful of terms spread across the alphabet, for the preview on the home page. */
+export function sampleTerms(entries: GlossaryEntry[], count: number): GlossaryEntry[] {
+  if (entries.length <= count) return entries;
+  const step = entries.length / count;
+  return Array.from({ length: count }, (_, index) => entries[Math.floor(index * step)]!);
+}

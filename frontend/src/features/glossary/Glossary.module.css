@@ -1,10 +1,27 @@
 .toolbar {
+  display: grid;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  padding-block: var(--space-3);
+  background: var(--color-bg);
+}
+
+/* On wide screens the search and letters stay under the header while scrolling. */
+@media (min-width: 48rem) {
+  .toolbar {
+    position: sticky;
+    top: calc(3.75rem + 1px);
+    z-index: 5;
+    border-bottom: 1px solid var(--color-border);
+  }
+}
+
+.searchRow {
   display: flex;
   flex-wrap: wrap;
   align-items: end;
   justify-content: space-between;
   gap: var(--space-3);
-  margin-bottom: var(--space-3);
 }
 
 .search {
@@ -20,7 +37,7 @@
 
 .search input {
   min-height: 44px;
-  padding: var(--space-2) var(--space-3);
+  padding: var(--space-2) var(--space-4);
   border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-pill);
   background: var(--color-surface);
@@ -35,22 +52,43 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-1);
-  margin-bottom: var(--space-4);
 }
 
-.letters a {
+.letters a,
+.letters span {
   display: inline-grid;
   place-items: center;
   min-width: 2.25rem;
   min-height: 2.25rem;
   border-radius: var(--radius-sm);
-  background: var(--color-surface-alt);
   font-weight: 700;
   text-decoration: none;
 }
 
+.letters a {
+  background: var(--color-surface-alt);
+  transition: background-color var(--duration);
+}
+
+.letters a:hover {
+  background: var(--color-primary-soft);
+}
+
+/* Empty letters: muted outline, clearly not interactive. */
+.letters span {
+  color: var(--color-muted);
+  border: 1px dashed var(--color-border);
+  font-weight: 500;
+}
+
 .group {
-  scroll-margin-top: 8rem;
+  scroll-margin-top: 5rem;
+}
+
+@media (min-width: 48rem) {
+  .group {
+    scroll-margin-top: 14rem;
+  }
 }
 
 .letter {
@@ -73,6 +111,13 @@
   }
 }
 
+.entry {
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
 .entry dt {
   font-weight: 700;
 }
@@ -80,4 +125,30 @@
 .entry dd {
   margin: 0;
   color: var(--color-muted);
+}
+
+.empty {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.empty p {
+  margin: 0;
+}
+
+.clear {
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-primary);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.clear:hover {
+  background: var(--color-primary-soft);
 }

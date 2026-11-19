@@ -1,4 +1,4 @@
-import { filterTerms, groupByLetter, initialOf } from "./glossary-utils";
+import { filterTerms, groupByLetter, initialOf, sampleTerms } from "./glossary-utils";
 
 const entries = [
   { term: "Ámbito", definition: "Dónde es visible un nombre." },
@@ -16,5 +16,13 @@ describe("glossary utilities", () => {
   it("groups terms by their unaccented initial", () => {
     expect(initialOf("Ámbito")).toBe("A");
     expect(groupByLetter(entries).map(([letter]) => letter)).toEqual(["A", "F", "T"]);
+  });
+});
+
+describe("sampleTerms", () => {
+  it("picks evenly spread terms", () => {
+    const many = Array.from({ length: 10 }, (_, i) => ({ term: `t${i}`, definition: "" }));
+    expect(sampleTerms(many, 5).map((e) => e.term)).toEqual(["t0", "t2", "t4", "t6", "t8"]);
+    expect(sampleTerms(many.slice(0, 3), 5)).toHaveLength(3);
   });
 });

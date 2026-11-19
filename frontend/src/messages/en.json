@@ -12,7 +12,9 @@
     "settings": "Settings",
     "login": "Log in",
     "signup": "Sign up",
-    "logout": "Log out"
+    "logout": "Log out",
+    "menu": "Menu",
+    "glossary": "Glossary"
   },
   "theme": {
     "label": "Theme",
@@ -70,7 +72,10 @@
     "placeholder": "e.g. tuple, scope, f-string",
     "letters": "Jump to letter",
     "count": "{count, plural, =0 {No terms match} one {# term} other {# terms}}",
-    "empty": "No terms match “{query}”."
+    "empty": "No terms match “{query}”.",
+    "searchButton": "Search",
+    "seeAll": "See all {count} terms",
+    "clear": "Clear search"
   },
   "demo": {
     "progress": "Question {current} of {total}",

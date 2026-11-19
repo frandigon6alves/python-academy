@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
+import { GlossaryTeaser } from "@/features/glossary/GlossaryTeaser";
 import { CourseCatalogue } from "./CourseCatalogue";
 import { DemoQuiz } from "./DemoQuiz";
-import { Glossary } from "./Glossary";
 import { Hero } from "./Hero";
 import styles from "./AcademyPage.module.css";
 
@@ -41,7 +41,7 @@ export function AcademyPage() {
         </div>
       </Section>
       <Section id="glossary" title={t("glossaryTitle")} lead={t("glossaryLead")}>
-        <Glossary />
+        <GlossaryTeaser />
       </Section>
     </>
   );

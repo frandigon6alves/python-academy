@@ -12,7 +12,9 @@
     "settings": "Ajustes",
     "login": "Iniciar sesión",
     "signup": "Registrarse",
-    "logout": "Cerrar sesión"
+    "logout": "Cerrar sesión",
+    "menu": "Menú",
+    "glossary": "Glosario"
   },
   "theme": {
     "label": "Tema",
@@ -70,7 +72,10 @@
     "placeholder": "p. ej. tupla, ámbito, f-string",
     "letters": "Saltar a la letra",
     "count": "{count, plural, =0 {Ningún término coincide} one {# término} other {# términos}}",
-    "empty": "Ningún término coincide con «{query}»."
+    "empty": "Ningún término coincide con «{query}».",
+    "searchButton": "Buscar",
+    "seeAll": "Ver los {count} términos",
+    "clear": "Borrar búsqueda"
   },
   "demo": {
     "progress": "Pregunta {current} de {total}",
