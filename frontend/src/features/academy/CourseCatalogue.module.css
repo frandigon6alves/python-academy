@@ -90,8 +90,19 @@
   margin-right: var(--space-2);
 }
 
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
 .level {
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--color-primary-soft);
   color: var(--color-primary);
+  font-size: var(--text-sm);
   font-weight: 700;
 }
 

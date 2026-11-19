@@ -18,16 +18,18 @@ export function CourseCard({ course, position, progress }: CourseCardProps) {
 
   return (
     <article className={progress ? `${styles.card} ${styles.withProgress}` : styles.card}>
-      <span className={styles.position} aria-hidden="true">
-        {String(position).padStart(2, "0")}
-      </span>
+      <div className={styles.top}>
+        <span className={styles.position} aria-hidden="true">
+          {String(position).padStart(2, "0")}
+        </span>
+        <span className={styles.level}>{t(`common.${course.level}`)}</span>
+      </div>
       <h3 className={styles.title}>
         <Link href={`/courses/${course.slug}`} className={styles.link}>
           {course.title}
         </Link>
       </h3>
       <ul className={styles.meta}>
-        <li className={styles.level}>{t(`common.${course.level}`)}</li>
         <li>{t("common.lessons", { count: course.lesson_count })}</li>
         <li>{t("common.minutes", { count: course.minutes })}</li>
       </ul>

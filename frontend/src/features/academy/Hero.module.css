@@ -6,13 +6,14 @@
 
 .inner {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-6);
   align-items: center;
 }
 
 @media (min-width: 56rem) {
   .inner {
-    grid-template-columns: 1.2fr 1fr;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
   }
 }
 
@@ -68,7 +69,10 @@
   box-shadow: var(--shadow-md);
 }
 
+/* The sample wraps on narrow phones instead of widening the page. */
 .terminal pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
   border: 0;
   padding: var(--space-2) 0;
   margin: 0;
