@@ -6,3 +6,4 @@ email-validator>=2.2
 sqlalchemy>=2.0
 argon2-cffi>=23.1
 pyyaml>=6.0
+psycopg[binary]>=3.2

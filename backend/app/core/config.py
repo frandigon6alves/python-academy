@@ -3,6 +3,7 @@
 from functools import lru_cache
 from pathlib import Path
 
+from pydantic import AliasChoices, Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 BACKEND_DIR = Path(__file__).resolve().parents[2]
@@ -11,7 +12,12 @@ BACKEND_DIR = Path(__file__).resolve().parents[2]
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_prefix="ACADEMY_", env_file=".env", extra="ignore")
 
-    database_url: str = f"sqlite:///{BACKEND_DIR / 'data' / 'academy.sqlite'}"
+    # Hosting platforms (Render, Neon, ...) hand out a plain DATABASE_URL, so it is accepted
+    # too. Without either, a local SQLite file is used.
+    database_url: str = Field(
+        default=f"sqlite:///{BACKEND_DIR / 'data' / 'academy.sqlite'}",
+        validation_alias=AliasChoices("ACADEMY_DATABASE_URL", "DATABASE_URL"),
+    )
     content_dir: Path = BACKEND_DIR / "content"
     session_cookie_name: str = "academy_session"
     session_days: int = 30

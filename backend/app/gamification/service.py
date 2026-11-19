@@ -4,7 +4,7 @@ Other domains call `record_activity` for what a learner did, then
 `collect_rewards` to award any badges and quests that became due.
 """
 
-from datetime import datetime
+from datetime import UTC, datetime
 
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
@@ -39,7 +39,7 @@ def record_activity(
 
 
 def total_xp(db: Session, user_id: int) -> int:
-    return metric_value(db, user_id, "total_xp", now=datetime.min)
+    return metric_value(db, user_id, "total_xp", now=datetime.min.replace(tzinfo=UTC))
 
 
 def streak_days(db: Session, user_id: int, now: datetime) -> int:

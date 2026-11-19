@@ -1,10 +1,10 @@
-"""Calendar helpers for streaks and quest periods. All times are naive UTC."""
+"""Calendar helpers for streaks and quest periods. All times are UTC."""
 
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, time, timedelta
 
 
 def period_start(period: str, now: datetime) -> datetime:
-    midnight = datetime.combine(now.date(), datetime.min.time())
+    midnight = datetime.combine(now.date(), time.min, tzinfo=now.tzinfo)
     if period == "daily":
         return midnight
     return midnight - timedelta(days=now.weekday())  # Monday of this ISO week

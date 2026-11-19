@@ -1,6 +1,6 @@
 """Course content. Text fields are JSON dicts keyed by language: {"en": ..., "es": ...}."""
 
-from sqlalchemy import JSON, ForeignKey, String
+from sqlalchemy import JSON, ForeignKey, String, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base
@@ -23,6 +23,7 @@ class Course(Base):
 
 class Lesson(Base):
     __tablename__ = "lessons"
+    __table_args__ = (UniqueConstraint("course_id", "slug"),)
 
     id: Mapped[int] = mapped_column(primary_key=True)
     course_id: Mapped[int] = mapped_column(ForeignKey("courses.id", ondelete="CASCADE"))

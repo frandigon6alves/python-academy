@@ -4,5 +4,5 @@ from datetime import UTC, datetime
 
 
 def utcnow() -> datetime:
-    # Naive UTC datetimes: SQLite does not store timezone information.
-    return datetime.now(UTC).replace(tzinfo=None)
+    """The current time as a timezone-aware UTC datetime."""
+    return datetime.now(UTC)
