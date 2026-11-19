@@ -1,0 +1,61 @@
+.page {
+  max-width: var(--reading-width);
+}
+
+.toggle {
+  display: inline-flex;
+  padding: var(--space-1);
+  margin-bottom: var(--space-4);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+}
+
+.toggleButton {
+  min-height: 40px;
+  padding: var(--space-1) var(--space-4);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.toggleButton[aria-pressed="true"] {
+  background: var(--color-primary);
+  color: var(--color-primary-contrast);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.table th,
+.table td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.table thead th {
+  background: var(--color-surface-alt);
+  font-size: var(--text-sm);
+}
+
+.table tbody th {
+  font-weight: 600;
+}
+
+.you {
+  background: var(--color-primary-soft);
+}
+
+.youTag {
+  color: var(--color-muted);
+  font-weight: 400;
+}
