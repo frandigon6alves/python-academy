@@ -12,7 +12,7 @@ import styles from "./QuizForm.module.css";
 interface QuizFormProps {
   questions: Question[];
   /** Grading results from the server, once submitted. */
-  results?: QuestionResult[];
+  results?: QuestionResult[] | undefined;
   isSubmitting: boolean;
   onSubmit: (answers: Answer[]) => void;
   onRetry: () => void;

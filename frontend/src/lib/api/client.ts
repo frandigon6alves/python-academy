@@ -65,7 +65,7 @@ export async function api<T>(path: string, options: RequestOptions = {}): Promis
       "X-Requested-With": "fetch",
       ...(options.body !== undefined && { "Content-Type": "application/json" }),
     },
-    body: options.body !== undefined ? JSON.stringify(options.body) : undefined,
+    ...(options.body !== undefined && { body: JSON.stringify(options.body) }),
   });
 
   if (!response.ok) {

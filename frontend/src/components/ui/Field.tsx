@@ -14,9 +14,9 @@ import styles from "./Field.module.css";
 
 interface FieldShellProps {
   label: string;
-  hint?: string;
-  error?: string;
-  children: (ids: { inputId: string; describedBy?: string }) => ReactNode;
+  hint?: string | undefined;
+  error?: string | undefined;
+  children: (ids: { inputId: string; describedBy: string | undefined }) => ReactNode;
 }
 
 /** Label, hint and error wiring shared by inputs and selects. */
@@ -71,9 +71,9 @@ function messageFor(input: HTMLInputElement, t: Translate): string | undefined {
 
 interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  hint?: string;
+  hint?: string | undefined;
   /** An error from the server; it wins over the field's own validation message. */
-  error?: string;
+  error?: string | undefined;
 }
 
 /**

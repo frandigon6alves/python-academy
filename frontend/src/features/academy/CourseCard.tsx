@@ -7,7 +7,7 @@ import styles from "./CourseCatalogue.module.css";
 interface CourseCardProps {
   course: CourseSummary;
   position: number;
-  progress?: CourseProgress;
+  progress?: CourseProgress | undefined;
 }
 
 export function CourseCard({ course, position, progress }: CourseCardProps) {

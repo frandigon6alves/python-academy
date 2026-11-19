@@ -48,7 +48,7 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   // The Docker image runs the self-contained server; local `next start` does not need it.
-  output: process.env.NEXT_OUTPUT === "standalone" ? "standalone" : undefined,
+  ...(process.env.NEXT_OUTPUT === "standalone" && { output: "standalone" }),
   poweredByHeader: false,
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];

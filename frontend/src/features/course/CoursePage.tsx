@@ -97,7 +97,7 @@ function CourseSkeleton() {
   );
 }
 
-function ExamCard({ course, progress }: { course: CourseDetail; progress?: CourseProgress }) {
+function ExamCard({ course, progress }: { course: CourseDetail; progress: CourseProgress | undefined }) {
   const t = useTranslations("course");
   const { data: me } = useMe();
   const unlocked = progress !== undefined && progress.completed_lessons.length === progress.lesson_count;
