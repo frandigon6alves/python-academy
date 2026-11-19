@@ -1,16 +1,17 @@
 .header {
-  background: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
   position: sticky;
   top: 0;
   z-index: 10;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .bar {
+  position: relative;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-2) var(--space-4);
+  gap: var(--space-4);
+  min-height: 3.75rem;
   padding-block: var(--space-2);
 }
 
@@ -18,11 +19,13 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
+  min-height: 44px;
+  margin-right: auto;
   font-weight: 800;
   font-size: var(--text-lg);
   color: var(--color-text);
   text-decoration: none;
-  margin-right: auto;
+  white-space: nowrap;
 }
 
 .logo:hover {
@@ -41,21 +44,45 @@
   font-weight: 800;
 }
 
-.nav {
-  order: 3;
-  display: flex;
-  gap: var(--space-1);
-  width: 100%;
-  overflow-x: auto;
+/* Menu button: only shown on narrow screens. */
+.menuButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  min-width: 44px;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--duration);
+}
+
+.menuButton:hover,
+.menuButton[aria-expanded="true"] {
+  background: var(--color-surface-alt);
+}
+
+.menuIcon {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
 }
 
 .navLink {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
   padding: var(--space-2) var(--space-3);
   border-radius: var(--radius-pill);
   color: var(--color-text);
-  text-decoration: none;
   font-weight: 500;
+  text-decoration: none;
   white-space: nowrap;
+  transition: background-color var(--duration);
 }
 
 .navLink:hover {
@@ -69,24 +96,141 @@
   font-weight: 700;
 }
 
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-2);
+.control {
+  display: grid;
+  gap: var(--space-1);
 }
 
-.control {
-  display: inline-flex;
+.controlLabel {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-muted);
 }
 
 .select {
-  min-height: 40px;
-  padding: var(--space-1) var(--space-2);
+  min-height: 44px;
+  padding: var(--space-1) var(--space-3);
   border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-pill);
   background: var(--color-surface);
   color: var(--color-text);
+  cursor: pointer;
+}
+
+.select:hover {
+  background: var(--color-surface-alt);
+}
+
+.account {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.accountPlaceholder {
+  display: block;
+  width: 11rem;
+  height: 44px;
+}
+
+/* Narrow screens: the menu is a panel under the bar, shown while the button is expanded. */
+@media (max-width: 71.99rem) {
+  .menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: calc(100dvh - 4rem);
+    overflow-y: auto;
+    padding: var(--space-3) max(var(--space-4), env(safe-area-inset-right))
+      max(var(--space-5), env(safe-area-inset-bottom)) max(var(--space-4), env(safe-area-inset-left));
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: var(--shadow-md);
+  }
+
+  .menu[data-open="true"] {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .nav {
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  .navLink {
+    min-height: 48px;
+    padding-inline: var(--space-4);
+    border-radius: var(--radius-md);
+  }
+
+  .preferences {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+    gap: var(--space-3);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .select {
+    width: 100%;
+    border-radius: var(--radius-md);
+  }
+
+  .account {
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .account > * {
+    flex: 1;
+  }
+
+  .account .accountPlaceholder {
+    display: none;
+  }
+}
+
+/* Wide screens: one row, the button is not needed and the menu is always visible. */
+@media (min-width: 72rem) {
+  .menuButton {
+    display: none;
+  }
+
+  .logo {
+    margin-right: var(--space-2);
+  }
+
+  .menu {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .nav {
+    display: flex;
+    gap: var(--space-1);
+  }
+
+  .preferences {
+    display: flex;
+    gap: var(--space-2);
+    margin-left: auto;
+  }
+
+  /* The selects explain themselves on wide screens; their labels stay for screen readers. */
+  .controlLabel {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
 }
 
 /* Off-screen horizontally (not vertically), because the header is sticky. */
@@ -104,17 +248,4 @@
 .skipLink:focus {
   left: var(--space-4);
   color: var(--color-primary-contrast);
-}
-
-@media (min-width: 64rem) {
-  .nav {
-    order: 0;
-    width: auto;
-  }
-  .logo {
-    margin-right: var(--space-4);
-  }
-  .actions {
-    margin-left: auto;
-  }
 }

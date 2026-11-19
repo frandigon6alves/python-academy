@@ -21,7 +21,7 @@ export function ThemeSelect() {
 
   return (
     <label className={styles.control}>
-      <span className="visually-hidden">{t("label")}</span>
+      <span className={styles.controlLabel}>{t("label")}</span>
       <select
         className={styles.select}
         value={preference}
