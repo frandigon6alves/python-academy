@@ -51,7 +51,7 @@ function ExamSummary({ result }: { result: ExamResult }) {
   const t = useTranslations("exam");
   return (
     <>
-      <Alert tone={result.passed ? "success" : "error"}>
+      <Alert tone={result.passed ? "success" : "info"}>
         <p>
           <strong>
             {result.passed
@@ -65,7 +65,7 @@ function ExamSummary({ result }: { result: ExamResult }) {
           </Link>
         )}
       </Alert>
-      <RewardsPanel rewards={result.rewards} />
+      <RewardsPanel rewards={result.rewards} celebrate={result.passed} />
     </>
   );
 }
