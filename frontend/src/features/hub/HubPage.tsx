@@ -4,9 +4,10 @@ import { useTranslations } from "next-intl";
 import { buttonClass } from "@/components/ui/Button";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { ErrorState, Loading } from "@/components/ui/QueryState";
+import { Skeleton, SkeletonCard } from "@/components/ui/Skeleton";
 import { Link } from "@/i18n/navigation";
 import { useMe } from "@/lib/api/hooks/auth";
-import { useCourses } from "@/lib/api/hooks/content";
+import { useCourse, useCourses } from "@/lib/api/hooks/content";
 import { useGamification, useProgress } from "@/lib/api/hooks/learning";
 import type { ProgressOverview } from "@/lib/api/types";
 import { BadgeGrid } from "./BadgeGrid";
@@ -20,7 +21,7 @@ export function HubPage() {
   const gamification = useGamification();
   const progress = useProgress();
 
-  if (gamification.isPending || progress.isPending) return <Loading />;
+  if (gamification.isPending || progress.isPending) return <HubSkeleton />;
   if (gamification.isError)
     return <ErrorState error={gamification.error} onRetry={() => gamification.refetch()} />;
   if (progress.isError) return <ErrorState error={progress.error} onRetry={() => progress.refetch()} />;
@@ -33,34 +34,79 @@ export function HubPage() {
       </header>
       <LevelCard level={gamification.data.level} streakDays={gamification.data.streak_days} />
       <div className={styles.columns}>
-        <ContinueCard progress={progress.data} />
+        <div className={styles.stack}>
+          <ContinueCard progress={progress.data} />
+          <CourseProgressList progress={progress.data} />
+        </div>
         <QuestList quests={gamification.data.quests} />
       </div>
       <BadgeGrid badges={gamification.data.badges} />
-      <CourseProgressList progress={progress.data} />
     </div>
   );
 }
 
-function ContinueCard({ progress }: { progress: ProgressOverview }) {
-  const t = useTranslations("hub");
-  const next = progress.continue_learning;
+function HubSkeleton() {
   return (
-    <section className={styles.card} aria-labelledby="continue-title">
-      <h2 id="continue-title">{t("continueTitle")}</h2>
+    <Loading>
+      <div className={styles.hub}>
+        <div>
+          <Skeleton width="40%" height="2.75rem" />
+          <div style={{ height: "var(--space-3)" }} />
+          <Skeleton width="30%" height="1.25rem" />
+        </div>
+        <Skeleton height="7.5rem" radius="var(--radius-lg)" />
+        <div className={styles.columns}>
+          <SkeletonCard lines={3} height="14rem" />
+          <SkeletonCard lines={6} height="24rem" />
+        </div>
+      </div>
+    </Loading>
+  );
+}
+
+function ContinueCard({ progress }: { progress: ProgressOverview }) {
+  const t = useTranslations();
+  const next = progress.continue_learning;
+  // Lesson position and length come from the course outline (usually cached already).
+  const course = useCourse(next?.course_slug ?? "", Boolean(next));
+  const lessons = course.data?.lessons ?? [];
+  const position = lessons.findIndex((lesson) => lesson.slug === next?.lesson_slug);
+  const courseProgress = progress.courses.find((item) => item.course_slug === next?.course_slug);
+
+  return (
+    <section className={`${styles.card} ${styles.continue}`} aria-labelledby="continue-title">
+      <h2 id="continue-title">{t("hub.continueTitle")}</h2>
       {next ? (
         <>
           <p className={styles.muted}>{next.course_title}</p>
           <p className={styles.nextLesson}>{next.lesson_title}</p>
+          {position >= 0 && (
+            <p className={styles.muted}>
+              {t("hub.lessonPosition", { position: position + 1, total: lessons.length })} ·{" "}
+              {t("common.minutes", { count: lessons[position]!.minutes })}
+            </p>
+          )}
+          {courseProgress && (
+            <div className={styles.continueProgress}>
+              <ProgressBar
+                value={courseProgress.percent}
+                label={t("catalogue.progressLabel")}
+                valueText={t("catalogue.progress", { percent: courseProgress.percent })}
+              />
+              <span className={styles.muted}>
+                {t("catalogue.progress", { percent: courseProgress.percent })}
+              </span>
+            </div>
+          )}
           <Link
             href={`/courses/${next.course_slug}/lessons/${next.lesson_slug}`}
             className={buttonClass("primary")}
           >
-            {t("continueCta")}
+            {t("hub.continueCta")}
           </Link>
         </>
       ) : (
-        <p>{t("allDone")}</p>
+        <p>{t("hub.allDone")}</p>
       )}
     </section>
   );

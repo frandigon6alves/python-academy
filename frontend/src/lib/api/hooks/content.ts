@@ -20,11 +20,12 @@ export function useCourses() {
   });
 }
 
-export function useCourse(slug: string) {
+export function useCourse(slug: string, enabled = true) {
   const lang = useLocale();
   return useQuery({
     queryKey: queryKeys.course(slug, lang),
     queryFn: () => api<CourseDetail>(`/courses/${slug}`, { lang }),
+    enabled,
   });
 }
 

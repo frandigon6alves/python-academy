@@ -15,15 +15,58 @@
   font-size: var(--text-xl);
 }
 
+@media (max-width: 30rem) {
+  .card {
+    padding: var(--space-4);
+  }
+}
+
 .columns {
   display: grid;
   gap: var(--space-5);
 }
 
+/* Cards keep their natural height instead of stretching to the tallest one. */
 @media (min-width: 56rem) {
   .columns {
-    grid-template-columns: 1fr 1.4fr;
+    grid-template-columns: 1fr 1.2fr;
+    align-items: start;
   }
+}
+
+.stack {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.cardHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.cardHeader h2 {
+  margin: 0;
+}
+
+.continue {
+  display: grid;
+  gap: var(--space-2);
+  justify-items: start;
+}
+
+.continue h2 {
+  margin-bottom: var(--space-1);
+}
+
+.continueProgress {
+  display: grid;
+  gap: var(--space-1);
+  width: 100%;
+  margin-block: var(--space-2);
 }
 
 .muted {
@@ -85,6 +128,7 @@
 }
 
 .nextLesson {
+  margin: 0;
   font-size: var(--text-lg);
   font-weight: 700;
 }
@@ -126,49 +170,98 @@
   font-weight: 600;
 }
 
-/* Badges */
+/* Badges: two per row on phones, more on wider screens. Every card has the same
+ * internal rows (fixed icon box, name, description, status), so names and statuses
+ * line up across a row whatever the emoji or description length. */
 .badges {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-3);
   padding: 0;
   margin: 0;
   list-style: none;
 }
 
-.badgeEarned,
-.badgeLocked {
-  display: grid;
-  gap: var(--space-1);
-  justify-items: center;
-  text-align: center;
-  padding: var(--space-4) var(--space-3);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-border);
+@media (min-width: 40rem) {
+  .badges {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
-.badgeEarned {
+@media (min-width: 64rem) {
+  .badges {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+.badge {
+  display: grid;
+  grid-template-rows: 3rem auto 1fr auto;
+  gap: var(--space-1);
+  justify-items: center;
+  align-items: start;
+  text-align: center;
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.badge[data-earned="true"] {
   background: var(--color-accent-soft);
   border-color: var(--color-accent);
 }
 
-.badgeLocked .badgeIcon {
-  filter: grayscale(1);
-  opacity: 0.45;
+.badgeIcon {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: var(--color-surface-alt);
+  font-size: 1.75rem;
+  line-height: 1;
 }
 
-.badgeIcon {
-  font-size: 2rem;
+.badge[data-earned="true"] .badgeIcon {
+  background: var(--color-surface);
+}
+
+.badge[data-earned="false"] .badgeIcon {
+  filter: grayscale(1);
+  opacity: 0.5;
 }
 
 .badgeName {
+  margin-top: var(--space-1);
   font-weight: 700;
+  line-height: 1.3;
 }
 
-.badgeDescription,
-.badgeState {
+.badgeDescription {
   font-size: var(--text-sm);
+  line-height: 1.4;
   color: var(--color-muted);
+}
+
+.badgeState {
+  margin-top: var(--space-1);
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+.badge[data-earned="true"] .badgeState {
+  background: var(--color-surface);
+  color: var(--color-success);
+}
+
+@media (min-width: 40rem) {
+  .badge {
+    padding: var(--space-4) var(--space-3);
+  }
 }
 
 .courseName {
