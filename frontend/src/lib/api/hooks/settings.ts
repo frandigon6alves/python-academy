@@ -24,14 +24,10 @@ export function useChangePassword() {
   });
 }
 
+/** Callers reload the page afterwards (see reloadSignedOut), which also resets the cache. */
 export function useDeleteAccount() {
-  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (body: { password: string; confirmation: string }) =>
       api<void>("/users/me", { method: "DELETE", body }),
-    onSuccess: () => {
-      queryClient.setQueryData(queryKeys.me, null);
-      queryClient.removeQueries({ queryKey: ["learner"] });
-    },
   });
 }

@@ -1,12 +1,12 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useState, type FormEvent } from "react";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
 import { TextField, validateForm } from "@/components/ui/Field";
 import { authErrorKey } from "@/features/auth/error-message";
-import { useRouter } from "@/i18n/navigation";
+import { reloadSignedOut } from "@/features/auth/sign-out";
 import { useDeleteAccount } from "@/lib/api/hooks/settings";
 import styles from "./SettingsPage.module.css";
 
@@ -14,7 +14,7 @@ const CONFIRMATION_WORD = "DELETE";
 
 export function DeleteAccountForm() {
   const t = useTranslations();
-  const router = useRouter();
+  const locale = useLocale();
   const remove = useDeleteAccount();
   const [password, setPassword] = useState("");
   const [confirmation, setConfirmation] = useState("");
@@ -22,7 +22,7 @@ export function DeleteAccountForm() {
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!validateForm(event.currentTarget)) return;
-    remove.mutate({ password, confirmation }, { onSuccess: () => router.replace("/") });
+    remove.mutate({ password, confirmation }, { onSuccess: () => reloadSignedOut(locale) });
   }
 
   return (

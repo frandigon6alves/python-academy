@@ -3,6 +3,7 @@
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef, useState, type FocusEvent, type ReactNode } from "react";
 import { buttonClass } from "@/components/ui/Button";
+import { reloadSignedOut } from "@/features/auth/sign-out";
 import { Link, usePathname } from "@/i18n/navigation";
 import { useLogout, useMe } from "@/lib/api/hooks/auth";
 import { LocaleSwitcher } from "./LocaleSwitcher";
@@ -68,10 +69,7 @@ export function Header() {
   }
 
   function handleLogout() {
-    // A full page load drops every cached learner query and beats the
-    // sign-in redirect that protected pages would otherwise trigger.
-    // eslint-disable-next-line @next/next/no-location-assign-relative-destination -- intentional full reload
-    logout.mutate(undefined, { onSuccess: () => window.location.assign(`/${locale}`) });
+    logout.mutate(undefined, { onSuccess: () => reloadSignedOut(locale) });
   }
 
   return (
