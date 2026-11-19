@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { CodeSnippet } from "@/components/CodeSnippet";
 import { Button } from "@/components/ui/Button";
 import type { Answer, Question, QuestionResult } from "@/lib/api/types";
@@ -17,7 +17,7 @@ interface QuizFormProps {
   onSubmit: (answers: Answer[]) => void;
   onRetry: () => void;
   /** Extra content shown in the live region after grading (score, rewards). */
-  summary?: React.ReactNode;
+  summary?: ReactNode;
 }
 
 /** Multiple-choice quiz used by lesson quizzes and course exams. */
@@ -27,6 +27,19 @@ export function QuizForm({ questions, results, isSubmitting, onSubmit, onRetry, 
   const isGraded = Boolean(results);
   const allAnswered = questions.every((question) => choices[question.id] !== undefined);
   const resultFor = (id: number) => results?.find((result) => result.question_id === id);
+  const formRef = useRef<HTMLFormElement>(null);
+  const summaryRef = useRef<HTMLDivElement>(null);
+  const wasGraded = useRef(isGraded);
+
+  // Grading disables the answers and swaps the submit button for "Try again" (and retrying
+  // swaps them back), which would drop keyboard focus on <body>. Move it to the result
+  // summary after grading, and back to the first answer after a retry.
+  useEffect(() => {
+    if (isGraded === wasGraded.current) return;
+    wasGraded.current = isGraded;
+    if (isGraded) summaryRef.current?.focus();
+    else formRef.current?.querySelector("input")?.focus();
+  }, [isGraded]);
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -40,7 +53,7 @@ export function QuizForm({ questions, results, isSubmitting, onSubmit, onRetry, 
   }
 
   return (
-    <form onSubmit={handleSubmit} className={styles.quiz} noValidate>
+    <form ref={formRef} onSubmit={handleSubmit} className={styles.quiz} noValidate>
       {questions.map((question, index) => (
         <QuestionFieldset
           key={question.id}
@@ -53,7 +66,7 @@ export function QuizForm({ questions, results, isSubmitting, onSubmit, onRetry, 
         />
       ))}
 
-      <div aria-live="polite" className={styles.summary}>
+      <div ref={summaryRef} tabIndex={-1} className={styles.summary}>
         {summary}
       </div>
 

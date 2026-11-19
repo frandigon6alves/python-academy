@@ -10,13 +10,16 @@ const catalogues = { en, es };
 /** Renders a component with the same providers the app uses. */
 export function renderWithProviders(ui: ReactElement, locale: "en" | "es" = "en") {
   const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <NextIntlClientProvider locale={locale} messages={catalogues[locale]} timeZone="UTC">
-        {ui}
-      </NextIntlClientProvider>
-    </QueryClientProvider>,
-  );
+  // A wrapper (rather than wrapping `ui`) keeps the providers on rerender().
+  return render(ui, {
+    wrapper: ({ children }) => (
+      <QueryClientProvider client={queryClient}>
+        <NextIntlClientProvider locale={locale} messages={catalogues[locale]} timeZone="UTC">
+          {children}
+        </NextIntlClientProvider>
+      </QueryClientProvider>
+    ),
+  });
 }
 
 /** Replaces fetch with a router of canned JSON responses keyed by "METHOD /path". */

@@ -28,7 +28,7 @@ describe("QuizForm", () => {
     ]);
   });
 
-  it("shows server feedback and announces the summary", () => {
+  it("shows server feedback", () => {
     renderWithProviders(
       <QuizForm
         questions={questions}
@@ -50,9 +50,26 @@ describe("QuizForm", () => {
     );
     expect(screen.getByText(/Correct answer: 4/)).toBeInTheDocument();
     expect(screen.getByText("Two plus two is four.")).toBeInTheDocument();
-    expect(screen.getByText("You scored 1 of 2.").parentElement).toHaveAttribute("aria-live", "polite");
     expect(screen.getByRole("button", { name: "Try again" })).toBeInTheDocument();
     expect(screen.getByRole("radio", { name: "4" })).toBeDisabled();
+  });
+
+  it("moves focus to the summary after grading and to the first answer after a retry", async () => {
+    const results = [
+      { question_id: 1, choice: 1, correct_index: 1, is_correct: true, explanation: "" },
+      { question_id: 2, choice: 0, correct_index: 0, is_correct: true, explanation: "" },
+    ];
+    const props = { questions, isSubmitting: false, onSubmit: vi.fn(), onRetry: vi.fn() };
+    const { rerender } = renderWithProviders(<QuizForm {...props} />);
+    await userEvent.click(screen.getByRole("radio", { name: "4" }));
+    await userEvent.click(screen.getByRole("radio", { name: "Yes" }));
+    await userEvent.click(screen.getByRole("button", { name: "Submit answers" }));
+
+    rerender(<QuizForm {...props} results={results} summary={<p>You scored 2 of 2.</p>} />);
+    expect(screen.getByText("You scored 2 of 2.").parentElement).toHaveFocus();
+
+    rerender(<QuizForm {...props} />);
+    expect(screen.getByRole("radio", { name: "3" })).toHaveFocus();
   });
 
   it("marks a wrong pick as wrong and the right answer as correct, not by colour alone", () => {
