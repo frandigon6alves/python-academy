@@ -66,12 +66,25 @@ def test_bad_credentials_return_the_same_generic_error(client: TestClient) -> No
 def test_login_then_logout(client: TestClient) -> None:
     sign_up(client)
     client.post("/api/v1/auth/logout")
-    assert client.get("/api/v1/auth/me").status_code == 401
+    assert client.get("/api/v1/auth/me").json() is None
     response = client.post(LOGIN, json={"email": "ada@example.com", "password": PASSWORD})
     assert response.status_code == 200
     assert client.get("/api/v1/auth/me").status_code == 200
     assert client.post("/api/v1/auth/logout").status_code == 204
-    assert client.get("/api/v1/auth/me").status_code == 401
+    assert client.get("/api/v1/auth/me").json() is None
+
+
+def test_who_am_i_returns_null_for_visitors(client: TestClient) -> None:
+    response = client.get("/api/v1/auth/me")
+    assert response.status_code == 200
+    assert response.json() is None
+
+
+def test_protected_endpoints_still_require_a_session(client: TestClient) -> None:
+    for path in ("/api/v1/progress/me", "/api/v1/gamification/me"):
+        response = client.get(path)
+        assert response.status_code == 401
+        assert response.json()["type"] == "/problems/not-authenticated"
 
 
 def test_login_is_rate_limited_after_repeated_failures(client: TestClient) -> None:

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Request, Response, status
 
 from app.auth import service
-from app.auth.dependencies import CurrentUser, DbSession, session_token
+from app.auth.dependencies import DbSession, OptionalUser, session_token
 from app.auth.schemas import LoginIn, SignupIn
 from app.auth.security import LoginRateLimiter
 from app.core.client_ip import client_ip
@@ -58,5 +58,11 @@ def log_out(request: Request, response: Response, db: DbSession) -> None:
 
 
 @router.get("/me")
-def who_am_i(user: CurrentUser) -> UserOut:
-    return UserOut.model_validate(user)
+def who_am_i(user: OptionalUser) -> UserOut | None:
+    """The signed-in user, or null for visitors.
+
+    Visitors are an expected state here, not an error, so this answers 200 instead of 401
+    (which would log an error in the browser console on every public page). Endpoints that
+    need an account still answer 401.
+    """
+    return UserOut.model_validate(user) if user else None

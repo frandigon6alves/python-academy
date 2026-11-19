@@ -1,20 +1,13 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { api, ApiError } from "../client";
+import { api } from "../client";
 import { queryKeys } from "../query-keys";
 import type { Locale, Theme, User } from "../types";
 
-/** The signed-in user, or null for visitors. */
+/** The signed-in user, or null for visitors (the API answers 200 with null, not 401). */
 export function useMe() {
   return useQuery({
     queryKey: queryKeys.me,
-    queryFn: async () => {
-      try {
-        return await api<User>("/auth/me");
-      } catch (error) {
-        if (error instanceof ApiError && error.status === 401) return null;
-        throw error;
-      }
-    },
+    queryFn: () => api<User | null>("/auth/me"),
     staleTime: 5 * 60_000,
   });
 }
