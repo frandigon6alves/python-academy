@@ -8,6 +8,7 @@ import { TextField } from "@/components/ui/Field";
 import { Link, useRouter } from "@/i18n/navigation";
 import { useSignup } from "@/lib/api/hooks/auth";
 import type { Locale } from "@/lib/api/types";
+import { useTheme } from "@/theme/ThemeProvider";
 import { authErrorMessage } from "./error-message";
 import styles from "./AuthCard.module.css";
 
@@ -16,6 +17,7 @@ export function SignupForm() {
   const locale = useLocale() as Locale;
   const router = useRouter();
   const signup = useSignup();
+  const { preference: theme } = useTheme();
   const [form, setForm] = useState({ email: "", display_name: "", password: "" });
 
   function update(field: keyof typeof form) {
@@ -25,8 +27,8 @@ export function SignupForm() {
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    // New accounts start in the language the visitor is browsing in.
-    signup.mutate({ ...form, language: locale }, { onSuccess: () => router.replace("/hub") });
+    // New accounts keep the language and theme the visitor is already using.
+    signup.mutate({ ...form, language: locale, theme }, { onSuccess: () => router.replace("/hub") });
   }
 
   return (

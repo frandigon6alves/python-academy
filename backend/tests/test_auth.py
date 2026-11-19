@@ -20,6 +20,22 @@ def test_signup_sets_a_secure_session_cookie(client: TestClient) -> None:
     assert client.get("/api/v1/auth/me").json()["display_name"] == "Ada"
 
 
+def test_signup_keeps_the_visitors_language_and_theme(client: TestClient) -> None:
+    response = client.post(
+        "/api/v1/auth/signup",
+        json={
+            "email": "ada@example.com",
+            "display_name": "Ada",
+            "password": PASSWORD,
+            "language": "es",
+            "theme": "dark",
+        },
+    )
+    assert response.status_code == 201
+    me = client.get("/api/v1/auth/me").json()
+    assert me["language"] == "es" and me["theme"] == "dark"
+
+
 def test_password_is_hashed_with_argon2(client: TestClient, db: Session) -> None:
     sign_up(client)
     user = db.scalar(select(User))

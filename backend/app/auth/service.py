@@ -26,6 +26,7 @@ def sign_up(db: Session, data: SignupIn) -> User:
         display_name=data.display_name.strip(),
         password_hash=hash_password(data.password),
         language=data.language,
+        theme=data.theme,
     )
     db.add(user)
     db.commit()

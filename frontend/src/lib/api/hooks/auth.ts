@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api, ApiError } from "../client";
 import { queryKeys } from "../query-keys";
-import type { Locale, User } from "../types";
+import type { Locale, Theme, User } from "../types";
 
 /** The signed-in user, or null for visitors. */
 export function useMe() {
@@ -39,8 +39,13 @@ export function useLogin() {
 export function useSignup() {
   const onSessionChange = useSessionChange();
   return useMutation({
-    mutationFn: (body: { email: string; display_name: string; password: string; language: Locale }) =>
-      api<User>("/auth/signup", { method: "POST", body }),
+    mutationFn: (body: {
+      email: string;
+      display_name: string;
+      password: string;
+      language: Locale;
+      theme: Theme;
+    }) => api<User>("/auth/signup", { method: "POST", body }),
     onSuccess: onSessionChange,
   });
 }
