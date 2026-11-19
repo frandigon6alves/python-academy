@@ -239,8 +239,8 @@ be forged by anyone calling Render directly. The chain is trusted like this inst
 | backend   | `.venv/bin/pytest`                       | Auth, settings, content integrity, courses, progress/XP/levels, badges, quests, streaks, leaderboards, exams and certificates, idempotent seeding, database URLs, rate-limit client IP (60 tests, in-memory SQLite) |
 | backend   | `TEST_DATABASE_URL=postgresql://postgres:postgres@localhost:5432/academy_test .venv/bin/pytest` | The same suite against PostgreSQL (the database is wiped; each test runs in a rolled-back transaction) |
 | frontend  | `pnpm lint && pnpm format:check`         | ESLint (Next.js rules) and Prettier |
-| frontend  | `pnpm typecheck`                         | TypeScript in strict mode |
-| frontend  | `pnpm test`                              | Vitest + Testing Library: quiz form and answer feedback, adaptive result message, demo quiz, mobile menu, glossary page and preview, form validation, safe `?next=` paths, session hook, API client, theme script, identical en/es message keys and placeholders, colour-contrast of every token pair in both themes (134 tests) |
+| frontend  | `pnpm typecheck`                         | TypeScript in strict mode (plus `exactOptionalPropertyTypes`); translation keys are type-checked against `en.json` |
+| frontend  | `pnpm test`                              | Vitest + Testing Library: quiz form and answer feedback, adaptive result message, demo quiz, mobile menu, glossary page and preview, form validation, safe `?next=` paths, session hook, API client, theme script, identical en/es message keys and placeholders, colour-contrast of every token pair in both themes, auth guard, Python highlighting, quiz focus management (144 tests) |
 | frontend  | `pnpm build`                             | Production build |
 | frontend  | `E2E_BASE_URL=http://localhost:3000 pnpm e2e` | Optional Playwright smoke test against a running stack: sign up, finish a lesson quiz, check the hub, switch to Spanish, dark mode, settings, log out |
 
