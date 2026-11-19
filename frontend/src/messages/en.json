@@ -204,7 +204,9 @@
     "badgeEarned": "Earned",
     "badgeLocked": "Locked",
     "progressTitle": "Course progress",
-    "certificate": "Certificate"
+    "certificate": "Certificate",
+    "lessonPosition": "Lesson {position} of {total}",
+    "badgesCount": "{earned} of {total} earned"
   },
   "leaderboard": {
     "title": "Leaderboard",
@@ -215,8 +217,10 @@
     "name": "Name",
     "xp": "XP",
     "level": "Level",
-    "you": "you",
-    "empty": "No one has earned XP in this period yet. Be the first!"
+    "you": "You",
+    "empty": "No one has earned XP in this period yet. Be the first!",
+    "period": "Period",
+    "join": "Create a free account to earn XP and see your name here."
   },
   "settings": {
     "title": "Settings",

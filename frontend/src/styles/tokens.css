@@ -112,3 +112,22 @@
 
   color-scheme: dark;
 }
+
+/* Paper is white whatever the screen theme: printing (e.g. a certificate) always uses
+ * the light values. */
+@media print {
+  :root[data-theme] {
+    --color-bg: #ffffff;
+    --color-surface: #ffffff;
+    --color-surface-alt: #f3ecf6;
+    --color-text: #1e1a26;
+    --color-muted: #5b5070;
+    --color-primary: #045a5c;
+    --color-accent: #6b5b8e;
+    --color-border: #e2d6e8;
+    --shadow-sm: none;
+    --shadow-md: none;
+
+    color-scheme: light;
+  }
+}

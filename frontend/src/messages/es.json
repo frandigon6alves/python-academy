@@ -204,7 +204,9 @@
     "badgeEarned": "Conseguida",
     "badgeLocked": "Bloqueada",
     "progressTitle": "Progreso de los cursos",
-    "certificate": "Certificado"
+    "certificate": "Certificado",
+    "lessonPosition": "Lección {position} de {total}",
+    "badgesCount": "{earned} de {total} conseguidas"
   },
   "leaderboard": {
     "title": "Clasificación",
@@ -215,8 +217,10 @@
     "name": "Nombre",
     "xp": "XP",
     "level": "Nivel",
-    "you": "tú",
-    "empty": "Nadie ha ganado XP en este periodo todavía. ¡Sé el primero!"
+    "you": "Tú",
+    "empty": "Nadie ha ganado XP en este periodo todavía. ¡Sé el primero!",
+    "period": "Periodo",
+    "join": "Crea una cuenta gratuita para ganar XP y ver tu nombre aquí."
   },
   "settings": {
     "title": "Ajustes",

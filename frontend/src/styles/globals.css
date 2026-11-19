@@ -100,6 +100,12 @@ select {
   font-size: var(--text-2xl);
 }
 
+/* A centred column of comfortable reading width (lessons, exams). */
+.reading-column {
+  max-width: var(--reading-width);
+  margin-inline: auto;
+}
+
 .lead {
   color: var(--color-muted);
   font-size: var(--text-lg);
@@ -128,5 +134,8 @@ select {
 @media print {
   .no-print {
     display: none !important;
+  }
+  .page {
+    padding-block: 0;
   }
 }

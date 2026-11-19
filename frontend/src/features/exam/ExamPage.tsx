@@ -11,6 +11,8 @@ import { ApiError } from "@/lib/api/client";
 import { useMe } from "@/lib/api/hooks/auth";
 import { useExam, useSubmitExam } from "@/lib/api/hooks/learning";
 import type { ExamResult } from "@/lib/api/types";
+import { usePageTitle } from "@/lib/use-page-title";
+import { SkeletonRows } from "@/components/ui/Skeleton";
 
 export function ExamPage({ courseSlug }: { courseSlug: string }) {
   const t = useTranslations("exam");
@@ -18,8 +20,17 @@ export function ExamPage({ courseSlug }: { courseSlug: string }) {
   const { data: me } = useMe();
   const exam = useExam(courseSlug, Boolean(me));
   const submit = useSubmitExam(courseSlug);
+  usePageTitle(exam.data && t("title", { course: exam.data.course_title }));
 
-  if (exam.isPending) return <Loading />;
+  if (exam.isPending) {
+    return (
+      <div className="reading-column">
+        <Loading>
+          <SkeletonRows count={4} height="12rem" />
+        </Loading>
+      </div>
+    );
+  }
   if (exam.error instanceof ApiError && exam.error.code === "exam-locked") {
     return (
       <Alert tone="info">
@@ -31,7 +42,7 @@ export function ExamPage({ courseSlug }: { courseSlug: string }) {
   if (exam.isError) return <ErrorState error={exam.error} onRetry={() => exam.refetch()} />;
 
   return (
-    <div style={{ maxWidth: "var(--reading-width)" }}>
+    <div className="reading-column">
       <h1 className="page-title">{t("title", { course: exam.data.course_title })}</h1>
       <p className="lead">{t("lead", { percent: exam.data.pass_percent })}</p>
       {submit.isError && <ErrorState error={submit.error} />}

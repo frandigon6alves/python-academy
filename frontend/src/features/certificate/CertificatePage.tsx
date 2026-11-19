@@ -4,6 +4,8 @@ import { useFormatter, useTranslations } from "next-intl";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
 import { Loading } from "@/components/ui/QueryState";
+import { Skeleton } from "@/components/ui/Skeleton";
+import { usePageTitle } from "@/lib/use-page-title";
 import { useCertificate } from "@/lib/api/hooks/learning";
 import styles from "./CertificatePage.module.css";
 
@@ -11,8 +13,17 @@ export function CertificatePage({ verificationId }: { verificationId: string }) 
   const t = useTranslations("certificate");
   const format = useFormatter();
   const certificate = useCertificate(verificationId);
+  usePageTitle(certificate.data && `${t("heading")}: ${certificate.data.course_title}`);
 
-  if (certificate.isPending) return <Loading />;
+  if (certificate.isPending) {
+    return (
+      <Loading>
+        <div className={styles.wrapper}>
+          <Skeleton width="min(52rem, 100%)" height="28rem" radius="var(--radius-lg)" />
+        </div>
+      </Loading>
+    );
+  }
   if (certificate.isError) return <Alert tone="error">{t("notFound")}</Alert>;
   const data = certificate.data;
 

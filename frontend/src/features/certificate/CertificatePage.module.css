@@ -75,11 +75,23 @@
   color: var(--color-muted);
 }
 
+/* One landscape page: no site chrome, no shadow, colours kept as designed. */
 @media print {
+  @page {
+    size: A4 landscape;
+    margin: 12mm;
+  }
+
+  .wrapper {
+    display: block;
+  }
+
   .certificate {
+    max-width: none;
+    padding: 18mm 14mm;
     box-shadow: none;
-    border-color: #6b5b8e;
-    color: #1e1a26;
-    background: #ffffff;
+    break-inside: avoid;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
   }
 }
