@@ -76,6 +76,8 @@ export function DemoQuiz() {
         )}
       </div>
 
+      {check.isError && <ErrorState error={check.error} />}
+
       {isFinished ? (
         <div className={styles.actions}>
           <Link href="/signup" className={buttonClass("primary")}>
