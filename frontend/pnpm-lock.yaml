@@ -11,6 +11,12 @@ importers:
       '@tanstack/react-query':
         specifier: ^5.108.0
         version: 5.108.0(@types/react@19.3.0)(react@19.3.1)
+      highlight.js:
+        specifier: ^11.11.2
+        version: 11.11.2
+      lowlight:
+        specifier: ^3.3.0
+        version: 3.3.0
       next:
         specifier: ^16.4.6
         version: 16.4.6(@babel/core@7.29.13)(@playwright/test@1.65.1)(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -26,9 +32,6 @@ importers:
       react-markdown:
         specifier: ^10.1.0
         version: 10.1.0(@types/react@19.3.0)(react@19.3.1)
-      rehype-highlight:
-        specifier: ^7.0.2
-        version: 7.0.2
     devDependencies:
       '@playwright/test':
         specifier: ^1.65.1
@@ -42,6 +45,9 @@ importers:
       '@testing-library/user-event':
         specifier: ^14.6.12
         version: 14.6.12(@testing-library/dom@10.4.2)
+      '@types/hast':
+        specifier: ^3.0.5
+        version: 3.0.5
       '@types/node':
         specifier: ^26.6.6
         version: 26.6.6
@@ -1715,9 +1721,6 @@ packages:
   hast-util-to-jsx-runtime@2.3.7:
     resolution: {integrity: sha512-F7DNV2NMcTxA4GqPVHnXzX+mpoPHAIY9rJAVH3CZ1FdBZOcBUEjUuvMkMpHVs/sicEtznh9tMGj5WUR9S4E2rg==}
 
-  hast-util-to-text@4.0.3:
-    resolution: {integrity: sha512-5yrlWOvGFs6CqHriUpSsNrjzT/Tdo+IOQudbznxOn8K5qblp18MJyzOg8IgDOKQ8MYgQcJA7SusuCjSpDr8mSA==}
-
   hast-util-whitespace@3.0.0:
     resolution: {integrity: sha512-88JUN06ipLwsnv+dVn+OIYOvAuvBMy/Qoi6O7mQHxdPXpjy+Cd6xRkWwux7DKO+4sYILtLBRIKgsdpS2gQc7qw==}
 
@@ -2412,9 +2415,6 @@ packages:
   regexp.prototype.flags@1.5.4:
     resolution: {integrity: sha512-dYqgNSZbDwkaJ2ceRd9ojCGjBq+mOm9LmtXnAnEGyHhN/5R7iDW2TRw3h+o/jCFxus3P2LfWIIiwowAjANm7IA==}
     engines: {node: '>= 0.4'}
-
-  rehype-highlight@7.0.2:
-    resolution: {integrity: sha512-k158pK7wdC2qL3M5NcZROZ2tR/l7zOzjxXd5VGdcfIyoijjQqpHd3JKtYSBDpDZ38UI2WJWuFAtkMDxmx5kstA==}
 
   remark-parse@11.0.0:
     resolution: {integrity: sha512-FCxlKLNGknS5ba/1lmpYijMUzX2esxW5xQqjWxw2eHFfS2MSdaHVINFmhjo+qN1WhZhNimq0dZATN9pH0IDrpA==}
@@ -4516,10 +4516,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  hast-util-to-text@4.0.3:
-    dependencies:
-      '@types/hast': 3.0.5
-
   hast-util-whitespace@3.0.0:
     dependencies:
       '@types/hast': 3.0.5
@@ -5370,14 +5366,6 @@ snapshots:
       get-proto: 1.0.1
       gopd: 1.2.0
       set-function-name: 2.0.2
-
-  rehype-highlight@7.0.2:
-    dependencies:
-      '@types/hast': 3.0.5
-      hast-util-to-text: 4.0.3
-      lowlight: 3.3.0
-      unist-util-visit: 5.2.0
-      vfile: 6.0.3
 
   remark-parse@11.0.0:
     dependencies:

@@ -1,7 +1,7 @@
 import { Children, isValidElement, type ReactNode } from "react";
 import ReactMarkdown, { type Components } from "react-markdown";
-import rehypeHighlight from "rehype-highlight";
 import { headingId } from "@/lib/headings";
+import { rehypePython } from "@/lib/rehype-python";
 
 /** Plain text of rendered children, e.g. "Checking a type with type()". */
 function textOf(children: ReactNode): string {
@@ -23,13 +23,15 @@ const components: Components = {
   pre: ({ children }) => <pre tabIndex={0}>{children}</pre>,
 };
 
-/** Renders lesson Markdown with Python syntax highlighting. Raw HTML is not allowed. */
+const rehypePlugins = [rehypePython];
+
+/**
+ * Renders lesson Markdown with Python syntax highlighting. Raw HTML is not rendered
+ * (react-markdown escapes it) and the content comes from the repository, not from users.
+ */
 export function Markdown({ children }: { children: string }) {
   return (
-    <ReactMarkdown
-      components={components}
-      rehypePlugins={[[rehypeHighlight, { detect: false, plainText: ["text"] }]]}
-    >
+    <ReactMarkdown components={components} rehypePlugins={rehypePlugins}>
       {children}
     </ReactMarkdown>
   );
