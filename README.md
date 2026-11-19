@@ -145,6 +145,11 @@ Alembic, once the schema starts to evolve regularly).
 
 ## Deploying (free): Vercel + Render + Neon
 
+Every push to `main` deploys automatically, but production only changes once CI is green:
+
+- **Vercel** builds the web app right away and waits for the `backend`, `backend-postgres` and `frontend` GitHub checks (Vercel *Deployment Checks*) before pointing the production domain at the new build.
+- **Render** redeploys the API from `render.yaml` on every push to `main`.
+
 ```mermaid
 flowchart LR
     Browser -->|"https://your-app.vercel.app"| Vercel["Vercel<br/>Next.js (frontend/)"]
