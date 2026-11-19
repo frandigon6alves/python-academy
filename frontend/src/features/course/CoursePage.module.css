@@ -1,0 +1,70 @@
+.level {
+  color: var(--color-primary);
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+}
+
+.heading {
+  margin-top: var(--space-6);
+}
+
+.lessons {
+  display: grid;
+  gap: var(--space-2);
+  padding: 0;
+  list-style: none;
+}
+
+.lesson {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.lesson a {
+  font-weight: 600;
+  flex: 1;
+}
+
+.done,
+.todo {
+  display: inline-grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  font-weight: 800;
+}
+
+.done {
+  background: var(--color-success-soft);
+  color: var(--color-success);
+}
+
+.todo {
+  background: var(--color-surface-alt);
+  color: var(--color-muted);
+}
+
+.minutes {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+.exam {
+  margin-top: var(--space-6);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-accent-soft);
+  border: 1px solid var(--color-accent);
+}
+
+.examActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
