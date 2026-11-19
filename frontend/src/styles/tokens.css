@@ -28,6 +28,8 @@
   --color-danger: #b3261e;
   --color-danger-soft: #fbe9e7;
   --color-focus: #08979d;
+  --color-disabled-bg: #e6dfeb;
+  --color-disabled-text: #574c69;
   --color-hero-from: #f3ecf6;
   --color-hero-to: #e0f2f2;
 
@@ -92,6 +94,8 @@
   --color-danger: #ff8a80;
   --color-danger-soft: #3a1c1c;
   --color-focus: #5fd3d7;
+  --color-disabled-bg: #2e2838;
+  --color-disabled-text: #bdb2cc;
   --color-hero-from: #1f1828;
   --color-hero-to: #0f2a2b;
 

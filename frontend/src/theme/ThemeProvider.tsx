@@ -39,8 +39,13 @@ function readPreference(): Theme {
 }
 
 function applyTheme(preference: Theme) {
+  const root = document.documentElement;
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  document.documentElement.dataset.theme = resolveTheme(preference, prefersDark);
+  // Swap every colour at once (see .theme-switching in globals.css).
+  root.classList.add("theme-switching");
+  root.dataset.theme = resolveTheme(preference, prefersDark);
+  void getComputedStyle(root).color; // flush styles while transitions are off
+  requestAnimationFrame(() => root.classList.remove("theme-switching"));
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {

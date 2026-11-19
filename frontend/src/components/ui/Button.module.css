@@ -19,9 +19,12 @@
   transform: translateY(1px);
 }
 
+/* Explicit tokens instead of opacity, so disabled labels stay readable (4.5:1). */
 .button:disabled {
   cursor: not-allowed;
-  opacity: 0.6;
+  background: var(--color-disabled-bg);
+  color: var(--color-disabled-text);
+  border-color: var(--color-disabled-bg);
 }
 
 .primary {

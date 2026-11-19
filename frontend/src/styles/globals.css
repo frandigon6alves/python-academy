@@ -65,6 +65,14 @@ select {
   border-radius: var(--radius-sm);
 }
 
+/* Set for one frame while the theme changes: colour transitions would briefly
+ * pair the new text colour with the old background (e.g. dark text on deep teal). */
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+  transition: none !important;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
