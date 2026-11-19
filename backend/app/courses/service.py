@@ -6,6 +6,7 @@ from app.core.i18n import Lang, pick
 from app.courses.grading import question_out
 from app.courses.models import Course, GlossaryTerm, Lesson, Question
 from app.courses.schemas import (
+    EXAM_PASS_PERCENT,
     CourseDetail,
     CourseSummary,
     GlossaryEntry,
@@ -65,6 +66,7 @@ def course_detail(db: Session, slug: str, lang: Lang) -> CourseDetail:
         **course_summary(course, lang).model_dump(),
         lessons=[lesson_link(lesson, lang) for lesson in course.lessons],
         exam_question_count=exam_size or 0,
+        exam_pass_percent=EXAM_PASS_PERCENT,
     )
 
 

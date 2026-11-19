@@ -31,6 +31,8 @@ export interface LessonLink {
 export interface CourseDetail extends CourseSummary {
   lessons: LessonLink[];
   exam_question_count: number;
+  /** Minimum exam score (percent) that earns a certificate. */
+  exam_pass_percent: number;
 }
 
 export interface Question {

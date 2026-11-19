@@ -57,9 +57,15 @@ class LessonLink(BaseModel):
     minutes: int
 
 
+# Minimum exam score (percent) that earns a certificate. Sent to the client in
+# CourseDetail so the UI never hard-codes its own copy.
+EXAM_PASS_PERCENT = 70
+
+
 class CourseDetail(CourseSummary):
     lessons: list[LessonLink]
     exam_question_count: int
+    exam_pass_percent: int
 
 
 class LessonDetail(BaseModel):

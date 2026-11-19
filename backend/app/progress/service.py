@@ -15,12 +15,11 @@ from app.core.i18n import Lang, pick
 from app.courses import service as courses
 from app.courses.grading import grade, question_out
 from app.courses.models import Course, Lesson
-from app.courses.schemas import AnswerIn
+from app.courses.schemas import EXAM_PASS_PERCENT, AnswerIn
 from app.gamification import levels
 from app.gamification import service as gamification
 from app.progress.models import Certificate, ExamAttempt, LessonCompletion, QuizAttempt
 from app.progress.schemas import (
-    PASS_PERCENT,
     CertificateOut,
     ContinueLearning,
     CourseProgress,
@@ -117,7 +116,7 @@ def get_exam(db: Session, user: User, course_slug: str, lang: Lang) -> ExamOut:
     return ExamOut(
         course_slug=course.slug,
         course_title=pick(course.title, lang),
-        pass_percent=PASS_PERCENT,
+        pass_percent=EXAM_PASS_PERCENT,
         questions=[
             question_out(q, lang) for q in courses.questions(db, "exam", course_id=course.id)
         ],
@@ -146,7 +145,7 @@ def submit_exam(
     require_all_lessons_done(db, user, course)
     xp_before = gamification.total_xp(db, user.id)
     graded = grade(courses.questions(db, "exam", course_id=course.id), answers, lang)
-    passed = graded.percent >= PASS_PERCENT
+    passed = graded.percent >= EXAM_PASS_PERCENT
     db.add(
         ExamAttempt(
             user_id=user.id,

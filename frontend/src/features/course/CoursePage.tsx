@@ -14,8 +14,6 @@ import { usePageTitle } from "@/lib/use-page-title";
 import type { CourseDetail, CourseProgress } from "@/lib/api/types";
 import styles from "./CoursePage.module.css";
 
-const PASS_PERCENT = 70;
-
 export function CoursePage({ slug }: { slug: string }) {
   const t = useTranslations();
   const course = useCourse(slug);
@@ -108,7 +106,7 @@ function ExamCard({ course, progress }: { course: CourseDetail; progress: Course
         <span aria-hidden="true">🎓 </span>
         {t("examTitle")}
       </h2>
-      <p>{t("examLead", { count: course.exam_question_count, percent: PASS_PERCENT })}</p>
+      <p>{t("examLead", { count: course.exam_question_count, percent: course.exam_pass_percent })}</p>
       {me === null && <SignInPrompt next={`/courses/${course.slug}`}>{t("examSignIn")}</SignInPrompt>}
       {me && !unlocked && (
         <p className={styles.locked}>

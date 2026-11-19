@@ -5,8 +5,6 @@ from pydantic import BaseModel
 from app.courses.schemas import QuestionOut, QuestionResult
 from app.gamification.schemas import Rewards
 
-PASS_PERCENT = 70
-
 
 class QuizResult(BaseModel):
     correct: int

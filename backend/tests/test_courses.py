@@ -1,5 +1,7 @@
 from fastapi.testclient import TestClient
 
+from app.courses.schemas import EXAM_PASS_PERCENT
+
 
 def test_catalogue_lists_courses_in_order(client: TestClient) -> None:
     courses = client.get("/api/v1/courses").json()
@@ -46,3 +48,8 @@ def test_demo_quiz_is_graded_on_the_server_without_an_account(client: TestClient
     result = client.post(f"/api/v1/demo-quiz/{questions[0]['id']}/check", json={"choice": 0}).json()
     assert result["is_correct"] == (result["correct_index"] == 0)
     assert result["explanation"]
+
+
+def test_course_detail_sends_the_exam_pass_mark(client: TestClient) -> None:
+    course = client.get("/api/v1/courses/python-basics").json()
+    assert course["exam_pass_percent"] == EXAM_PASS_PERCENT
