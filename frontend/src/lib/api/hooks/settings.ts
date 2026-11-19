@@ -13,7 +13,14 @@ export function useUpdateSettings() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (changes: SettingsChanges) => api<User>("/users/me", { method: "PATCH", body: changes }),
-    onSuccess: (user) => queryClient.setQueryData(queryKeys.me, user),
+    onSuccess: (user) => {
+      const previous = queryClient.getQueryData<User | null>(queryKeys.me);
+      queryClient.setQueryData(queryKeys.me, user);
+      // Leaderboards list display names.
+      if (previous?.display_name !== user.display_name) {
+        void queryClient.invalidateQueries({ queryKey: queryKeys.leaderboards });
+      }
+    },
   });
 }
 

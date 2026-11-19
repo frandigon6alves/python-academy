@@ -45,7 +45,7 @@ export function useLeaderboard(period: "weekly" | "all_time") {
 /** After any graded submission, progress, XP and rankings may have changed. */
 function useRefreshLearner() {
   const queryClient = useQueryClient();
-  return () => queryClient.invalidateQueries({ queryKey: ["learner"] });
+  return () => queryClient.invalidateQueries({ queryKey: queryKeys.learner });
 }
 
 export function useSubmitQuiz(lessonId: number) {

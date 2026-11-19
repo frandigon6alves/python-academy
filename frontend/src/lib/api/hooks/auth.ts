@@ -16,7 +16,7 @@ function useSessionChange() {
   const queryClient = useQueryClient();
   return (user: User | null) => {
     queryClient.setQueryData(queryKeys.me, user);
-    queryClient.removeQueries({ queryKey: ["learner"] });
+    queryClient.removeQueries({ queryKey: queryKeys.learner });
   };
 }
 
