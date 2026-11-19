@@ -163,7 +163,7 @@ Tables are created and the course content is loaded by the backend when it start
    `python -m app.seed && uvicorn app.main:app --host 0.0.0.0 --port $PORT --proxy-headers --forwarded-allow-ips '*'`.
 3. When asked, paste the Neon connection string as `DATABASE_URL`.
 4. After the first deploy, open the service's **Environment** tab and copy the generated value of
-   `ACADEMY_PROXY_SECRET`. Note the service URL, e.g. `https://python-academy-api.onrender.com`.
+   `ACADEMY_PROXY_SECRET`. Note the service URL shown in the Render dashboard, e.g. `https://<your-service>.onrender.com`. Render appends a suffix when the name is taken, so always copy the real URL and check that its `/api/v1/openapi.json` lists this app's routes.
 
 | Render variable | Value |
 |-----------------|-------|
@@ -186,7 +186,7 @@ directly.
 
 | Vercel variable | Value |
 |-----------------|-------|
-| `BACKEND_URL` | The Render service URL, e.g. `https://python-academy-api.onrender.com` (no trailing path) |
+| `BACKEND_URL` | The Render service URL, e.g. `https://<your-service>.onrender.com` (no trailing path) |
 | `PROXY_SECRET` | The value of `ACADEMY_PROXY_SECRET` from Render |
 | `ENABLE_EXPERIMENTAL_COREPACK` | `1`, so Vercel uses the pnpm version pinned in `package.json` (`packageManager`) |
 
