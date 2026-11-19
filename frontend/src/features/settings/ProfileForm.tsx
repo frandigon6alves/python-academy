@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { useState, type FormEvent } from "react";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
-import { SelectField, TextField } from "@/components/ui/Field";
+import { SelectField, TextField, validateForm } from "@/components/ui/Field";
 import { authErrorMessage } from "@/features/auth/error-message";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { useUpdateSettings } from "@/lib/api/hooks/settings";
@@ -25,8 +25,9 @@ export function ProfileForm({ user }: { user: User }) {
     theme: user.theme,
   });
 
-  function handleSubmit(event: FormEvent) {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!validateForm(event.currentTarget)) return;
     update.mutate(form, {
       onSuccess: (saved) => {
         setPreference(saved.theme);
@@ -36,13 +37,14 @@ export function ProfileForm({ user }: { user: User }) {
   }
 
   return (
-    <form className={styles.section} onSubmit={handleSubmit} aria-labelledby="profile-title">
+    <form className={styles.section} onSubmit={handleSubmit} noValidate aria-labelledby="profile-title">
       <h2 id="profile-title">{t("settings.profileTitle")}</h2>
       {update.isSuccess && <Alert tone="success">{t("settings.saved")}</Alert>}
       {update.isError && <Alert tone="error">{authErrorMessage(update.error, t)}</Alert>}
       <TextField
         label={t("settings.displayName")}
         hint={t("auth.displayNameHint")}
+        autoComplete="nickname"
         required
         minLength={2}
         maxLength={40}
@@ -65,7 +67,7 @@ export function ProfileForm({ user }: { user: User }) {
         options={THEMES.map((theme) => ({ value: theme, label: t(`theme.${theme}`) }))}
       />
       <Button type="submit" disabled={update.isPending}>
-        {t("settings.save")}
+        {update.isPending ? t("settings.saving") : t("settings.save")}
       </Button>
     </form>
   );

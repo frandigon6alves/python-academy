@@ -8,6 +8,11 @@
   box-shadow: var(--shadow-md);
 }
 
+.lead {
+  color: var(--color-muted);
+  margin-bottom: var(--space-5);
+}
+
 .submit {
   width: 100%;
   margin-top: var(--space-2);
@@ -16,4 +21,15 @@
 .switch {
   margin: var(--space-4) 0 0;
   text-align: center;
+}
+
+.switch a {
+  display: inline-block;
+  padding-block: var(--space-2);
+}
+
+@media (max-width: 30rem) {
+  .card {
+    padding: var(--space-5) var(--space-4);
+  }
 }

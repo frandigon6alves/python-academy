@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { useState, type FormEvent } from "react";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
-import { TextField } from "@/components/ui/Field";
+import { TextField, validateForm } from "@/components/ui/Field";
 import { authErrorMessage } from "@/features/auth/error-message";
 import { useRouter } from "@/i18n/navigation";
 import { useDeleteAccount } from "@/lib/api/hooks/settings";
@@ -19,8 +19,9 @@ export function DeleteAccountForm() {
   const [password, setPassword] = useState("");
   const [confirmation, setConfirmation] = useState("");
 
-  function handleSubmit(event: FormEvent) {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!validateForm(event.currentTarget)) return;
     remove.mutate({ password, confirmation }, { onSuccess: () => router.replace("/") });
   }
 
@@ -28,6 +29,7 @@ export function DeleteAccountForm() {
     <form
       className={`${styles.section} ${styles.danger}`}
       onSubmit={handleSubmit}
+      noValidate
       aria-labelledby="delete-title"
     >
       <h2 id="delete-title">{t("settings.dangerTitle")}</h2>
@@ -45,6 +47,8 @@ export function DeleteAccountForm() {
         label={t("settings.confirm")}
         required
         autoComplete="off"
+        autoCapitalize="characters"
+        spellCheck={false}
         value={confirmation}
         onChange={(event) => setConfirmation(event.target.value)}
       />
@@ -53,7 +57,7 @@ export function DeleteAccountForm() {
         variant="danger"
         disabled={confirmation !== CONFIRMATION_WORD || !password || remove.isPending}
       >
-        {t("settings.deleteAccount")}
+        {remove.isPending ? t("settings.deleting") : t("settings.deleteAccount")}
       </Button>
     </form>
   );

@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { useState, type FormEvent } from "react";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
-import { TextField } from "@/components/ui/Field";
+import { TextField, validateForm } from "@/components/ui/Field";
 import { authErrorMessage } from "@/features/auth/error-message";
 import { useChangePassword } from "@/lib/api/hooks/settings";
 import styles from "./SettingsPage.module.css";
@@ -15,8 +15,9 @@ export function PasswordForm() {
   const [current, setCurrent] = useState("");
   const [next, setNext] = useState("");
 
-  function handleSubmit(event: FormEvent) {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!validateForm(event.currentTarget)) return;
     change.mutate(
       { current_password: current, new_password: next },
       {
@@ -29,7 +30,7 @@ export function PasswordForm() {
   }
 
   return (
-    <form className={styles.section} onSubmit={handleSubmit} aria-labelledby="password-title">
+    <form className={styles.section} onSubmit={handleSubmit} noValidate aria-labelledby="password-title">
       <h2 id="password-title">{t("settings.passwordTitle")}</h2>
       {change.isSuccess && <Alert tone="success">{t("settings.passwordChanged")}</Alert>}
       {change.isError && <Alert tone="error">{authErrorMessage(change.error, t)}</Alert>}
@@ -48,11 +49,12 @@ export function PasswordForm() {
         autoComplete="new-password"
         required
         minLength={8}
+        maxLength={128}
         value={next}
         onChange={(event) => setNext(event.target.value)}
       />
       <Button type="submit" disabled={change.isPending}>
-        {t("settings.changePassword")}
+        {change.isPending ? t("settings.updatingPassword") : t("settings.changePassword")}
       </Button>
     </form>
   );
