@@ -2,7 +2,9 @@ import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
 // The browser only ever talks to this Next.js server; /api/* is forwarded to
-// FastAPI so session cookies stay same-origin.
+// FastAPI so session cookies stay same-origin. On Vercel (PROXY_SECRET set) src/proxy.ts
+// forwards /api/* itself and adds the client IP; this rewrite covers every other setup.
+// Rewrites are resolved at build time: redeploy after changing BACKEND_URL.
 const backendUrl = process.env.BACKEND_URL ?? "http://127.0.0.1:8000";
 
 const nextConfig: NextConfig = {

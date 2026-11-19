@@ -4,6 +4,7 @@ from app.auth import service
 from app.auth.dependencies import CurrentUser, DbSession, session_token
 from app.auth.schemas import LoginIn, SignupIn
 from app.auth.security import LoginRateLimiter
+from app.core.client_ip import client_ip
 from app.core.config import get_settings
 from app.core.errors import ProblemError
 from app.users.schemas import UserOut
@@ -35,8 +36,7 @@ def sign_up(data: SignupIn, response: Response, db: DbSession) -> UserOut:
 
 @router.post("/login")
 def log_in(data: LoginIn, request: Request, response: Response, db: DbSession) -> UserOut:
-    client = request.client.host if request.client else "unknown"
-    key = f"{client}:{service.normalize_email(data.email)}"
+    key = f"{client_ip(request)}:{service.normalize_email(data.email)}"
     if login_limiter.is_blocked(key):
         raise ProblemError(429, "Too many attempts. Try again in a few minutes.", "rate-limited")
     try:

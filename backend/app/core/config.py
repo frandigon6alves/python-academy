@@ -25,6 +25,10 @@ class Settings(BaseSettings):
     cookie_secure: bool = False
     login_max_attempts: int = 5
     login_window_seconds: int = 300
+    # Shared secret between the Next.js proxy and this API. When set, the client IP used for
+    # login rate limiting is only taken from the proxy's header if the request carries this
+    # secret; see app/core/client_ip.py.
+    proxy_secret: str = ""
 
 
 @lru_cache
