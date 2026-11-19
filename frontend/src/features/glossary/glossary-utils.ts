@@ -1,7 +1,7 @@
 import type { GlossaryEntry } from "@/lib/api/types";
 
 /** Lowercase and strip accents, so "ambito" finds "Ámbito". */
-export function normalize(text: string): string {
+function normalize(text: string): string {
   return text
     .normalize("NFD")
     .replace(/\p{Diacritic}/gu, "")
