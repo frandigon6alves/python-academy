@@ -1,0 +1,30 @@
+# Render Blueprint for the FastAPI backend (free web service).
+# The database is Neon PostgreSQL and the frontend runs on Vercel; see README
+# "Deploying (free): Vercel + Render + Neon".
+services:
+  - type: web
+    name: python-academy-api
+    runtime: python
+    plan: free
+    region: frankfurt
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    # Seeding is idempotent and never touches learner data, so it runs on every start.
+    # Render's load balancer terminates TLS; --proxy-headers makes uvicorn honour its
+    # X-Forwarded-Proto/For. The login rate limiter does not use X-Forwarded-For: it trusts
+    # only the client IP sent by the Vercel proxy together with ACADEMY_PROXY_SECRET.
+    startCommand: python -m app.seed && uvicorn app.main:app --host 0.0.0.0 --port $PORT --proxy-headers --forwarded-allow-ips '*'
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12"
+      # Neon connection string, e.g.
+      # postgresql://user:password@ep-xxx-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require
+      - key: DATABASE_URL
+        sync: false
+      # Copy the generated value into the Vercel project as PROXY_SECRET.
+      - key: ACADEMY_PROXY_SECRET
+        generateValue: true
+      # The site is served over HTTPS (Vercel), so the session cookie is Secure.
+      - key: ACADEMY_COOKIE_SECURE
+        value: "true"
