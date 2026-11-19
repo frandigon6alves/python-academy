@@ -25,10 +25,17 @@
   border-left-color: var(--color-danger);
 }
 
+/* Floated so the legend sits inside the card instead of cutting through its border. */
 .legend {
+  float: left;
+  width: 100%;
   font-weight: 600;
   padding: 0;
   margin-bottom: var(--space-2);
+}
+
+.legend + * {
+  clear: both;
 }
 
 .number {
