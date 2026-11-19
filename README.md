@@ -89,6 +89,11 @@ sequenceDiagram
   cookies this blocks cross-site request forgery: browsers cannot add custom headers to
   cross-site forms, and the API never approves the CORS preflight a cross-origin fetch would need.
 - Errors use RFC 9457 problem details (`application/problem+json`).
+- Next.js sends security headers with every page ([`frontend/next.config.ts`](frontend/next.config.ts)):
+  a Content Security Policy that only allows this origin (`frame-ancestors 'none'`, no plugins,
+  no third-party scripts), `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`,
+  `Permissions-Policy` and HSTS. Inline scripts stay allowed because Next.js streams page data in
+  inline scripts and the theme script runs before the first paint; lesson Markdown never renders raw HTML.
 - The login rate limiter is in memory, per process. That fits the single-process setup here;
   several API replicas would need a shared store such as Redis.
 - Behind the production proxies the limiter never trusts `X-Forwarded-For`; see
