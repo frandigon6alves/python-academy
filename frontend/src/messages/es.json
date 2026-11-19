@@ -1,0 +1,220 @@
+{
+  "meta": {
+    "title": "Python Academy",
+    "description": "Aprende a programar con Python: cursos gratuitos y breves con cuestionarios, XP y certificados."
+  },
+  "nav": {
+    "skipToContent": "Saltar al contenido",
+    "main": "Navegación principal",
+    "home": "Academia",
+    "leaderboard": "Clasificación",
+    "hub": "Mi panel",
+    "settings": "Ajustes",
+    "login": "Iniciar sesión",
+    "signup": "Registrarse",
+    "logout": "Cerrar sesión"
+  },
+  "theme": {
+    "label": "Tema",
+    "system": "Sistema",
+    "light": "Claro",
+    "dark": "Oscuro"
+  },
+  "locale": {
+    "label": "Idioma",
+    "en": "English",
+    "es": "Español"
+  },
+  "common": {
+    "loading": "Cargando…",
+    "retry": "Reintentar",
+    "minutes": "{count} min",
+    "lessons": "{count, plural, one {# lección} other {# lecciones}}",
+    "beginner": "Principiante",
+    "intermediate": "Intermedio",
+    "level": "Nivel {level}",
+    "xp": "{xp} XP",
+    "notFound": "No encontramos esa página.",
+    "backHome": "Volver a la academia"
+  },
+  "errors": {
+    "generic": "Algo salió mal. Inténtalo de nuevo.",
+    "network": "No pudimos conectar con el servidor. Revisa tu conexión e inténtalo de nuevo."
+  },
+  "home": {
+    "eyebrow": "Gratis · Bilingüe · Con juego",
+    "title": "Aprende a programar con Python",
+    "lead": "Lecciones cortas, cuestionarios al instante y progreso real. Gana XP, mantén tu racha y colecciona certificados por el camino.",
+    "start": "Empezar a aprender",
+    "tryDemo": "Prueba un cuestionario rápido",
+    "featureLessons": "Lecciones breves con ejemplos ejecutables",
+    "featureXp": "XP, niveles, insignias y misiones",
+    "featureCertificates": "Certificados que puedes imprimir y verificar",
+    "catalogueTitle": "Cursos",
+    "catalogueLead": "Cuatro cursos te llevan de tu primera variable a manejar datos con soltura.",
+    "demoTitle": "Adivina la salida",
+    "demoLead": "Cinco programas diminutos. ¿Sabes qué imprimen? No necesitas cuenta.",
+    "glossaryTitle": "Glosario de Python",
+    "glossaryLead": "Definiciones sencillas de las palabras que encontrarás por el camino."
+  },
+  "catalogue": {
+    "progress": "{percent}% completado",
+    "progressLabel": "Progreso del curso",
+    "start": "Empezar curso",
+    "continue": "Continuar",
+    "review": "Repasar",
+    "completed": "Completado"
+  },
+  "glossary": {
+    "search": "Buscar términos",
+    "placeholder": "p. ej. tupla, ámbito, f-string",
+    "letters": "Saltar a la letra",
+    "count": "{count, plural, =0 {Ningún término coincide} one {# término} other {# términos}}",
+    "empty": "Ningún término coincide con «{query}»."
+  },
+  "demo": {
+    "progress": "Pregunta {current} de {total}",
+    "check": "Comprobar respuesta",
+    "next": "Siguiente pregunta",
+    "finish": "Ver mi puntuación",
+    "restart": "Jugar de nuevo",
+    "correct": "¡Correcto!",
+    "incorrect": "Casi. La respuesta es «{answer}».",
+    "score": "Acertaste {score} de {total}.",
+    "nudge": "Crea una cuenta gratuita para guardar tu progreso y ganar XP."
+  },
+  "course": {
+    "lessonsTitle": "Lecciones",
+    "examTitle": "Examen final",
+    "examLead": "{count} preguntas. Consigue un {percent}% o más para obtener tu certificado.",
+    "examLocked": "Completa todas las lecciones para desbloquear el examen.",
+    "examSignIn": "Inicia sesión para registrar tus lecciones y hacer el examen.",
+    "takeExam": "Hacer el examen",
+    "retakeExam": "Repetir el examen",
+    "viewCertificate": "Ver certificado",
+    "lessonDone": "Completada",
+    "lessonTodo": "Sin empezar"
+  },
+  "lesson": {
+    "breadcrumb": "Ruta de navegación",
+    "takeaways": "Puntos clave",
+    "quizTitle": "Comprueba lo que aprendiste",
+    "signInToSave": "Inicia sesión para enviar el cuestionario, completar la lección y ganar XP.",
+    "previous": "Lección anterior",
+    "next": "Lección siguiente",
+    "backToCourse": "Volver al curso",
+    "readingTime": "{count} min de lectura"
+  },
+  "quiz": {
+    "question": "Pregunta {number}",
+    "submit": "Enviar respuestas",
+    "submitting": "Corrigiendo…",
+    "retry": "Intentar de nuevo",
+    "answerAll": "Responde todas las preguntas para enviar.",
+    "score": "Acertaste {correct} de {total}.",
+    "correct": "Correcta",
+    "incorrect": "Incorrecta",
+    "correctAnswer": "Respuesta correcta: {answer}"
+  },
+  "exam": {
+    "title": "{course}: examen final",
+    "lead": "Consigue al menos un {percent}% para obtener tu certificado. Las respuestas se corrigen al enviarlas.",
+    "passed": "¡Aprobaste con un {percent}%! 🎉",
+    "failed": "Obtuviste un {percent}%. Repasa las lecciones e inténtalo de nuevo.",
+    "viewCertificate": "Ver tu certificado",
+    "locked": "Completa todas las lecciones de este curso para desbloquear el examen."
+  },
+  "rewards": {
+    "title": "Recompensas",
+    "xp": "+{xp} XP",
+    "noXp": "Esta vez no hay XP nueva: supera tu mejor puntuación para ganar más.",
+    "levelUp": "¡Subiste de nivel! Ahora eres nivel {level}.",
+    "badge": "Nueva insignia: {name}",
+    "quest": "Misión completada: {name} (+{xp} XP)"
+  },
+  "certificate": {
+    "heading": "Certificado de finalización",
+    "presentedTo": "Se certifica que",
+    "completed": "ha completado con éxito el curso",
+    "score": "Nota del examen final: {percent}%",
+    "issuedOn": "Emitido el {date}",
+    "verification": "ID de verificación: {id}",
+    "verifyNote": "Cualquiera puede verificar este certificado en la dirección de esta página.",
+    "print": "Imprimir certificado",
+    "notFound": "Ningún certificado coincide con este ID de verificación."
+  },
+  "auth": {
+    "loginTitle": "Hola de nuevo",
+    "signupTitle": "Crea tu cuenta gratuita",
+    "email": "Correo electrónico",
+    "displayName": "Nombre visible",
+    "displayNameHint": "Se muestra en la clasificación y en los certificados.",
+    "password": "Contraseña",
+    "passwordHint": "Al menos 8 caracteres.",
+    "submitLogin": "Iniciar sesión",
+    "submitSignup": "Crear cuenta",
+    "noAccount": "¿Eres nuevo? Crea una cuenta",
+    "haveAccount": "¿Ya tienes cuenta? Inicia sesión",
+    "invalidCredentials": "Correo o contraseña no válidos.",
+    "emailTaken": "Ya existe una cuenta con este correo.",
+    "rateLimited": "Demasiados intentos. Espera unos minutos e inténtalo de nuevo.",
+    "checkFields": "Revisa los campos marcados."
+  },
+  "hub": {
+    "greeting": "¡Hola, {name}!",
+    "lead": "Así va tu aprendizaje.",
+    "toNextLevel": "{xp} XP para el nivel {level}",
+    "xpLabel": "Experiencia hacia el siguiente nivel",
+    "streak": "{count, plural, =0 {Aún sin racha} one {Racha de # día} other {Racha de # días}}",
+    "streakHint": "Aprende algo cada día para mantenerla.",
+    "continueTitle": "Sigue aprendiendo",
+    "continueCta": "Retomar lección",
+    "allDone": "Has completado todas las lecciones. ¡Increíble!",
+    "questsTitle": "Misiones",
+    "daily": "Diaria",
+    "weekly": "Semanal",
+    "questDone": "Hecha",
+    "questProgress": "{progress} / {target}",
+    "badgesTitle": "Insignias",
+    "badgeEarned": "Conseguida",
+    "badgeLocked": "Bloqueada",
+    "progressTitle": "Progreso de los cursos",
+    "certificate": "Certificado"
+  },
+  "leaderboard": {
+    "title": "Clasificación",
+    "lead": "Solo se muestran los nombres visibles. ¡Sigue aprendiendo para subir!",
+    "weekly": "Esta semana",
+    "allTime": "Histórico",
+    "rank": "Puesto",
+    "name": "Nombre",
+    "xp": "XP",
+    "level": "Nivel",
+    "you": "tú",
+    "empty": "Nadie ha ganado XP en este periodo todavía. ¡Sé el primero!"
+  },
+  "settings": {
+    "title": "Ajustes",
+    "profileTitle": "Perfil y preferencias",
+    "displayName": "Nombre visible",
+    "language": "Idioma",
+    "theme": "Tema",
+    "save": "Guardar cambios",
+    "saved": "Cambios guardados.",
+    "passwordTitle": "Cambiar contraseña",
+    "currentPassword": "Contraseña actual",
+    "newPassword": "Nueva contraseña",
+    "changePassword": "Actualizar contraseña",
+    "passwordChanged": "Contraseña actualizada. Se cerró la sesión en tus otros dispositivos.",
+    "wrongPassword": "La contraseña actual no es correcta.",
+    "dangerTitle": "Eliminar cuenta",
+    "dangerLead": "Esto elimina para siempre tu cuenta, tu progreso, tus insignias y tus certificados. No se puede deshacer.",
+    "deletePassword": "Contraseña",
+    "confirm": "Escribe DELETE para confirmar",
+    "deleteAccount": "Eliminar mi cuenta"
+  },
+  "footer": {
+    "tagline": "Python Academy es un proyecto educativo de código abierto.",
+    "license": "Publicado bajo la licencia MIT."
+  }
+}

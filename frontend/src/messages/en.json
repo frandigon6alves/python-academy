@@ -1,0 +1,220 @@
+{
+  "meta": {
+    "title": "Python Academy",
+    "description": "Learn programming with Python: free, bite-sized courses with quizzes, XP and certificates."
+  },
+  "nav": {
+    "skipToContent": "Skip to content",
+    "main": "Main navigation",
+    "home": "Academy",
+    "leaderboard": "Leaderboard",
+    "hub": "My hub",
+    "settings": "Settings",
+    "login": "Log in",
+    "signup": "Sign up",
+    "logout": "Log out"
+  },
+  "theme": {
+    "label": "Theme",
+    "system": "System",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "locale": {
+    "label": "Language",
+    "en": "English",
+    "es": "Español"
+  },
+  "common": {
+    "loading": "Loading…",
+    "retry": "Try again",
+    "minutes": "{count} min",
+    "lessons": "{count, plural, one {# lesson} other {# lessons}}",
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "level": "Level {level}",
+    "xp": "{xp} XP",
+    "notFound": "We couldn't find that page.",
+    "backHome": "Back to the academy"
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "network": "We couldn't reach the server. Check your connection and try again."
+  },
+  "home": {
+    "eyebrow": "Free · Bilingual · Gamified",
+    "title": "Learn programming with Python",
+    "lead": "Short lessons, instant quizzes and real progress. Earn XP, keep your streak alive and collect certificates as you go.",
+    "start": "Start learning",
+    "tryDemo": "Try a quick quiz",
+    "featureLessons": "Bite-sized lessons with runnable examples",
+    "featureXp": "XP, levels, badges and quests",
+    "featureCertificates": "Certificates you can print and verify",
+    "catalogueTitle": "Courses",
+    "catalogueLead": "Four courses take you from your first variable to confident data handling.",
+    "demoTitle": "Predict the output",
+    "demoLead": "Five tiny programs. Can you tell what they print? No account needed.",
+    "glossaryTitle": "Python glossary",
+    "glossaryLead": "Plain-language definitions of the words you will meet along the way."
+  },
+  "catalogue": {
+    "progress": "{percent}% complete",
+    "progressLabel": "Course progress",
+    "start": "Start course",
+    "continue": "Continue",
+    "review": "Review",
+    "completed": "Completed"
+  },
+  "glossary": {
+    "search": "Search terms",
+    "placeholder": "e.g. tuple, scope, f-string",
+    "letters": "Jump to letter",
+    "count": "{count, plural, =0 {No terms match} one {# term} other {# terms}}",
+    "empty": "No terms match “{query}”."
+  },
+  "demo": {
+    "progress": "Question {current} of {total}",
+    "check": "Check answer",
+    "next": "Next question",
+    "finish": "See my score",
+    "restart": "Play again",
+    "correct": "Correct!",
+    "incorrect": "Not quite. The answer is “{answer}”.",
+    "score": "You got {score} of {total} right.",
+    "nudge": "Create a free account to save your progress and earn XP."
+  },
+  "course": {
+    "lessonsTitle": "Lessons",
+    "examTitle": "Final exam",
+    "examLead": "{count} questions. Score {percent}% or more to earn your certificate.",
+    "examLocked": "Complete every lesson to unlock the exam.",
+    "examSignIn": "Sign in to track lessons and take the exam.",
+    "takeExam": "Take the exam",
+    "retakeExam": "Retake the exam",
+    "viewCertificate": "View certificate",
+    "lessonDone": "Completed",
+    "lessonTodo": "Not started"
+  },
+  "lesson": {
+    "breadcrumb": "Breadcrumb",
+    "takeaways": "Key takeaways",
+    "quizTitle": "Check your understanding",
+    "signInToSave": "Log in to submit the quiz, complete the lesson and earn XP.",
+    "previous": "Previous lesson",
+    "next": "Next lesson",
+    "backToCourse": "Back to course",
+    "readingTime": "{count} min read"
+  },
+  "quiz": {
+    "question": "Question {number}",
+    "submit": "Submit answers",
+    "submitting": "Grading…",
+    "retry": "Try again",
+    "answerAll": "Answer every question to submit.",
+    "score": "You scored {correct} of {total}.",
+    "correct": "Correct",
+    "incorrect": "Incorrect",
+    "correctAnswer": "Correct answer: {answer}"
+  },
+  "exam": {
+    "title": "{course}: final exam",
+    "lead": "Score at least {percent}% to earn your certificate. Answers are checked when you submit.",
+    "passed": "You passed with {percent}%! 🎉",
+    "failed": "You scored {percent}%. Review the lessons and try again.",
+    "viewCertificate": "View your certificate",
+    "locked": "Complete every lesson of this course to unlock the exam."
+  },
+  "rewards": {
+    "title": "Rewards",
+    "xp": "+{xp} XP",
+    "noXp": "No new XP this time: beat your best score to earn more.",
+    "levelUp": "Level up! You reached level {level}.",
+    "badge": "New badge: {name}",
+    "quest": "Quest complete: {name} (+{xp} XP)"
+  },
+  "certificate": {
+    "heading": "Certificate of completion",
+    "presentedTo": "This certifies that",
+    "completed": "has successfully completed the course",
+    "score": "Final exam score: {percent}%",
+    "issuedOn": "Issued on {date}",
+    "verification": "Verification ID: {id}",
+    "verifyNote": "Anyone can verify this certificate at this page's address.",
+    "print": "Print certificate",
+    "notFound": "No certificate matches this verification ID."
+  },
+  "auth": {
+    "loginTitle": "Welcome back",
+    "signupTitle": "Create your free account",
+    "email": "Email",
+    "displayName": "Display name",
+    "displayNameHint": "Shown on the leaderboard and on certificates.",
+    "password": "Password",
+    "passwordHint": "At least 8 characters.",
+    "submitLogin": "Log in",
+    "submitSignup": "Create account",
+    "noAccount": "New here? Create an account",
+    "haveAccount": "Already have an account? Log in",
+    "invalidCredentials": "Invalid email or password.",
+    "emailTaken": "An account with this email already exists.",
+    "rateLimited": "Too many attempts. Please wait a few minutes and try again.",
+    "checkFields": "Please check the highlighted fields."
+  },
+  "hub": {
+    "greeting": "Hi, {name}!",
+    "lead": "Here is how your learning is going.",
+    "toNextLevel": "{xp} XP to level {level}",
+    "xpLabel": "Experience towards the next level",
+    "streak": "{count, plural, =0 {No streak yet} one {# day streak} other {# day streak}}",
+    "streakHint": "Learn something every day to keep it going.",
+    "continueTitle": "Continue learning",
+    "continueCta": "Resume lesson",
+    "allDone": "You have completed every lesson. Amazing work!",
+    "questsTitle": "Quests",
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "questDone": "Done",
+    "questProgress": "{progress} / {target}",
+    "badgesTitle": "Badges",
+    "badgeEarned": "Earned",
+    "badgeLocked": "Locked",
+    "progressTitle": "Course progress",
+    "certificate": "Certificate"
+  },
+  "leaderboard": {
+    "title": "Leaderboard",
+    "lead": "Only display names are shown. Keep learning to climb!",
+    "weekly": "This week",
+    "allTime": "All time",
+    "rank": "Rank",
+    "name": "Name",
+    "xp": "XP",
+    "level": "Level",
+    "you": "you",
+    "empty": "No one has earned XP in this period yet. Be the first!"
+  },
+  "settings": {
+    "title": "Settings",
+    "profileTitle": "Profile and preferences",
+    "displayName": "Display name",
+    "language": "Language",
+    "theme": "Theme",
+    "save": "Save changes",
+    "saved": "Changes saved.",
+    "passwordTitle": "Change password",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "changePassword": "Update password",
+    "passwordChanged": "Password updated. Other devices have been signed out.",
+    "wrongPassword": "The current password is not correct.",
+    "dangerTitle": "Delete account",
+    "dangerLead": "This permanently deletes your account, progress, badges and certificates. It cannot be undone.",
+    "deletePassword": "Password",
+    "confirm": "Type DELETE to confirm",
+    "deleteAccount": "Delete my account"
+  },
+  "footer": {
+    "tagline": "Python Academy is an open-source learning project.",
+    "license": "Released under the MIT license."
+  }
+}
