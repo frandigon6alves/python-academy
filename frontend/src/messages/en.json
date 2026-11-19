@@ -93,7 +93,7 @@
     "examTitle": "Final exam",
     "examLead": "{count} questions. Score {percent}% or more to earn your certificate.",
     "examLocked": "Complete every lesson to unlock the exam.",
-    "examSignIn": "Sign in to track lessons and take the exam.",
+    "examSignIn": "Create a free account or log in to track your lessons and take the exam.",
     "takeExam": "Take the exam",
     "retakeExam": "Retake the exam",
     "viewCertificate": "View certificate",
@@ -104,11 +104,13 @@
     "breadcrumb": "Breadcrumb",
     "takeaways": "Key takeaways",
     "quizTitle": "Check your understanding",
-    "signInToSave": "Log in to submit the quiz, complete the lesson and earn XP.",
+    "signInToSave": "Create a free account or log in to submit the quiz, complete the lesson and earn XP.",
     "previous": "Previous lesson",
     "next": "Next lesson",
     "backToCourse": "Back to course",
-    "readingTime": "{count} min read"
+    "readingTime": "{count} min read",
+    "onThisPage": "On this page",
+    "pagerLabel": "Lessons"
   },
   "quiz": {
     "question": "Question {number}",
@@ -177,7 +179,11 @@
     "invalidCredentials": "Invalid email or password.",
     "emailTaken": "An account with this email already exists.",
     "rateLimited": "Too many attempts. Please wait a few minutes and try again.",
-    "checkFields": "Please check the highlighted fields."
+    "checkFields": "Please check the highlighted fields.",
+    "loginLead": "Log in to pick up where you left off.",
+    "signupLead": "Save your progress, earn XP and collect certificates.",
+    "submittingLogin": "Logging in…",
+    "submittingSignup": "Creating account…"
   },
   "hub": {
     "greeting": "Hi, {name}!",
@@ -230,10 +236,20 @@
     "dangerLead": "This permanently deletes your account, progress, badges and certificates. It cannot be undone.",
     "deletePassword": "Password",
     "confirm": "Type DELETE to confirm",
-    "deleteAccount": "Delete my account"
+    "deleteAccount": "Delete my account",
+    "saving": "Saving…",
+    "updatingPassword": "Updating…",
+    "deleting": "Deleting…"
   },
   "footer": {
     "tagline": "Python Academy is an open-source learning project.",
     "license": "Released under the MIT license."
+  },
+  "validation": {
+    "required": "This field is required.",
+    "email": "Enter an email address like name@example.com.",
+    "tooShort": "Use at least {min} characters.",
+    "tooLong": "Use at most {max} characters.",
+    "showPassword": "Show password"
   }
 }

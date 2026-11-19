@@ -93,7 +93,7 @@
     "examTitle": "Examen final",
     "examLead": "{count} preguntas. Consigue un {percent}% o más para obtener tu certificado.",
     "examLocked": "Completa todas las lecciones para desbloquear el examen.",
-    "examSignIn": "Inicia sesión para registrar tus lecciones y hacer el examen.",
+    "examSignIn": "Crea una cuenta gratuita o inicia sesión para seguir tus lecciones y hacer el examen.",
     "takeExam": "Hacer el examen",
     "retakeExam": "Repetir el examen",
     "viewCertificate": "Ver certificado",
@@ -104,11 +104,13 @@
     "breadcrumb": "Ruta de navegación",
     "takeaways": "Puntos clave",
     "quizTitle": "Comprueba lo que aprendiste",
-    "signInToSave": "Inicia sesión para enviar el cuestionario, completar la lección y ganar XP.",
+    "signInToSave": "Crea una cuenta gratuita o inicia sesión para enviar el cuestionario, completar la lección y ganar XP.",
     "previous": "Lección anterior",
     "next": "Lección siguiente",
     "backToCourse": "Volver al curso",
-    "readingTime": "{count} min de lectura"
+    "readingTime": "{count} min de lectura",
+    "onThisPage": "En esta página",
+    "pagerLabel": "Lecciones"
   },
   "quiz": {
     "question": "Pregunta {number}",
@@ -177,7 +179,11 @@
     "invalidCredentials": "Correo o contraseña no válidos.",
     "emailTaken": "Ya existe una cuenta con este correo.",
     "rateLimited": "Demasiados intentos. Espera unos minutos e inténtalo de nuevo.",
-    "checkFields": "Revisa los campos marcados."
+    "checkFields": "Revisa los campos marcados.",
+    "loginLead": "Inicia sesión para seguir donde lo dejaste.",
+    "signupLead": "Guarda tu progreso, gana XP y colecciona certificados.",
+    "submittingLogin": "Iniciando sesión…",
+    "submittingSignup": "Creando cuenta…"
   },
   "hub": {
     "greeting": "¡Hola, {name}!",
@@ -230,10 +236,20 @@
     "dangerLead": "Esto elimina para siempre tu cuenta, tu progreso, tus insignias y tus certificados. No se puede deshacer.",
     "deletePassword": "Contraseña",
     "confirm": "Escribe DELETE para confirmar",
-    "deleteAccount": "Eliminar mi cuenta"
+    "deleteAccount": "Eliminar mi cuenta",
+    "saving": "Guardando…",
+    "updatingPassword": "Actualizando…",
+    "deleting": "Eliminando…"
   },
   "footer": {
     "tagline": "Python Academy es un proyecto educativo de código abierto.",
     "license": "Publicado bajo la licencia MIT."
+  },
+  "validation": {
+    "required": "Este campo es obligatorio.",
+    "email": "Escribe un correo como nombre@ejemplo.com.",
+    "tooShort": "Usa al menos {min} caracteres.",
+    "tooLong": "Usa como máximo {max} caracteres.",
+    "showPassword": "Mostrar contraseña"
   }
 }
