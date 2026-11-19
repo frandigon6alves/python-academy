@@ -13,7 +13,9 @@ by domain, and a Next.js frontend split by feature, both small enough to read in
 
 - **Academy page** (public): hero, course catalogue with level, duration, lesson count and
   your progress when signed in, a "predict the output" demo quiz that needs no account,
-  and a searchable A–Z glossary of 47 Python terms.
+  and a preview of the glossary.
+- **Glossary page** (public): a searchable A–Z glossary of 47 Python terms at `/[locale]/glossary`,
+  with the search kept in the URL (`?q=`).
 - **Four courses, 16 lessons**: Python Basics, Control Flow, Functions & Modules and Data
   Structures. Each lesson is Markdown with highlighted code, key takeaways and a 3-question quiz.
 - **Exams and certificates**: each course ends with a 6-question exam, unlocked once every
@@ -24,7 +26,9 @@ by domain, and a Next.js frontend split by feature, both small enough to read in
   that only show display names.
 - **Learner hub**: level and XP bar, streak, quests, badges, "continue learning" and course progress.
 - **Accounts**: sign up, log in, log out with server-side sessions in an `HttpOnly`,
-  `SameSite=Lax` cookie. Passwords are hashed with Argon2, failed logins are rate-limited and
+  `SameSite=Lax` cookie. Login and sign-up return to the page you came from (`?next=`, only
+  same-site paths are accepted). `GET /api/v1/auth/me` answers `null` for visitors instead of 401,
+  so public pages log no errors; every endpoint that needs an account still answers 401. Passwords are hashed with Argon2, failed logins are rate-limited and
   bad credentials always return the same generic error.
 - **Settings**: display name, language, theme, password change (requires the current password)
   and account deletion (requires the password and typing `DELETE`).
@@ -34,8 +38,9 @@ by domain, and a Next.js frontend split by feature, both small enough to read in
 - **Light and dark themes**: follows the system by default, can be switched manually, and is
   applied before the first paint so there is no flash.
 - **Accessibility**: semantic landmarks, skip link, labelled controls, visible focus rings,
-  `aria-live` quiz feedback, keyboard-only navigation, reduced-motion support and WCAG AA
-  contrast in both themes (checked by a unit test).
+  `aria-live` quiz feedback that never relies on colour alone (icons and text tags), a mobile menu
+  with `aria-expanded` and Escape to close, 44px touch targets, inline form errors, keyboard-only
+  navigation, reduced-motion support and WCAG AA contrast in both themes (checked by a unit test).
 
 ## Architecture
 
@@ -226,11 +231,11 @@ be forged by anyone calling Render directly. The chain is trusted like this inst
 |-----------|------------------------------------------|----------------|
 | backend   | `.venv/bin/ruff check . && .venv/bin/ruff format --check .` | Lint and formatting |
 | backend   | `.venv/bin/mypy`                         | Strict type checking |
-| backend   | `.venv/bin/pytest`                       | Auth, settings, content integrity, courses, progress/XP/levels, badges, quests, streaks, leaderboards, exams and certificates, idempotent seeding, database URLs, rate-limit client IP (58 tests, in-memory SQLite) |
+| backend   | `.venv/bin/pytest`                       | Auth, settings, content integrity, courses, progress/XP/levels, badges, quests, streaks, leaderboards, exams and certificates, idempotent seeding, database URLs, rate-limit client IP (60 tests, in-memory SQLite) |
 | backend   | `TEST_DATABASE_URL=postgresql://postgres:postgres@localhost:5432/academy_test .venv/bin/pytest` | The same suite against PostgreSQL (the database is wiped; each test runs in a rolled-back transaction) |
 | frontend  | `pnpm lint && pnpm format:check`         | ESLint (Next.js rules) and Prettier |
 | frontend  | `pnpm typecheck`                         | TypeScript in strict mode |
-| frontend  | `pnpm test`                              | Vitest + Testing Library: quiz form, demo quiz, API client, theme script, glossary search, identical en/es message keys and placeholders, colour-contrast of every token pair in both themes (78 tests) |
+| frontend  | `pnpm test`                              | Vitest + Testing Library: quiz form and answer feedback, adaptive result message, demo quiz, mobile menu, glossary page and preview, form validation, safe `?next=` paths, session hook, API client, theme script, identical en/es message keys and placeholders, colour-contrast of every token pair in both themes (134 tests) |
 | frontend  | `pnpm build`                             | Production build |
 | frontend  | `E2E_BASE_URL=http://localhost:3000 pnpm e2e` | Optional Playwright smoke test against a running stack: sign up, finish a lesson quiz, check the hub, switch to Spanish, dark mode, settings, log out |
 
