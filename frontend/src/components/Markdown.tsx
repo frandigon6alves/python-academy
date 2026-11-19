@@ -1,7 +1,7 @@
 import { Children, isValidElement, type ReactNode } from "react";
 import ReactMarkdown, { type Components } from "react-markdown";
 import { headingId } from "@/lib/headings";
-import { rehypePython } from "@/lib/rehype-python";
+import { rehypePython } from "@/lib/highlight";
 
 /** Plain text of rendered children, e.g. "Checking a type with type()". */
 function textOf(children: ReactNode): string {
@@ -35,8 +35,4 @@ export function Markdown({ children }: { children: string }) {
       {children}
     </ReactMarkdown>
   );
-}
-
-export function CodeSnippet({ code }: { code: string }) {
-  return <Markdown>{"```python\n" + code + "\n```"}</Markdown>;
 }

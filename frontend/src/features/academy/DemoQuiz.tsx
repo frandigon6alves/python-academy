@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { CodeSnippet } from "@/components/Markdown";
+import { CodeSnippet } from "@/components/CodeSnippet";
 import { Button, buttonClass } from "@/components/ui/Button";
 import { ErrorState, Loading } from "@/components/ui/QueryState";
 import { Link } from "@/i18n/navigation";

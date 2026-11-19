@@ -10,12 +10,17 @@ function isElementContent(node: RootContent): node is ElementContent {
   return node.type === "element" || node.type === "text" || node.type === "comment";
 }
 
+/** Python source as highlight.js tokens: text nodes and <span class="hljs-…"> elements. */
+export function highlightPython(source: string): ElementContent[] {
+  return lowlight.highlight("python", source).children.filter(isElementContent);
+}
+
 function highlight(code: Element): void {
   const classes = code.properties.className;
   if (!Array.isArray(classes) || !classes.includes("language-python")) return;
   const source = code.children.map((child) => (child.type === "text" ? child.value : "")).join("");
   code.properties.className = ["hljs", ...classes];
-  code.children = lowlight.highlight("python", source).children.filter(isElementContent);
+  code.children = highlightPython(source);
 }
 
 function visit(parent: Root | Element): void {

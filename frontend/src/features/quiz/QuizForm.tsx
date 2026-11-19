@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useState, type FormEvent } from "react";
-import { CodeSnippet } from "@/components/Markdown";
+import { CodeSnippet } from "@/components/CodeSnippet";
 import { Button } from "@/components/ui/Button";
 import type { Answer, Question, QuestionResult } from "@/lib/api/types";
 import { ChoiceOption } from "./ChoiceOption";
