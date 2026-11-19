@@ -5,6 +5,8 @@ import { useState, type FormEvent } from "react";
 import { CodeSnippet } from "@/components/Markdown";
 import { Button } from "@/components/ui/Button";
 import type { Answer, Question, QuestionResult } from "@/lib/api/types";
+import { ChoiceOption } from "./ChoiceOption";
+import { optionOutcome } from "./outcome";
 import styles from "./QuizForm.module.css";
 
 interface QuizFormProps {
@@ -92,22 +94,22 @@ function QuestionFieldset({ number, question, choice, result, disabled, onChoose
       {question.code && <CodeSnippet code={question.code} />}
       <div className={styles.options}>
         {question.options.map((option, index) => (
-          <label key={index} className={styles.option}>
-            <input
-              type="radio"
-              name={`question-${question.id}`}
-              value={index}
-              checked={choice === index}
-              onChange={() => onChoose(index)}
-            />
-            <span>{option}</span>
-          </label>
+          <ChoiceOption
+            key={index}
+            name={`question-${question.id}`}
+            checked={choice === index}
+            onChange={() => onChoose(index)}
+            outcome={optionOutcome(index, result)}
+          >
+            {option}
+          </ChoiceOption>
         ))}
       </div>
       {result && (
         <div className={styles.feedback}>
-          <p>
-            <strong>{result.is_correct ? `✓ ${t("correct")}` : `✗ ${t("incorrect")}`}</strong>
+          <p className={result.is_correct ? styles.verdictCorrect : styles.verdictIncorrect}>
+            <span aria-hidden="true">{result.is_correct ? "✓ " : "✕ "}</span>
+            <strong>{result.is_correct ? t("correct") : t("incorrect")}</strong>
             {!result.is_correct && (
               <> · {t("correctAnswer", { answer: question.options[result.correct_index] ?? "" })}</>
             )}

@@ -31,28 +31,8 @@
 
 .options {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
   gap: var(--space-2);
-}
-
-.option {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  min-height: 44px;
-  padding: var(--space-2) var(--space-3);
-  border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-}
-
-.option:has(input:checked) {
-  border-color: var(--color-primary);
-  background: var(--color-primary-soft);
-}
-
-.option input {
-  accent-color: var(--color-primary);
 }
 
 .live:empty {

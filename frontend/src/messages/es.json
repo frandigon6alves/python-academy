@@ -114,7 +114,20 @@
     "score": "Acertaste {correct} de {total}.",
     "correct": "Correcta",
     "incorrect": "Incorrecta",
-    "correctAnswer": "Respuesta correcta: {answer}"
+    "correctAnswer": "Respuesta correcta: {answer}",
+    "outcome": {
+      "chosen-correct": "Tu respuesta · correcta",
+      "chosen-wrong": "Tu respuesta",
+      "missed": "Respuesta correcta"
+    },
+    "result": {
+      "perfectTitle": "¡Puntuación perfecta!",
+      "perfect": "Todas las respuestas son correctas. ¡Muy bien!",
+      "goodTitle": "¡Buen trabajo!",
+      "good": "Revisa las explicaciones de las que fallaste.",
+      "lowTitle": "¡Sigue así!",
+      "low": "Lee las explicaciones y vuelve a intentarlo. Cada intento te ayuda a aprender."
+    }
   },
   "exam": {
     "title": "{course}: examen final",
@@ -130,7 +143,8 @@
     "noXp": "Esta vez no hay XP nueva: supera tu mejor puntuación para ganar más.",
     "levelUp": "¡Subiste de nivel! Ahora eres nivel {level}.",
     "badge": "Nueva insignia: {name}",
-    "quest": "Misión completada: {name} (+{xp} XP)"
+    "quest": "Misión completada: {name} (+{xp} XP)",
+    "xpQuiet": "Aun así ganaste +{xp} XP por practicar."
   },
   "certificate": {
     "heading": "Certificado de finalización",

@@ -114,7 +114,20 @@
     "score": "You scored {correct} of {total}.",
     "correct": "Correct",
     "incorrect": "Incorrect",
-    "correctAnswer": "Correct answer: {answer}"
+    "correctAnswer": "Correct answer: {answer}",
+    "outcome": {
+      "chosen-correct": "Your answer · correct",
+      "chosen-wrong": "Your answer",
+      "missed": "Correct answer"
+    },
+    "result": {
+      "perfectTitle": "Perfect score!",
+      "perfect": "Every answer was right. Great work!",
+      "goodTitle": "Nice work!",
+      "good": "Check the explanations for the ones you missed.",
+      "lowTitle": "Keep going!",
+      "low": "Read the explanations, then try again. Every attempt helps you learn."
+    }
   },
   "exam": {
     "title": "{course}: final exam",
@@ -130,7 +143,8 @@
     "noXp": "No new XP this time: beat your best score to earn more.",
     "levelUp": "Level up! You reached level {level}.",
     "badge": "New badge: {name}",
-    "quest": "Quest complete: {name} (+{xp} XP)"
+    "quest": "Quest complete: {name} (+{xp} XP)",
+    "xpQuiet": "You still earned +{xp} XP for practising."
   },
   "certificate": {
     "heading": "Certificate of completion",

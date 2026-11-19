@@ -43,39 +43,27 @@
   gap: var(--space-2);
 }
 
-.option {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  min-height: 44px;
-  padding: var(--space-2) var(--space-3);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-}
-
-.option:hover {
-  background: var(--color-surface-alt);
-}
-
-.option:has(input:checked) {
-  border-color: var(--color-primary);
-  background: var(--color-primary-soft);
-}
-
-.option input {
-  width: 1.15rem;
-  height: 1.15rem;
-  accent-color: var(--color-primary);
-}
-
 .feedback {
   margin-top: var(--space-3);
-  font-size: var(--text-sm);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+}
+
+.verdictCorrect {
+  color: var(--color-success);
+}
+
+.verdictIncorrect {
+  color: var(--color-danger);
 }
 
 .feedback p {
   margin: 0 0 var(--space-1);
+}
+
+.feedback p:last-child {
+  color: var(--color-text);
+  margin: 0;
 }
 
 .summary:empty {

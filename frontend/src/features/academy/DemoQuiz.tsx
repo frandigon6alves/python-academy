@@ -6,6 +6,8 @@ import { CodeSnippet } from "@/components/Markdown";
 import { Button, buttonClass } from "@/components/ui/Button";
 import { ErrorState, Loading } from "@/components/ui/QueryState";
 import { Link } from "@/i18n/navigation";
+import { ChoiceOption } from "@/features/quiz/ChoiceOption";
+import { optionOutcome } from "@/features/quiz/outcome";
 import { useCheckDemoAnswer, useDemoQuiz } from "@/lib/api/hooks/content";
 import type { QuestionResult } from "@/lib/api/types";
 import styles from "./DemoQuiz.module.css";
@@ -65,6 +67,7 @@ export function DemoQuiz() {
         )}
         {result && (
           <p className={result.is_correct ? styles.correct : styles.incorrect}>
+            <span aria-hidden="true">{result.is_correct ? "✓ " : "✕ "}</span>
             {result.is_correct
               ? t("correct")
               : t("incorrect", { answer: question?.options[result.correct_index] ?? "" })}{" "}
@@ -94,15 +97,15 @@ export function DemoQuiz() {
             {question.code && <CodeSnippet code={question.code} />}
             <div className={styles.options}>
               {question.options.map((option, optionIndex) => (
-                <label key={optionIndex} className={styles.option}>
-                  <input
-                    type="radio"
-                    name="demo-choice"
-                    checked={choice === optionIndex}
-                    onChange={() => setChoice(optionIndex)}
-                  />
+                <ChoiceOption
+                  key={optionIndex}
+                  name="demo-choice"
+                  checked={choice === optionIndex}
+                  onChange={() => setChoice(optionIndex)}
+                  outcome={optionOutcome(optionIndex, result)}
+                >
                   <code>{option}</code>
-                </label>
+                </ChoiceOption>
               ))}
             </div>
           </fieldset>
