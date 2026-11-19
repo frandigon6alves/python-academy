@@ -33,7 +33,7 @@ export function CertificatePage({ verificationId }: { verificationId: string }) 
         <p>{t("score", { percent: data.score_percent })}</p>
         <div className={styles.footer}>
           <span>
-            {t("issuedOn", { date: format.dateTime(new Date(data.issued_at + "Z"), { dateStyle: "long" }) })}
+            {t("issuedOn", { date: format.dateTime(new Date(data.issued_at), { dateStyle: "long" }) })}
           </span>
           <span className={styles.id}>{t("verification", { id: data.verification_id })}</span>
         </div>
