@@ -1,0 +1,4 @@
+# Native build scripts are not needed: Next.js ships prebuilt binaries.
+allowBuilds:
+  "@parcel/watcher": false
+  "@swc/core": false
