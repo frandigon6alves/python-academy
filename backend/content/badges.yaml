@@ -1,0 +1,38 @@
+# A badge is awarded once `metric` reaches `threshold` (all-time).
+# Metrics: lessons_completed, correct_answers, perfect_quizzes, exams_passed, total_xp, streak_days
+- code: first-lesson
+  icon: "🌱"
+  metric: lessons_completed
+  threshold: 1
+  name: {en: First steps, es: Primeros pasos}
+  description: {en: Complete your first lesson., es: Completa tu primera lección.}
+- code: perfect-quiz
+  icon: "🎯"
+  metric: perfect_quizzes
+  threshold: 1
+  name: {en: Bullseye, es: En el blanco}
+  description: {en: Answer every question of a quiz correctly., es: Responde bien todas las preguntas de un cuestionario.}
+- code: streak-3
+  icon: "🔥"
+  metric: streak_days
+  threshold: 3
+  name: {en: On fire, es: En racha}
+  description: {en: Learn three days in a row., es: Aprende tres días seguidos.}
+- code: first-course
+  icon: "🎓"
+  metric: exams_passed
+  threshold: 1
+  name: {en: Graduate, es: Graduado}
+  description: {en: Pass your first course exam., es: Aprueba tu primer examen de curso.}
+- code: xp-500
+  icon: "⭐"
+  metric: total_xp
+  threshold: 500
+  name: {en: Rising star, es: Estrella en ascenso}
+  description: {en: Earn 500 XP., es: Consigue 500 XP.}
+- code: ten-lessons
+  icon: "📚"
+  metric: lessons_completed
+  threshold: 10
+  name: {en: Bookworm, es: Ratón de biblioteca}
+  description: {en: Complete ten lessons., es: Completa diez lecciones.}

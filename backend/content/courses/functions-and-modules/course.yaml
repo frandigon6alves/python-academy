@@ -1,0 +1,297 @@
+slug: functions-and-modules
+order: 3
+level: intermediate
+title:
+  en: Functions and Modules
+  es: Funciones y módulos
+summary:
+  en: Organise your code into reusable pieces. Write functions with flexible arguments, understand scope and closures, and split programs into modules.
+  es: Organiza tu código en piezas reutilizables. Escribe funciones con argumentos flexibles, entiende el ámbito y las clausuras, y divide tus programas en módulos.
+lessons:
+  - slug: defining-functions
+    minutes: 9
+    quiz:
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          def double(n):
+              print(n * 2)
+
+          result = double(4)
+          print(result)
+        options:
+          en: ["8\n8", "8\nNone", "None", "8"]
+          es: ["8\n8", "8\nNone", "None", "8"]
+        answer: 1
+        explanation:
+          en: double() prints 8 but has no return statement, so it returns None, which is then printed.
+          es: double() imprime 8 pero no tiene sentencia return, así que devuelve None, que después se imprime.
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          def check(n):
+              if n > 0:
+                  return "up"
+                  print("unreachable")
+              return "down"
+
+          print(check(5), check(-5))
+        options:
+          en: ["up unreachable down", "down down", "up up", "up down"]
+          es: ["up unreachable down", "down down", "up up", "up down"]
+        answer: 3
+        explanation:
+          en: return ends the function immediately, so the print after it never runs.
+          es: return termina la función inmediatamente, así que el print que hay después nunca se ejecuta.
+      - prompt:
+          en: Where should a docstring be placed?
+          es: ¿Dónde se debe colocar un docstring?
+        options:
+          en: ["As the first statement inside the function body", "On the line just above the def", "As a comment after the return", "In a separate .txt file"]
+          es: ["Como primera sentencia dentro del cuerpo de la función", "En la línea justo encima del def", "Como comentario después del return", "En un archivo .txt aparte"]
+        answer: 0
+        explanation:
+          en: A docstring is a string literal written as the first statement of the function body.
+          es: Un docstring es una cadena literal escrita como primera sentencia del cuerpo de la función.
+  - slug: arguments
+    minutes: 11
+    quiz:
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          def label(text, symbol="*", times=2):
+              return symbol * times + text
+
+          print(label("hi", times=3))
+        options:
+          en: ["**hi", "hihihi", "***hi", "hi***"]
+          es: ["**hi", "hihihi", "***hi", "hi***"]
+        answer: 2
+        explanation:
+          en: symbol keeps its default "*", and times is set to 3 by keyword, giving "***" + "hi".
+          es: symbol mantiene su valor por defecto "*" y times recibe 3 por nombre, lo que da "***" + "hi".
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          def collect(value, bag=[]):
+              bag.append(value)
+              return len(bag)
+
+          collect("a")
+          collect("b")
+          print(collect("c"))
+        options:
+          en: ["1", "3", "0", "2"]
+          es: ["1", "3", "0", "2"]
+        answer: 1
+        explanation:
+          en: The default list is created once and shared between calls, so it grows to 3 items.
+          es: La lista por defecto se crea una sola vez y se comparte entre llamadas, así que crece hasta 3 elementos.
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          def info(*args, **kwargs):
+              print(len(args), sorted(kwargs))
+
+          info(1, 2, 3, color="red", size=5)
+        options:
+          en: ["3 ['color', 'size']", "5 []", "3 ['red', 5]", "2 ['color', 'size']"]
+          es: ["3 ['color', 'size']", "5 []", "3 ['red', 5]", "2 ['color', 'size']"]
+        answer: 0
+        explanation:
+          en: The three positional values go into args, and the two keyword arguments go into kwargs, whose keys are sorted.
+          es: Los tres valores posicionales van a args, y los dos argumentos con nombre van a kwargs, cuyas claves se ordenan.
+  - slug: scope
+    minutes: 10
+    quiz:
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          level = 1
+
+          def raise_level():
+              level = 5
+              return level
+
+          raise_level()
+          print(level)
+        options:
+          en: ["5", "None", "1", "6"]
+          es: ["5", "None", "1", "6"]
+        answer: 2
+        explanation:
+          en: The assignment inside the function creates a local variable, so the global level stays 1.
+          es: La asignación dentro de la función crea una variable local, así que la variable global level sigue valiendo 1.
+      - prompt:
+          en: In which order does Python search scopes when looking up a name?
+          es: ¿En qué orden busca Python en los ámbitos al resolver un nombre?
+        options:
+          en: ["Global, Local, Built-in, Enclosing", "Built-in, Global, Enclosing, Local", "Enclosing, Local, Global, Built-in", "Local, Enclosing, Global, Built-in"]
+          es: ["Global, Local, Integrado, Envolvente", "Integrado, Global, Envolvente, Local", "Envolvente, Local, Global, Integrado", "Local, Envolvente, Global, Integrado"]
+        answer: 3
+        explanation:
+          en: The LEGB rule searches Local, then Enclosing, then Global, then Built-in, and the first match wins.
+          es: La regla LEGB busca en Local, luego en Envolvente, luego en Global y por último en Integrado; gana la primera coincidencia.
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          def make_adder(n):
+              def add(x):
+                  return x + n
+              return add
+
+          add_ten = make_adder(10)
+          print(add_ten(5))
+        options:
+          en: ["15", "10", "5", "An error, because n no longer exists"]
+          es: ["15", "10", "5", "Un error, porque n ya no existe"]
+        answer: 0
+        explanation:
+          en: add is a closure that remembers n = 10 from its enclosing scope, so 5 + 10 is 15.
+          es: add es una clausura que recuerda n = 10 de su ámbito envolvente, así que 5 + 10 es 15.
+  - slug: modules
+    minutes: 10
+    quiz:
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          import math as m
+          print(m.floor(m.sqrt(50)))
+        options:
+          en: ["7.0710678118654755", "8", "7", "50"]
+          es: ["7.0710678118654755", "8", "7", "50"]
+        answer: 2
+        explanation:
+          en: The square root of 50 is about 7.07, and floor() rounds it down to the integer 7.
+          es: La raíz cuadrada de 50 es aproximadamente 7.07, y floor() la redondea hacia abajo al entero 7.
+      - prompt:
+          en: A file named tools.py contains code under if __name__ == "__main__":. When does that code run?
+          es: Un archivo llamado tools.py contiene código bajo if __name__ == "__main__":. ¿Cuándo se ejecuta ese código?
+        options:
+          en: ["Every time tools is imported", "Only when tools.py is run directly", "Never, it is only documentation", "Only inside a package"]
+          es: ["Cada vez que se importa tools", "Solo cuando tools.py se ejecuta directamente", "Nunca, es solo documentación", "Solo dentro de un paquete"]
+        answer: 1
+        explanation:
+          en: __name__ equals "__main__" only when the file is executed directly; when imported it equals "tools".
+          es: __name__ vale "__main__" solo cuando el archivo se ejecuta directamente; al importarlo vale "tools".
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          from datetime import date, timedelta
+          d = date(2024, 12, 30) + timedelta(days=3)
+          print(d.year, d.month, d.day)
+        options:
+          en: ["2024 12 33", "2025 1 3", "2025 1 2", "2024 1 2"]
+          es: ["2024 12 33", "2025 1 3", "2025 1 2", "2024 1 2"]
+        answer: 2
+        explanation:
+          en: Three days after 30 December 2024 is 2 January 2025, and timedelta handles the year change for you.
+          es: Tres días después del 30 de diciembre de 2024 es el 2 de enero de 2025, y timedelta gestiona el cambio de año por ti.
+exam:
+  - prompt:
+      en: What does this program print?
+      es: ¿Qué imprime este programa?
+    code: |
+      def stats(values):
+          return min(values), max(values), len(values)
+
+      low, high, count = stats([5, 2, 9])
+      print(high - low, count)
+    options:
+      en: ["7 3", "3 7", "9 3", "An error"]
+      es: ["7 3", "3 7", "9 3", "Un error"]
+    answer: 0
+    explanation:
+      en: The function returns a tuple (2, 9, 3) that is unpacked, so high - low is 7 and count is 3.
+      es: La función devuelve una tupla (2, 9, 3) que se desempaqueta, así que high - low es 7 y count es 3.
+  - prompt:
+      en: What does this program print?
+      es: ¿Qué imprime este programa?
+    code: |
+      def greet(greeting, name="friend"):
+          return f"{greeting}, {name}!"
+
+      print(greet(name="Sam", greeting="Hi"))
+    options:
+      en: ["Sam, Hi!", "Hi, friend!", "Hi, Sam!", "An error"]
+      es: ["Sam, Hi!", "Hi, friend!", "Hi, Sam!", "Un error"]
+    answer: 2
+    explanation:
+      en: Keyword arguments are matched by name, so their order in the call does not matter.
+      es: Los argumentos con nombre se asocian por nombre, así que su orden en la llamada no importa.
+  - prompt:
+      en: What is the recommended fix for a function that uses a list as a default value?
+      es: ¿Cuál es la solución recomendada para una función que usa una lista como valor por defecto?
+    options:
+      en: ["Use a tuple as the default instead", "Call the function with no arguments", "Declare the list as global", "Use None as the default and create the list inside the function"]
+      es: ["Usar una tupla como valor por defecto", "Llamar a la función sin argumentos", "Declarar la lista como global", "Usar None como valor por defecto y crear la lista dentro de la función"]
+    answer: 3
+    explanation:
+      en: Defaults are evaluated once, so a None default with a fresh list created inside gives each call its own list.
+      es: Los valores por defecto se evalúan una sola vez, así que usar None y crear una lista nueva dentro da a cada llamada su propia lista.
+  - prompt:
+      en: What does this program print?
+      es: ¿Qué imprime este programa?
+    code: |
+      total = 0
+
+      def add(n):
+          global total
+          total += n
+
+      for i in range(1, 4):
+          add(i)
+      print(total)
+    options:
+      en: ["0", "3", "6", "An error"]
+      es: ["0", "3", "6", "Un error"]
+    answer: 2
+    explanation:
+      en: The global declaration lets add() rebind the module-level total, which becomes 1 + 2 + 3 = 6.
+      es: La declaración global permite que add() reasigne la variable total del módulo, que pasa a valer 1 + 2 + 3 = 6.
+  - prompt:
+      en: What does this program print?
+      es: ¿Qué imprime este programa?
+    code: |
+      def outer():
+          count = 0
+          def inner():
+              nonlocal count
+              count += 2
+          inner()
+          inner()
+          return count
+
+      print(outer())
+    options:
+      en: ["0", "4", "2", "An error"]
+      es: ["0", "4", "2", "Un error"]
+    answer: 1
+    explanation:
+      en: nonlocal lets inner() rebind count in the enclosing function, and two calls add 2 each time.
+      es: nonlocal permite que inner() reasigne count en la función envolvente, y dos llamadas suman 2 cada vez.
+  - prompt:
+      en: What does this program print?
+      es: ¿Qué imprime este programa?
+    code: |
+      def combine(*parts, sep="-"):
+          return sep.join(parts)
+
+      words = ["a", "b", "c"]
+      print(combine(*words), combine("x", "y", sep="+"))
+    options:
+      en: ["abc x+y", "a-b-c x+y", "['a', 'b', 'c'] x+y", "a-b-c x-y"]
+      es: ["abc x+y", "a-b-c x+y", "['a', 'b', 'c'] x+y", "a-b-c x-y"]
+    answer: 1
+    explanation:
+      en: "*words unpacks the list into separate arguments, and sep must be passed by keyword because it follows *parts."
+      es: "*words desempaqueta la lista en argumentos separados, y sep debe pasarse por nombre porque va después de *parts."

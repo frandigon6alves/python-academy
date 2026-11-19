@@ -1,0 +1,33 @@
+# A quest is completed when `metric` reaches `target` within its period
+# (daily = UTC day, weekly = ISO week). The reward is granted automatically.
+# Metrics: lessons_completed, correct_answers, perfect_quizzes, exams_passed, xp_earned
+- code: daily-lesson
+  period: daily
+  metric: lessons_completed
+  target: 1
+  xp_reward: 15
+  name: {en: Complete 1 lesson today, es: Completa 1 lección hoy}
+- code: daily-answers
+  period: daily
+  metric: correct_answers
+  target: 5
+  xp_reward: 15
+  name: {en: Answer 5 questions correctly today, es: Responde bien 5 preguntas hoy}
+- code: weekly-lessons
+  period: weekly
+  metric: lessons_completed
+  target: 5
+  xp_reward: 50
+  name: {en: Complete 5 lessons this week, es: Completa 5 lecciones esta semana}
+- code: weekly-exam
+  period: weekly
+  metric: exams_passed
+  target: 1
+  xp_reward: 75
+  name: {en: Pass an exam this week, es: Aprueba un examen esta semana}
+- code: weekly-xp
+  period: weekly
+  metric: xp_earned
+  target: 200
+  xp_reward: 40
+  name: {en: Earn 200 XP this week, es: Consigue 200 XP esta semana}

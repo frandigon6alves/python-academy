@@ -1,0 +1,277 @@
+slug: control-flow
+order: 2
+level: beginner
+title:
+  en: Control Flow
+  es: Control de flujo
+summary:
+  en: Teach your programs to make decisions and repeat work. Master conditionals, for and while loops, and compact comprehensions.
+  es: Enseña a tus programas a tomar decisiones y repetir tareas. Domina los condicionales, los bucles for y while, y las comprensiones compactas.
+lessons:
+  - slug: conditionals
+    minutes: 9
+    quiz:
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          score = 75
+          if score >= 90:
+              print("A")
+          elif score >= 70:
+              print("B")
+          elif score >= 50:
+              print("C")
+          else:
+              print("F")
+        options:
+          en: ["A", "B", "C", "B and C"]
+          es: ["A", "B", "C", "B and C"]
+        answer: 1
+        explanation:
+          en: Only the first true branch runs. 75 >= 70 is true, so "B" is printed and the rest is skipped.
+          es: Solo se ejecuta la primera rama verdadera. 75 >= 70 es cierto, así que se imprime "B" y se omite el resto.
+      - prompt:
+          en: Which of these values is truthy?
+          es: ¿Cuál de estos valores es verdadero (truthy)?
+        options:
+          en: ["0", "[]", "None", "\" \""]
+          es: ["0", "[]", "None", "\" \""]
+        answer: 3
+        explanation:
+          en: A string containing a space is not empty, so it is truthy. Zero, empty lists and None are falsy.
+          es: Una cadena que contiene un espacio no está vacía, así que es verdadera. El cero, las listas vacías y None son falsos.
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          x = 7
+          print("big" if x > 10 else "small", 5 < x <= 7)
+        options:
+          en: ["big True", "small False", "small True", "big False"]
+          es: ["big True", "small False", "small True", "big False"]
+        answer: 2
+        explanation:
+          en: 7 is not greater than 10, so the expression gives "small", and 5 < 7 <= 7 is True.
+          es: 7 no es mayor que 10, así que la expresión da "small", y 5 < 7 <= 7 es True.
+  - slug: for-loops
+    minutes: 9
+    quiz:
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          print(list(range(1, 10, 4)))
+        options:
+          en: ["[1, 5, 9]", "[1, 4, 7]", "[1, 5]", "[4, 8]"]
+          es: ["[1, 5, 9]", "[1, 4, 7]", "[1, 5]", "[4, 8]"]
+        answer: 0
+        explanation:
+          en: The range starts at 1 and adds 4 each step (1, 5, 9) while staying below 10.
+          es: El rango empieza en 1 y suma 4 en cada paso (1, 5, 9) mientras se mantiene por debajo de 10.
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          total = 0
+          for n in [2, 4, 6]:
+              total += n
+          print(total)
+        options:
+          en: ["6", "0", "246", "12"]
+          es: ["6", "0", "246", "12"]
+        answer: 3
+        explanation:
+          en: The loop adds 2, then 4, then 6 to total, giving 12.
+          es: El bucle suma 2, después 4 y después 6 a total, lo que da 12.
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          for i, ch in enumerate("ok", start=1):
+              print(i, ch)
+        options:
+          en: ["0 o\n1 k", "1 o\n2 k", "o 1\nk 2", "1 ok"]
+          es: ["0 o\n1 k", "1 o\n2 k", "o 1\nk 2", "1 ok"]
+        answer: 1
+        explanation:
+          en: enumerate yields (index, item) pairs, and start=1 makes the counting begin at 1.
+          es: enumerate produce parejas (índice, elemento), y start=1 hace que la cuenta empiece en 1.
+  - slug: while-loops
+    minutes: 9
+    quiz:
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          n = 1
+          while n < 20:
+              n *= 3
+          print(n)
+        options:
+          en: ["9", "20", "27", "81"]
+          es: ["9", "20", "27", "81"]
+        answer: 2
+        explanation:
+          en: n goes 1, 3, 9, 27. When n is 27 the condition n < 20 is false, so the loop stops.
+          es: n pasa por 1, 3, 9, 27. Cuando n vale 27, la condición n < 20 es falsa y el bucle se detiene.
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          for n in range(10):
+              if n == 4:
+                  break
+              if n % 2 == 1:
+                  continue
+              print(n, end=" ")
+        options:
+          en: ["0 2", "0 2 4", "1 3", "0 1 2 3"]
+          es: ["0 2", "0 2 4", "1 3", "0 1 2 3"]
+        answer: 0
+        explanation:
+          en: Odd numbers are skipped by continue, and the loop stops at 4 before printing it.
+          es: continue salta los números impares, y el bucle se detiene en 4 antes de imprimirlo.
+      - prompt:
+          en: Why does this loop never end?
+          es: ¿Por qué este bucle no termina nunca?
+        code: |
+          i = 0
+          while i < 3:
+              print(i)
+        options:
+          en: ["The condition should use <=", "i is never changed inside the loop", "print() cannot be used in a loop", "while needs a break to work"]
+          es: ["La condición debería usar <=", "i nunca cambia dentro del bucle", "print() no se puede usar en un bucle", "while necesita un break para funcionar"]
+        answer: 1
+        explanation:
+          en: The condition depends on i, but the body never updates it, so i < 3 stays true forever.
+          es: La condición depende de i, pero el cuerpo nunca la actualiza, así que i < 3 sigue siendo cierto para siempre.
+  - slug: comprehensions
+    minutes: 9
+    quiz:
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          print([x * 10 for x in range(4) if x % 2 == 0])
+        options:
+          en: ["[0, 10, 20, 30]", "[10, 30]", "[0, 20]", "[0, 2]"]
+          es: ["[0, 10, 20, 30]", "[10, 30]", "[0, 20]", "[0, 2]"]
+        answer: 2
+        explanation:
+          en: Only the even values 0 and 2 pass the filter, and each is multiplied by 10.
+          es: Solo los valores pares 0 y 2 pasan el filtro, y cada uno se multiplica por 10.
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          print(len({c for c in "mississippi"}))
+        options:
+          en: ["11", "4", "3", "1"]
+          es: ["11", "4", "3", "1"]
+        answer: 1
+        explanation:
+          en: A set comprehension keeps unique items only, and "mississippi" has 4 distinct letters (m, i, s, p).
+          es: Una comprensión de conjunto solo guarda elementos únicos, y "mississippi" tiene 4 letras distintas (m, i, s, p).
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          print({w: w[::-1] for w in ["ab", "cd"]})
+        options:
+          en: ["{'ab': 'cd'}", "['ba', 'dc']", "{'ba': 'ab', 'dc': 'cd'}", "{'ab': 'ba', 'cd': 'dc'}"]
+          es: ["{'ab': 'cd'}", "['ba', 'dc']", "{'ba': 'ab', 'dc': 'cd'}", "{'ab': 'ba', 'cd': 'dc'}"]
+        answer: 3
+        explanation:
+          en: Each word becomes a key, and its value is the reversed word.
+          es: Cada palabra se convierte en una clave, y su valor es la palabra invertida.
+exam:
+  - prompt:
+      en: What does this program print?
+      es: ¿Qué imprime este programa?
+    code: |
+      items = []
+      if items:
+          print("full")
+      elif not items and True:
+          print("empty")
+      else:
+          print("unknown")
+    options:
+      en: ["full", "empty", "unknown", "Nothing"]
+      es: ["full", "empty", "unknown", "Nothing"]
+    answer: 1
+    explanation:
+      en: An empty list is falsy, so the first branch is skipped and not items and True is True.
+      es: Una lista vacía es falsa, así que se omite la primera rama y not items and True es True.
+  - prompt:
+      en: What does this program print?
+      es: ¿Qué imprime este programa?
+    code: |
+      count = 0
+      for i in range(3):
+          for j in range(2):
+              count += 1
+      print(count)
+    options:
+      en: ["5", "3", "2", "6"]
+      es: ["5", "3", "2", "6"]
+    answer: 3
+    explanation:
+      en: The inner loop runs 2 times for each of the 3 outer passes, so count reaches 3 * 2 = 6.
+      es: El bucle interior se ejecuta 2 veces por cada una de las 3 vueltas exteriores, así que count llega a 3 * 2 = 6.
+  - prompt:
+      en: What does this program print?
+      es: ¿Qué imprime este programa?
+    code: |
+      n = 10
+      steps = 0
+      while n != 1:
+          n = n // 2 if n % 2 == 0 else 3 * n + 1
+          steps += 1
+      print(steps)
+    options:
+      en: ["4", "6", "7", "10"]
+      es: ["4", "6", "7", "10"]
+    answer: 1
+    explanation:
+      en: The sequence is 10, 5, 16, 8, 4, 2, 1, which takes 6 steps to reach 1.
+      es: La secuencia es 10, 5, 16, 8, 4, 2, 1, que necesita 6 pasos para llegar a 1.
+  - prompt:
+      en: Which comprehension produces ['A', 'B'] from words = ["a", "bb", "b"]?
+      es: ¿Qué comprensión produce ['A', 'B'] a partir de words = ["a", "bb", "b"]?
+    options:
+      en: ["[w.upper() for w in words]", "[w.upper() for w in words if len(w) == 1]", "[w.upper() if len(w) == 1 for w in words]", "{w.upper() for w in words}"]
+      es: ["[w.upper() for w in words]", "[w.upper() for w in words if len(w) == 1]", "[w.upper() if len(w) == 1 for w in words]", "{w.upper() for w in words}"]
+    answer: 1
+    explanation:
+      en: A trailing if filters out "bb". Option three is a syntax error because a leading if needs an else.
+      es: Un if al final filtra "bb". La tercera opción es un error de sintaxis porque un if al principio necesita un else.
+  - prompt:
+      en: What does this program print?
+      es: ¿Qué imprime este programa?
+    code: |
+      for word in ["sun", "moon", "star"]:
+          if "o" in word:
+              print("found", word)
+              break
+      print("done")
+    options:
+      en: ["found moon\ndone", "found moon", "done", "found sun\ndone"]
+      es: ["found moon\ndone", "found moon", "done", "found sun\ndone"]
+    answer: 0
+    explanation:
+      en: break only leaves the loop, so the program continues and still prints "done".
+      es: break solo sale del bucle, así que el programa continúa y también imprime "done".
+  - prompt:
+      en: What does this program print?
+      es: ¿Qué imprime este programa?
+    code: |
+      print(0 or "" or "default", None and 5)
+    options:
+      en: ["False None", "default 5", "default None", "True False"]
+      es: ["False None", "default 5", "default None", "True False"]
+    answer: 2
+    explanation:
+      en: or returns the first truthy value ("default"), and and returns the first falsy value (None).
+      es: or devuelve el primer valor verdadero ("default"), y and devuelve el primer valor falso (None).

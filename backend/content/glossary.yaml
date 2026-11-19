@@ -1,0 +1,282 @@
+- term:
+    en: Argument
+    es: Argumento
+  definition:
+    en: A value passed to a function when you call it. In greet("Ana"), the string "Ana" is the argument.
+    es: Un valor que se pasa a una función al llamarla. En greet("Ana"), la cadena "Ana" es el argumento.
+- term:
+    en: Assignment
+    es: Asignación
+  definition:
+    en: The act of binding a name to a value with the = operator, as in total = 0.
+    es: La acción de asociar un nombre a un valor con el operador =, como en total = 0.
+- term:
+    en: Boolean
+    es: Booleano
+  definition:
+    en: A value of type bool that is either True or False. Comparisons such as 3 > 2 produce booleans.
+    es: Un valor de tipo bool que es True o False. Las comparaciones como 3 > 2 producen booleanos.
+- term:
+    en: Built-in function
+    es: Función integrada
+  definition:
+    en: A function that is always available without importing anything, such as print(), len(), range() or sorted().
+    es: Una función disponible siempre sin importar nada, como print(), len(), range() o sorted().
+- term:
+    en: Class
+    es: Clase
+  definition:
+    en: A blueprint for creating objects that bundles data (attributes) and behaviour (methods). Defined with the class keyword.
+    es: Una plantilla para crear objetos que agrupa datos (atributos) y comportamiento (métodos). Se define con la palabra clave class.
+- term:
+    en: Closure
+    es: Clausura
+  definition:
+    en: An inner function that remembers variables from the enclosing function in which it was created, even after that function has returned.
+    es: Una función interior que recuerda variables de la función envolvente donde se creó, incluso después de que esa función haya terminado.
+- term:
+    en: Comprehension
+    es: Comprensión
+  definition:
+    en: A compact expression that builds a list, dictionary or set from an iterable, such as [n * 2 for n in numbers].
+    es: Una expresión compacta que construye una lista, un diccionario o un conjunto a partir de un iterable, como [n * 2 for n in numbers].
+- term:
+    en: Dictionary
+    es: Diccionario
+  definition:
+    en: A mutable collection of key-value pairs written with curly braces. Values are looked up by their unique, hashable keys.
+    es: Una colección mutable de parejas clave-valor escrita con llaves. Los valores se buscan por sus claves únicas y hashables.
+- term:
+    en: Docstring
+    es: Docstring
+  definition:
+    en: A string written as the first statement of a function, class or module to document what it does. Tools like help() display it.
+    es: Una cadena escrita como primera sentencia de una función, clase o módulo para documentar lo que hace. Herramientas como help() la muestran.
+- term:
+    en: Exception
+    es: Excepción
+  definition:
+    en: An error raised while a program runs, such as ValueError or KeyError. It can be handled with a try and except block.
+    es: Un error que se lanza mientras un programa se ejecuta, como ValueError o KeyError. Se puede gestionar con un bloque try y except.
+- term:
+    en: Expression
+    es: Expresión
+  definition:
+    en: Any piece of code that produces a value, such as 2 + 3, name.upper() or x > 0.
+    es: Cualquier fragmento de código que produce un valor, como 2 + 3, name.upper() o x > 0.
+- term:
+    en: f-string
+    es: f-string
+  definition:
+    en: 'A string literal prefixed with f that embeds expressions inside curly braces, such as f"Total: {price:.2f}".'
+    es: 'Una cadena literal con el prefijo f que inserta expresiones entre llaves, como f"Total: {price:.2f}".'
+- term:
+    en: Float
+    es: Float (número de punto flotante)
+  definition:
+    en: A number with a decimal point, such as 3.14. Floats are stored in binary, so they can show tiny rounding errors.
+    es: Un número con punto decimal, como 3.14. Los floats se guardan en binario, así que pueden mostrar pequeños errores de redondeo.
+- term:
+    en: Function
+    es: Función
+  definition:
+    en: A named, reusable block of code defined with def. It can take parameters and return a value.
+    es: Un bloque de código con nombre y reutilizable que se define con def. Puede recibir parámetros y devolver un valor.
+- term:
+    en: Generator
+    es: Generador
+  definition:
+    en: A function that uses yield to produce values one at a time, on demand, instead of building them all in memory at once.
+    es: Una función que usa yield para producir valores de uno en uno, cuando se piden, en lugar de construirlos todos en memoria a la vez.
+- term:
+    en: Hashable
+    es: Hashable
+  definition:
+    en: Describes a value with a fixed hash, which allows it to be a dictionary key or a set item. Immutable built-in values like strings, numbers and tuples of them are hashable.
+    es: Describe un valor con un hash fijo, lo que le permite ser clave de diccionario o elemento de un conjunto. Los valores integrados inmutables como cadenas, números y tuplas de ellos son hashables.
+- term:
+    en: Immutable
+    es: Inmutable
+  definition:
+    en: Describes an object that cannot be changed after it is created. Strings, numbers and tuples are immutable.
+    es: Describe un objeto que no se puede modificar después de crearlo. Las cadenas, los números y las tuplas son inmutables.
+- term:
+    en: Indentation
+    es: Sangría
+  definition:
+    en: The leading spaces at the start of a line. Python uses indentation, usually four spaces, to define blocks of code.
+    es: Los espacios al principio de una línea. Python usa la sangría, normalmente cuatro espacios, para definir bloques de código.
+- term:
+    en: Index
+    es: Índice
+  definition:
+    en: The position of an item in a sequence, starting at 0. Negative indexes count from the end, so -1 is the last item.
+    es: La posición de un elemento en una secuencia, empezando por 0. Los índices negativos cuentan desde el final, así que -1 es el último elemento.
+- term:
+    en: Integer
+    es: Entero
+  definition:
+    en: A whole number of type int, such as 42 or -7. Python integers can be arbitrarily large.
+    es: Un número sin decimales de tipo int, como 42 o -7. Los enteros de Python pueden ser tan grandes como haga falta.
+- term:
+    en: Iterable
+    es: Iterable
+  definition:
+    en: Any object you can loop over with for, such as a list, string, tuple, dictionary, set or range.
+    es: Cualquier objeto que se pueda recorrer con for, como una lista, una cadena, una tupla, un diccionario, un conjunto o un range.
+- term:
+    en: Keyword argument
+    es: Argumento con nombre
+  definition:
+    en: An argument passed by parameter name, as in power(2, exponent=3). Its position in the call does not matter.
+    es: Un argumento que se pasa indicando el nombre del parámetro, como en power(2, exponent=3). Su posición en la llamada no importa.
+- term:
+    en: Lambda
+    es: Lambda
+  definition:
+    en: 'A small anonymous function written in one expression, such as lambda x: x * 2. Often used as a key for sorting.'
+    es: 'Una pequeña función anónima escrita en una sola expresión, como lambda x: x * 2. Se usa a menudo como clave para ordenar.'
+- term:
+    en: List
+    es: Lista
+  definition:
+    en: An ordered, mutable collection written with square brackets, such as [1, 2, 3]. Items can be added, removed and changed.
+    es: Una colección ordenada y mutable escrita entre corchetes, como [1, 2, 3]. Se pueden añadir, quitar y modificar elementos.
+- term:
+    en: Loop
+    es: Bucle
+  definition:
+    en: A structure that repeats a block of code. Python has for loops, which walk through iterables, and while loops, which repeat while a condition is true.
+    es: Una estructura que repite un bloque de código. Python tiene bucles for, que recorren iterables, y bucles while, que se repiten mientras una condición es verdadera.
+- term:
+    en: Method
+    es: Método
+  definition:
+    en: A function that belongs to an object and is called with a dot, such as text.upper() or items.append(4).
+    es: Una función que pertenece a un objeto y se llama con un punto, como text.upper() o items.append(4).
+- term:
+    en: Module
+    es: Módulo
+  definition:
+    en: A Python file whose functions, classes and variables can be reused in other files with import.
+    es: Un archivo de Python cuyas funciones, clases y variables se pueden reutilizar en otros archivos con import.
+- term:
+    en: Mutable
+    es: Mutable
+  definition:
+    en: Describes an object that can be changed in place after it is created. Lists, dictionaries and sets are mutable.
+    es: Describe un objeto que se puede modificar en su sitio después de crearlo. Las listas, los diccionarios y los conjuntos son mutables.
+- term:
+    en: None
+    es: None
+  definition:
+    en: A special value that represents the absence of a value. Functions without a return statement return None.
+    es: Un valor especial que representa la ausencia de valor. Las funciones sin sentencia return devuelven None.
+- term:
+    en: Operator
+    es: Operador
+  definition:
+    en: A symbol or keyword that performs an operation on values, such as +, //, ==, and, or in.
+    es: Un símbolo o palabra clave que realiza una operación sobre valores, como +, //, ==, and, or o in.
+- term:
+    en: Package
+    es: Paquete
+  definition:
+    en: A folder that groups related modules so they can be imported together, possibly with subpackages inside.
+    es: Una carpeta que agrupa módulos relacionados para que se puedan importar juntos, y que puede contener subpaquetes.
+- term:
+    en: Parameter
+    es: Parámetro
+  definition:
+    en: A name listed in a function definition that receives a value when the function is called. In def greet(name), name is a parameter.
+    es: Un nombre que aparece en la definición de una función y recibe un valor cuando se la llama. En def greet(name), name es un parámetro.
+- term:
+    en: PEP 8
+    es: PEP 8
+  definition:
+    en: The official style guide for Python code. It recommends conventions such as four-space indentation and snake_case names.
+    es: La guía de estilo oficial para el código Python. Recomienda convenciones como la sangría de cuatro espacios y los nombres en snake_case.
+- term:
+    en: REPL
+    es: REPL
+  definition:
+    en: The interactive Python prompt (Read, Evaluate, Print, Loop) where you type code and see results immediately.
+    es: El intérprete interactivo de Python (leer, evaluar, imprimir, repetir) donde escribes código y ves los resultados al instante.
+- term:
+    en: Return value
+    es: Valor devuelto
+  definition:
+    en: The value a function sends back to its caller with return. If no return is reached, the return value is None.
+    es: El valor que una función envía a quien la llama mediante return. Si no se llega a ningún return, el valor devuelto es None.
+- term:
+    en: Scope
+    es: Ámbito
+  definition:
+    en: The region of a program where a name is visible. Python looks up names in the Local, Enclosing, Global and Built-in scopes, in that order.
+    es: La región de un programa donde un nombre es visible. Python busca los nombres en los ámbitos Local, Envolvente, Global e Integrado, en ese orden.
+- term:
+    en: Set
+    es: Conjunto
+  definition:
+    en: An unordered, mutable collection of unique, hashable items. Sets support fast membership tests and operations like union and intersection.
+    es: Una colección mutable y sin orden de elementos únicos y hashables. Los conjuntos permiten comprobar pertenencia rápidamente y operaciones como la unión y la intersección.
+- term:
+    en: Slice
+    es: Rebanada
+  definition:
+    en: A portion of a sequence selected with [start:stop:step]. The start is included and the stop is excluded.
+    es: Una porción de una secuencia seleccionada con [start:stop:step]. El inicio se incluye y el final se excluye.
+- term:
+    en: String
+    es: Cadena
+  definition:
+    en: An immutable sequence of characters of type str, written with single, double or triple quotes.
+    es: Una secuencia inmutable de caracteres de tipo str, escrita con comillas simples, dobles o triples.
+- term:
+    en: Truthiness
+    es: Veracidad (truthiness)
+  definition:
+    en: How a value behaves in a condition. Zero, None, False and empty collections are falsy; almost everything else is truthy.
+    es: Cómo se comporta un valor en una condición. El cero, None, False y las colecciones vacías son falsos; casi todo lo demás es verdadero.
+- term:
+    en: Tuple
+    es: Tupla
+  definition:
+    en: An ordered, immutable collection usually written with parentheses, such as (3, 4). A one-item tuple needs a trailing comma.
+    es: Una colección ordenada e inmutable que suele escribirse entre paréntesis, como (3, 4). Una tupla de un elemento necesita una coma final.
+- term:
+    en: Type hint
+    es: Anotación de tipo
+  definition:
+    en: 'An optional annotation that documents the expected type of a variable, parameter or return value, as in def area(r: float) -> float. Python does not enforce it at runtime.'
+    es: 'Una anotación opcional que documenta el tipo esperado de una variable, un parámetro o un valor devuelto, como en def area(r: float) -> float. Python no la impone al ejecutar.'
+- term:
+    en: Unpacking
+    es: Desempaquetado
+  definition:
+    en: Assigning the items of an iterable to several names at once, as in x, y = (3, 4). A starred name like *rest collects leftover items.
+    es: Asignar los elementos de un iterable a varios nombres a la vez, como en x, y = (3, 4). Un nombre con asterisco como *rest recoge los elementos sobrantes.
+- term:
+    en: Variable
+    es: Variable
+  definition:
+    en: A name that refers to a value stored in memory. In Python the type belongs to the value, so a name can later refer to a value of another type.
+    es: Un nombre que se refiere a un valor guardado en memoria. En Python el tipo pertenece al valor, así que un nombre puede referirse después a un valor de otro tipo.
+- term:
+    en: Virtual environment
+    es: Entorno virtual
+  definition:
+    en: An isolated folder with its own Python interpreter and installed packages, created with python -m venv, so each project can have its own dependencies.
+    es: Una carpeta aislada con su propio intérprete de Python y sus paquetes instalados, creada con python -m venv, para que cada proyecto tenga sus propias dependencias.
+- term:
+    en: While loop
+    es: Bucle while
+  definition:
+    en: A loop that keeps running its body as long as its condition is true. The body must eventually make the condition false.
+    es: Un bucle que sigue ejecutando su cuerpo mientras su condición sea verdadera. El cuerpo debe acabar haciendo falsa la condición.
+- term:
+    en: Yield
+    es: Yield
+  definition:
+    en: A keyword used inside a function to hand back one value and pause, turning the function into a generator that resumes on the next request.
+    es: Una palabra clave que se usa dentro de una función para entregar un valor y pausarse, lo que convierte la función en un generador que se reanuda en la siguiente petición.

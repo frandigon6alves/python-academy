@@ -1,0 +1,249 @@
+slug: python-basics
+order: 1
+level: beginner
+title:
+  en: Python Basics
+  es: Fundamentos de Python
+summary:
+  en: Take your first steps with Python. Learn how to store values in variables, work with numbers and text, and talk to the user with input and output.
+  es: Da tus primeros pasos con Python. Aprende a guardar valores en variables, trabajar con números y texto, y comunicarte con la persona usuaria mediante entrada y salida.
+lessons:
+  - slug: variables
+    minutes: 7
+    quiz:
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          count = 4
+          count = count * 2
+          count += 1
+          print(count)
+        options:
+          en: ["5", "8", "9", "count"]
+          es: ["5", "8", "9", "count"]
+        answer: 2
+        explanation:
+          en: count becomes 4 * 2 = 8, then += 1 makes it 9.
+          es: count pasa a ser 4 * 2 = 8 y luego += 1 lo convierte en 9.
+      - prompt:
+          en: Which of these is a valid variable name?
+          es: ¿Cuál de estos es un nombre de variable válido?
+        options:
+          en: ["2nd_place", "second-place", "second_place", "class"]
+          es: ["2nd_place", "second-place", "second_place", "class"]
+        answer: 2
+        explanation:
+          en: Names cannot start with a digit, cannot contain hyphens and cannot be keywords like class.
+          es: Los nombres no pueden empezar por un dígito, no pueden contener guiones y no pueden ser palabras reservadas como class.
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          a, b = 1, 2
+          a, b = b, a
+          print(a, b)
+        options:
+          en: ["1 2", "2 1", "2 2", "1 1"]
+          es: ["1 2", "2 1", "2 2", "1 1"]
+        answer: 1
+        explanation:
+          en: The right-hand side (b, a) is evaluated first as (2, 1), then unpacked, so the values are swapped.
+          es: El lado derecho (b, a) se evalúa primero como (2, 1) y después se desempaqueta, así que los valores se intercambian.
+  - slug: types
+    minutes: 9
+    quiz:
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          print(7 // 2, 7 % 2)
+        options:
+          en: ["4 1", "3.5 1", "3 0.5", "3 1"]
+          es: ["4 1", "3.5 1", "3 0.5", "3 1"]
+        answer: 3
+        explanation:
+          en: Floor division 7 // 2 gives 3 and the remainder 7 % 2 is 1.
+          es: La división entera 7 // 2 da 3 y el resto 7 % 2 es 1.
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          print(int(8.9) + int("1"))
+        options:
+          en: ["10", "9", "8.91", "An error"]
+          es: ["10", "9", "8.91", "Un error"]
+        answer: 1
+        explanation:
+          en: int(8.9) truncates to 8 (it does not round), and int("1") is 1, so the sum is 9.
+          es: int(8.9) trunca a 8 (no redondea) e int("1") es 1, así que la suma es 9.
+      - prompt:
+          en: Which value is printed by print(type(10 / 2))?
+          es: ¿Qué valor imprime print(type(10 / 2))?
+        options:
+          en: ["<class 'int'>", "5", "<class 'str'>", "<class 'float'>"]
+          es: ["<class 'int'>", "5", "<class 'str'>", "<class 'float'>"]
+        answer: 3
+        explanation:
+          en: The / operator always returns a float, so 10 / 2 is 5.0.
+          es: El operador / siempre devuelve un float, así que 10 / 2 es 5.0.
+  - slug: strings
+    minutes: 9
+    quiz:
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          word = "galaxy"
+          print(word[1:4])
+        options:
+          en: ["gal", "ala", "alax", "laxy"]
+          es: ["gal", "ala", "alax", "laxy"]
+        answer: 1
+        explanation:
+          en: The slice starts at index 1 ("a") and stops before index 4, giving "ala".
+          es: La rebanada empieza en el índice 1 ("a") y se detiene antes del índice 4, dando "ala".
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          name = "ana"
+          name.upper()
+          print(name)
+        options:
+          en: ["ANA", "Ana", "ana", "None"]
+          es: ["ANA", "Ana", "ana", "None"]
+        answer: 2
+        explanation:
+          en: Strings are immutable; upper() returns a new string that was never stored, so name is unchanged.
+          es: Las cadenas son inmutables; upper() devuelve una cadena nueva que nunca se guardó, así que name no cambia.
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          print("-".join("abc".split("b")))
+        options:
+          en: ["a-c", "a-b-c", "abc", "['a', 'c']"]
+          es: ["a-c", "a-b-c", "abc", "['a', 'c']"]
+        answer: 0
+        explanation:
+          en: split("b") gives ['a', 'c'], and joining them with "-" produces "a-c".
+          es: split("b") da ['a', 'c'] y al unirlos con "-" se obtiene "a-c".
+  - slug: input-output
+    minutes: 8
+    quiz:
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          print("x", "y", "z", sep="+", end="!")
+        options:
+          en: ["x y z!", "x+y+z!", "x+y+z+!", "xyz!"]
+          es: ["x y z!", "x+y+z!", "x+y+z+!", "xyz!"]
+        answer: 1
+        explanation:
+          en: sep goes only between values and end is added once at the end.
+          es: sep va solo entre los valores y end se añade una vez al final.
+      - prompt:
+          en: The user types 5 when this program runs. What happens?
+          es: La persona escribe 5 al ejecutar este programa. ¿Qué ocurre?
+        code: |
+          n = input("Number: ")
+          print(n * 2)
+        options:
+          en: ["It prints 10", "It prints 55", "It raises an error", "It prints 5 5"]
+          es: ["Imprime 10", "Imprime 55", "Lanza un error", "Imprime 5 5"]
+        answer: 1
+        explanation:
+          en: input() returns the string "5", and multiplying a string by 2 repeats it.
+          es: input() devuelve la cadena "5", y multiplicar una cadena por 2 la repite.
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          price = 3.14159
+          print(f"Cost: {price:.2f}")
+        options:
+          en: ["Cost: 3.14", "Cost: 3.1", "Cost: 3.14159", "Cost: {price:.2f}"]
+          es: ["Cost: 3.14", "Cost: 3.1", "Cost: 3.14159", "Cost: {price:.2f}"]
+        answer: 0
+        explanation:
+          en: The .2f format spec shows the float with exactly two decimal places.
+          es: La especificación .2f muestra el float con exactamente dos decimales.
+exam:
+  - prompt:
+      en: What does this program print?
+      es: ¿Qué imprime este programa?
+    code: |
+      total = 10
+      total -= 3
+      total *= 2
+      print(total)
+    options:
+      en: ["7", "14", "17", "20"]
+      es: ["7", "14", "17", "20"]
+    answer: 1
+    explanation:
+      en: 10 - 3 is 7, and 7 * 2 is 14.
+      es: 10 - 3 es 7, y 7 * 2 es 14.
+  - prompt:
+      en: What does this program print?
+      es: ¿Qué imprime este programa?
+    code: |
+      print(bool(""), bool("False"), bool(0.0))
+    options:
+      en: ["False False False", "True True False", "False True True", "False True False"]
+      es: ["False False False", "True True False", "False True True", "False True False"]
+    answer: 3
+    explanation:
+      en: Empty strings and zero are falsy, but any non-empty string, even "False", is truthy.
+      es: Las cadenas vacías y el cero son falsos, pero cualquier cadena no vacía, incluso "False", es verdadera.
+  - prompt:
+      en: What does this program print?
+      es: ¿Qué imprime este programa?
+    code: |
+      text = "Python"
+      print(text[-1] + text[:2])
+    options:
+      en: ["nPy", "Pyn", "nyP", "nPyt"]
+      es: ["nPy", "Pyn", "nyP", "nPyt"]
+    answer: 0
+    explanation:
+      en: text[-1] is "n" and text[:2] is "Py", so the result is "nPy".
+      es: text[-1] es "n" y text[:2] es "Py", así que el resultado es "nPy".
+  - prompt:
+      en: Which expression correctly adds 1 to a number the user typed?
+      es: ¿Qué expresión suma 1 correctamente a un número que escribió la persona?
+    options:
+      en: ["input() + 1", "str(input()) + 1", "input(int()) + 1", "int(input()) + 1"]
+      es: ["input() + 1", "str(input()) + 1", "input(int()) + 1", "int(input()) + 1"]
+    answer: 3
+    explanation:
+      en: input() returns a string, so it must be converted with int() before adding a number.
+      es: input() devuelve una cadena, así que hay que convertirla con int() antes de sumarle un número.
+  - prompt:
+      en: What does this program print?
+      es: ¿Qué imprime este programa?
+    code: |
+      items = 1234
+      print(f"{items:,} items, {0.5:.0%} off")
+    options:
+      en: ["1234 items, 0.5 off", "1.234 items, 50% off", "1,234 items, 50% off", "1,234 items, 0% off"]
+      es: ["1234 items, 0.5 off", "1.234 items, 50% off", "1,234 items, 50% off", "1,234 items, 0% off"]
+    answer: 2
+    explanation:
+      en: The , spec adds a thousands separator and .0% turns 0.5 into 50% with no decimals.
+      es: La especificación , añade separador de miles y .0% convierte 0.5 en 50% sin decimales.
+  - prompt:
+      en: What does this program print?
+      es: ¿Qué imprime este programa?
+    code: |
+      value = None
+      print(value is None, type(3 == 3).__name__)
+    options:
+      en: ["True bool", "False bool", "True int", "None bool"]
+      es: ["True bool", "False bool", "True int", "None bool"]
+    answer: 0
+    explanation:
+      en: value is None evaluates to True, and comparisons produce values of type bool.
+      es: value is None se evalúa como True, y las comparaciones producen valores de tipo bool.

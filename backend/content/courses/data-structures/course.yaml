@@ -1,0 +1,264 @@
+slug: data-structures
+order: 4
+level: intermediate
+title:
+  en: Data Structures
+  es: Estructuras de datos
+summary:
+  en: Store and organise data like a pro. Learn when and how to use lists, tuples, dictionaries and sets, and avoid their classic pitfalls.
+  es: Guarda y organiza datos como un profesional. Aprende cuándo y cómo usar listas, tuplas, diccionarios y conjuntos, y evita sus trampas clásicas.
+lessons:
+  - slug: lists
+    minutes: 10
+    quiz:
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          a = [1, 2, 3]
+          b = a
+          b.append(4)
+          print(len(a))
+        options:
+          en: ["3", "4", "1", "An error"]
+          es: ["3", "4", "1", "Un error"]
+        answer: 1
+        explanation:
+          en: b = a creates an alias, not a copy, so appending through b also changes a.
+          es: b = a crea un alias, no una copia, así que añadir a través de b también cambia a.
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          nums = [3, 1, 2]
+          result = nums.sort()
+          print(result, nums)
+        options:
+          en: ["[1, 2, 3] [1, 2, 3]", "[1, 2, 3] [3, 1, 2]", "None [3, 1, 2]", "None [1, 2, 3]"]
+          es: ["[1, 2, 3] [1, 2, 3]", "[1, 2, 3] [3, 1, 2]", "None [3, 1, 2]", "None [1, 2, 3]"]
+        answer: 3
+        explanation:
+          en: sort() sorts the list in place and returns None. Use sorted() if you want a new list back.
+          es: sort() ordena la lista en su sitio y devuelve None. Usa sorted() si quieres que te devuelva una lista nueva.
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          stack = ["a", "b", "c"]
+          stack.append("d")
+          top = stack.pop()
+          stack.pop(0)
+          print(top, stack)
+        options:
+          en: ["d ['b', 'c']", "a ['b', 'c', 'd']", "d ['a', 'b', 'c']", "c ['b']"]
+          es: ["d ['b', 'c']", "a ['b', 'c', 'd']", "d ['a', 'b', 'c']", "c ['b']"]
+        answer: 0
+        explanation:
+          en: pop() removes and returns the last item ("d"), then pop(0) removes the first item ("a").
+          es: pop() quita y devuelve el último elemento ("d"), y después pop(0) quita el primero ("a").
+  - slug: tuples
+    minutes: 8
+    quiz:
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          t = ("solo")
+          u = ("solo",)
+          print(type(t).__name__, len(u))
+        options:
+          en: ["tuple 1", "str 4", "str 1", "tuple 4"]
+          es: ["tuple 1", "str 4", "str 1", "tuple 4"]
+        answer: 2
+        explanation:
+          en: Parentheses alone do not create a tuple; the trailing comma does. So t is a str and u is a one-item tuple.
+          es: Los paréntesis por sí solos no crean una tupla; la coma final sí. Así que t es una str y u es una tupla de un elemento.
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          head, *tail = (10, 20, 30)
+          print(head, tail)
+        options:
+          en: ["10 (20, 30)", "10 [20, 30]", "(10,) [20, 30]", "10 30"]
+          es: ["10 (20, 30)", "10 [20, 30]", "(10,) [20, 30]", "10 30"]
+        answer: 1
+        explanation:
+          en: The starred name collects the remaining items, and it always becomes a list.
+          es: El nombre con asterisco recoge los elementos restantes y siempre se convierte en una lista.
+      - prompt:
+          en: Why can a tuple like ("Paris", "Rome") be used as a dictionary key while a list cannot?
+          es: ¿Por qué una tupla como ("Paris", "Rome") puede usarse como clave de diccionario y una lista no?
+        options:
+          en: ["Tuples are faster to type", "Tuples are always shorter", "Tuples of immutable values are hashable", "Lists cannot contain strings"]
+          es: ["Las tuplas son más rápidas de escribir", "Las tuplas siempre son más cortas", "Las tuplas de valores inmutables son hashables", "Las listas no pueden contener cadenas"]
+        answer: 2
+        explanation:
+          en: Dictionary keys must be hashable. Tuples of immutable values are hashable, while mutable lists are not.
+          es: Las claves de un diccionario deben ser hashables. Las tuplas de valores inmutables lo son, mientras que las listas mutables no.
+  - slug: dictionaries
+    minutes: 10
+    quiz:
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          ages = {"ana": 30, "leo": 25}
+          print(ages.get("mia", 0) + ages["leo"])
+        options:
+          en: ["25", "None", "55", "An error"]
+          es: ["25", "None", "55", "Un error"]
+        answer: 0
+        explanation:
+          en: "\"mia\" is missing, so .get() returns the default 0, and 0 + 25 is 25."
+          es: "\"mia\" no existe, así que .get() devuelve el valor por defecto 0, y 0 + 25 es 25."
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          d = {"a": 1, "b": 2}
+          d["a"] = 10
+          d["c"] = 3
+          print(list(d.items()))
+        options:
+          en: ["[('a', 1), ('b', 2), ('c', 3)]", "[('b', 2), ('c', 3), ('a', 10)]", "[('a', 10), ('b', 2), ('c', 3)]", "[('a', 1), ('a', 10), ('b', 2), ('c', 3)]"]
+          es: ["[('a', 1), ('b', 2), ('c', 3)]", "[('b', 2), ('c', 3), ('a', 10)]", "[('a', 10), ('b', 2), ('c', 3)]", "[('a', 1), ('a', 10), ('b', 2), ('c', 3)]"]
+        answer: 2
+        explanation:
+          en: Assigning to an existing key replaces its value in place, and new keys are added at the end.
+          es: Asignar a una clave existente sustituye su valor en su sitio, y las claves nuevas se añaden al final.
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          scores = {"x": 3, "y": 7}
+          print("7" in scores, 7 in scores.values())
+        options:
+          en: ["True True", "False True", "False False", "True False"]
+          es: ["True True", "False True", "False False", "True False"]
+        answer: 1
+        explanation:
+          en: in on a dictionary checks keys only. The string "7" is not a key, but 7 is among the values.
+          es: in sobre un diccionario solo comprueba las claves. La cadena "7" no es una clave, pero 7 está entre los valores.
+  - slug: sets
+    minutes: 9
+    quiz:
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          print(len(set("banana")))
+        options:
+          en: ["6", "1", "2", "3"]
+          es: ["6", "1", "2", "3"]
+        answer: 3
+        explanation:
+          en: A set keeps only unique items, and "banana" contains three distinct letters (b, a, n).
+          es: Un conjunto solo guarda elementos únicos, y "banana" contiene tres letras distintas (b, a, n).
+      - prompt:
+          en: What does this program print?
+          es: ¿Qué imprime este programa?
+        code: |
+          a = {1, 2, 3, 4}
+          b = {3, 4, 5}
+          print(sorted(a - b), sorted(a & b))
+        options:
+          en: ["[1, 2] [3, 4]", "[5] [3, 4]", "[1, 2, 5] [3, 4]", "[3, 4] [1, 2]"]
+          es: ["[1, 2] [3, 4]", "[5] [3, 4]", "[1, 2, 5] [3, 4]", "[3, 4] [1, 2]"]
+        answer: 0
+        explanation:
+          en: a - b keeps items of a that are not in b, and a & b keeps items found in both.
+          es: a - b conserva los elementos de a que no están en b, y a & b conserva los que están en ambos.
+      - prompt:
+          en: Which expression creates an empty set?
+          es: ¿Qué expresión crea un conjunto vacío?
+        options:
+          en: ["{}", "set()", "[]", "{,}"]
+          es: ["{}", "set()", "[]", "{,}"]
+        answer: 1
+        explanation:
+          en: "{} creates an empty dictionary, so an empty set must be created with set()."
+          es: "{} crea un diccionario vacío, así que un conjunto vacío debe crearse con set()."
+exam:
+  - prompt:
+      en: What does this program print?
+      es: ¿Qué imprime este programa?
+    code: |
+      grid = [[0, 0], [0, 0]]
+      copy_grid = grid.copy()
+      copy_grid[0][0] = 5
+      print(grid[0][0])
+    options:
+      en: ["0", "5", "None", "An error"]
+      es: ["0", "5", "None", "Un error"]
+    answer: 1
+    explanation:
+      en: copy() is shallow, so the inner lists are shared between grid and copy_grid.
+      es: copy() es superficial, así que las listas interiores se comparten entre grid y copy_grid.
+  - prompt:
+      en: What does this program print?
+      es: ¿Qué imprime este programa?
+    code: |
+      words = ["pear", "fig", "banana"]
+      print(sorted(words, key=len)[0], max(words, key=len))
+    options:
+      en: ["banana fig", "pear banana", "fig pear", "fig banana"]
+      es: ["banana fig", "pear banana", "fig pear", "fig banana"]
+    answer: 3
+    explanation:
+      en: Sorting by length puts "fig" first, and the longest word is "banana".
+      es: Al ordenar por longitud, "fig" queda primero, y la palabra más larga es "banana".
+  - prompt:
+      en: What does this program print?
+      es: ¿Qué imprime este programa?
+    code: |
+      point = (2, 5)
+      x, y = point
+      point = (y, x)
+      print(point, x)
+    options:
+      en: ["(5, 2) 2", "(2, 5) 2", "(5, 2) 5", "An error, tuples are immutable"]
+      es: ["(5, 2) 2", "(2, 5) 2", "(5, 2) 5", "Un error, las tuplas son inmutables"]
+    answer: 0
+    explanation:
+      en: The tuple is not modified; the name point is simply rebound to a new tuple (5, 2), while x is still 2.
+      es: La tupla no se modifica; el nombre point simplemente pasa a referirse a una tupla nueva (5, 2), y x sigue valiendo 2.
+  - prompt:
+      en: What does this program print?
+      es: ¿Qué imprime este programa?
+    code: |
+      counts = {}
+      for ch in "abca":
+          counts[ch] = counts.get(ch, 0) + 1
+      print(counts)
+    options:
+      en: ["{'a': 1, 'b': 1, 'c': 1}", "{'a': 2, 'b': 1, 'c': 1}", "{'abca': 4}", "An error, because counts starts empty"]
+      es: ["{'a': 1, 'b': 1, 'c': 1}", "{'a': 2, 'b': 1, 'c': 1}", "{'abca': 4}", "Un error, porque counts empieza vacío"]
+    answer: 1
+    explanation:
+      en: .get(ch, 0) returns 0 the first time a letter appears, so each letter is counted safely and "a" reaches 2.
+      es: .get(ch, 0) devuelve 0 la primera vez que aparece una letra, así que cada letra se cuenta sin errores y "a" llega a 2.
+  - prompt:
+      en: You need to check thousands of times whether a username has already been taken. Which structure is the best fit to store the taken names?
+      es: Necesitas comprobar miles de veces si un nombre de usuario ya está ocupado. ¿Qué estructura es la más adecuada para guardar los nombres ocupados?
+    options:
+      en: ["A list", "A tuple", "A set", "A string with all the names"]
+      es: ["Una lista", "Una tupla", "Un conjunto", "Una cadena con todos los nombres"]
+    answer: 2
+    explanation:
+      en: Membership tests on a set are very fast thanks to hashing, while lists and tuples are searched item by item.
+      es: Las comprobaciones de pertenencia en un conjunto son muy rápidas gracias al hashing, mientras que las listas y tuplas se recorren elemento a elemento.
+  - prompt:
+      en: What does this program print?
+      es: ¿Qué imprime este programa?
+    code: |
+      inventory = {"apple": 3, "kiwi": 0, "plum": 5}
+      in_stock = sorted(k for k, v in inventory.items() if v)
+      print(in_stock, len(set(inventory.values())))
+    options:
+      en: ["['apple', 'plum'] 3", "['apple', 'kiwi', 'plum'] 3", "['apple', 'plum'] 2", "['plum', 'apple'] 3"]
+      es: ["['apple', 'plum'] 3", "['apple', 'kiwi', 'plum'] 3", "['apple', 'plum'] 2", "['plum', 'apple'] 3"]
+    answer: 0
+    explanation:
+      en: kiwi has the falsy value 0 so it is filtered out, and the values 3, 0 and 5 are all different.
+      es: kiwi tiene el valor falso 0, así que se filtra, y los valores 3, 0 y 5 son todos distintos.
