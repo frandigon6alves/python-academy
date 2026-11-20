@@ -11,7 +11,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-4);
-  min-height: 3.75rem;
+  min-height: var(--header-height);
   padding-block: var(--space-2);
 }
 
@@ -39,7 +39,7 @@
   height: 2.25rem;
   border-radius: var(--radius-md);
   background: linear-gradient(135deg, var(--brand-deep-teal), var(--brand-purple));
-  color: #ffffff;
+  color: var(--brand-contrast);
   font-size: var(--text-sm);
   font-weight: 800;
 }

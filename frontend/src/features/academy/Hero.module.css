@@ -79,9 +79,9 @@
   background: transparent;
 }
 
-.output {
-  color: var(--code-string) !important;
-  border-top: 1px dashed var(--color-border) !important;
+.terminal .output {
+  color: var(--code-string);
+  border-top: 1px dashed var(--color-border);
 }
 
 .dots {

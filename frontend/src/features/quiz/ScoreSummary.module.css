@@ -1,0 +1,32 @@
+/* Score message above the rewards; the tone sets the colour, the icon and copy carry the meaning. */
+.score {
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  border-left-width: 4px;
+  margin-bottom: var(--space-3);
+}
+
+.score p {
+  margin: 0;
+}
+
+.score[data-tone="perfect"] {
+  background: var(--color-success-soft);
+  border-color: var(--color-success);
+}
+
+.score[data-tone="good"] {
+  background: var(--color-primary-soft);
+  border-color: var(--color-primary);
+}
+
+.score[data-tone="low"] {
+  background: var(--color-accent-soft);
+  border-color: var(--color-accent);
+}
+
+.scoreTitle {
+  font-size: var(--text-lg);
+  font-weight: 800;
+}

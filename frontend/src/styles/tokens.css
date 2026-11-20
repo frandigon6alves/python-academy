@@ -9,6 +9,8 @@
   --brand-purple: #8474a1;
   --brand-teal: #08979d;
   --brand-deep-teal: #045a5c;
+  /* Text on a brand colour (logo marks): the same in both themes. */
+  --brand-contrast: #ffffff;
 
   --color-bg: #fbf8fd;
   --color-surface: #ffffff;
@@ -68,12 +70,13 @@
   --shadow-md: 0 4px 16px rgb(30 26 38 / 0.08);
   --content-width: 72rem;
   --reading-width: 46rem;
+  --header-height: 3.75rem;
   --duration: 160ms;
 
   color-scheme: light;
 }
 
-/* Dark values. The inline theme script (src/theme/theme-script.ts) sets
+/* Dark values. The inline theme script (src/theme/theme.ts) sets
  * data-theme before first paint, resolving "system" via prefers-color-scheme. */
 [data-theme="dark"] {
   --color-bg: #121016;

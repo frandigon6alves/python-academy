@@ -33,7 +33,7 @@
   height: 2rem;
   border-radius: var(--radius-sm);
   background: var(--brand-deep-teal);
-  color: #ffffff;
+  color: var(--brand-contrast);
   font-size: var(--text-sm);
 }
 

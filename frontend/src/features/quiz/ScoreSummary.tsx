@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import { scoreTone } from "./outcome";
-import styles from "./RewardsPanel.module.css";
+import styles from "./ScoreSummary.module.css";
 
 const ICONS = { perfect: "🎉", good: "👍", low: "💪" } as const;
 
