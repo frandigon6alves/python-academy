@@ -8,6 +8,8 @@ services:
     plan: free
     region: frankfurt
     rootDir: backend
+    # Deploy a push to main only once its GitHub checks (CI) have passed.
+    autoDeployTrigger: checksPass
     buildCommand: pip install -r requirements.txt
     # Seeding is idempotent and never touches learner data, so it runs on every start.
     # Render's load balancer terminates TLS; --proxy-headers makes uvicorn honour its
