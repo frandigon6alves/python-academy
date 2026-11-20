@@ -69,7 +69,10 @@ function messageFor(input: HTMLInputElement, t: Translate): string | undefined {
   return input.validationMessage;
 }
 
-interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
+/** Attributes the field wires itself; callers cannot override the label, hint and error links. */
+type OwnedProps = "id" | "className" | "aria-describedby" | "aria-invalid" | "onInvalid";
+
+interface TextFieldProps extends Omit<InputHTMLAttributes<HTMLInputElement>, OwnedProps> {
   label: string;
   hint?: string | undefined;
   /** An error from the server; it wins over the field's own validation message. */
@@ -148,7 +151,7 @@ function EyeIcon({ crossed }: { crossed: boolean }) {
   );
 }
 
-interface SelectFieldProps extends SelectHTMLAttributes<HTMLSelectElement> {
+interface SelectFieldProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, "id" | "className"> {
   label: string;
   options: { value: string; label: string }[];
 }

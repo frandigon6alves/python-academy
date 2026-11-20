@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes } from "react";
+import type { ComponentProps } from "react";
 import styles from "./Button.module.css";
 
 export type ButtonVariant = "primary" | "secondary" | "danger" | "ghost";
@@ -8,7 +8,7 @@ export function buttonClass(variant: ButtonVariant = "primary", extra?: string):
   return [styles.button, styles[variant], extra].filter(Boolean).join(" ");
 }
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ComponentProps<"button"> {
   variant?: ButtonVariant;
 }
 

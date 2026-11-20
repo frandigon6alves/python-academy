@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import type { ReactNode } from "react";
 import { GlossaryTeaser } from "@/features/glossary/GlossaryTeaser";
 import { CourseCatalogue } from "./CourseCatalogue";
 import { DemoQuiz } from "./DemoQuiz";
@@ -14,7 +15,7 @@ function Section({
   id: string;
   title: string;
   lead: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <section id={id} aria-labelledby={`${id}-title`} className={`container ${styles.section}`}>
