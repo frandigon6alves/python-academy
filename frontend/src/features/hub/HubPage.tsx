@@ -2,9 +2,9 @@
 
 import { useTranslations } from "next-intl";
 import { buttonClass } from "@/components/ui/Button";
-import { ProgressBar } from "@/components/ui/ProgressBar";
 import { ErrorState, Loading } from "@/components/ui/QueryState";
 import { Skeleton, SkeletonCard } from "@/components/ui/Skeleton";
+import { CourseProgressMeter } from "@/components/CourseProgressMeter";
 import { Link } from "@/i18n/navigation";
 import { useMe } from "@/lib/api/hooks/auth";
 import { useCourse, useCourses } from "@/lib/api/hooks/content";
@@ -89,16 +89,11 @@ function ContinueCard({ progress }: { progress: ProgressOverview }) {
             </p>
           )}
           {courseProgress && (
-            <div className={styles.continueProgress}>
-              <ProgressBar
-                value={courseProgress.percent}
-                label={t("catalogue.progressLabel")}
-                valueText={t("catalogue.progress", { percent: courseProgress.percent })}
-              />
-              <span className={styles.muted}>
-                {t("catalogue.progress", { percent: courseProgress.percent })}
-              </span>
-            </div>
+            <CourseProgressMeter
+              percent={courseProgress.percent}
+              label={t("catalogue.progressLabel")}
+              className={styles.continueProgress}
+            />
           )}
           <Link
             href={`/courses/${next.course_slug}/lessons/${next.lesson_slug}`}
@@ -121,32 +116,26 @@ interface CourseProgressListProps {
 }
 
 function CourseProgressList({ progress, courses }: CourseProgressListProps) {
-  const t = useTranslations();
+  const t = useTranslations("hub");
   const titleOf = (slug: string) => courses?.find((course) => course.slug === slug)?.title ?? slug;
 
   return (
     <section className={styles.card} aria-labelledby="course-progress-title">
-      <h2 id="course-progress-title">{t("hub.progressTitle")}</h2>
+      <h2 id="course-progress-title">{t("progressTitle")}</h2>
       <ul className={styles.courseList}>
         {progress.courses.map((course) => (
           <li key={course.course_slug} className={styles.courseRow}>
             <Link href={`/courses/${course.course_slug}`} className={styles.courseName}>
               {titleOf(course.course_slug)}
             </Link>
-            <ProgressBar
-              value={course.percent}
-              label={titleOf(course.course_slug)}
-              valueText={t("catalogue.progress", { percent: course.percent })}
-            />
-            <span className={styles.muted}>
-              {t("catalogue.progress", { percent: course.percent })}
+            <CourseProgressMeter percent={course.percent} label={titleOf(course.course_slug)}>
               {course.certificate_id && (
                 <>
                   {" · "}
-                  <Link href={`/certificates/${course.certificate_id}`}>{t("hub.certificate")}</Link>
+                  <Link href={`/certificates/${course.certificate_id}`}>{t("certificate")}</Link>
                 </>
               )}
-            </span>
+            </CourseProgressMeter>
           </li>
         ))}
       </ul>

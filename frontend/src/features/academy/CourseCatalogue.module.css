@@ -115,13 +115,6 @@
   margin: 0;
 }
 
-.progress {
-  display: grid;
-  gap: var(--space-1);
-  font-size: var(--text-sm);
-  color: var(--color-muted);
-}
-
 .cta {
   align-self: end;
   margin-top: var(--space-2);

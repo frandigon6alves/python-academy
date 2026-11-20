@@ -2,8 +2,8 @@
 
 import type { UseQueryResult } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
+import { CourseProgressMeter } from "@/components/CourseProgressMeter";
 import { buttonClass } from "@/components/ui/Button";
-import { ProgressBar } from "@/components/ui/ProgressBar";
 import { ErrorState, Loading } from "@/components/ui/QueryState";
 import { Skeleton, SkeletonRows } from "@/components/ui/Skeleton";
 import { SignInPrompt } from "@/features/auth/SignInPrompt";
@@ -37,14 +37,11 @@ export function CoursePage({ slug }: { slug: string }) {
         <li>{t("common.minutes", { count: course.data.minutes })}</li>
       </ul>
       {courseProgress && (
-        <div className={styles.progress}>
-          <ProgressBar
-            value={courseProgress.percent}
-            label={t("catalogue.progressLabel")}
-            valueText={t("catalogue.progress", { percent: courseProgress.percent })}
-          />
-          <span>{t("catalogue.progress", { percent: courseProgress.percent })}</span>
-        </div>
+        <CourseProgressMeter
+          percent={courseProgress.percent}
+          label={t("catalogue.progressLabel")}
+          className={styles.progress}
+        />
       )}
 
       <h2 className={styles.heading}>{t("course.lessonsTitle")}</h2>

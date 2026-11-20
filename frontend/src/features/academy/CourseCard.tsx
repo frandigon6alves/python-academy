@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { ProgressBar } from "@/components/ui/ProgressBar";
+import { CourseProgressMeter } from "@/components/CourseProgressMeter";
 import { Link } from "@/i18n/navigation";
 import type { CourseProgress, CourseSummary } from "@/lib/api/types";
 import styles from "./CourseCatalogue.module.css";
@@ -35,14 +35,7 @@ export function CourseCard({ course, position, progress }: CourseCardProps) {
       </ul>
       <p className={styles.summary}>{course.summary}</p>
       {progress && (
-        <div className={styles.progress}>
-          <ProgressBar
-            value={percent}
-            label={`${t("catalogue.progressLabel")}: ${course.title}`}
-            valueText={t("catalogue.progress", { percent })}
-          />
-          <span>{percent === 100 ? t("catalogue.completed") : t("catalogue.progress", { percent })}</span>
-        </div>
+        <CourseProgressMeter percent={percent} label={`${t("catalogue.progressLabel")}: ${course.title}`} />
       )}
       <span className={styles.cta} aria-hidden="true">
         {action} →

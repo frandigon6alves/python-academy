@@ -25,11 +25,7 @@
 }
 
 .progress {
-  display: grid;
-  gap: var(--space-1);
   max-width: 28rem;
-  font-size: var(--text-sm);
-  color: var(--color-muted);
 }
 
 .heading {

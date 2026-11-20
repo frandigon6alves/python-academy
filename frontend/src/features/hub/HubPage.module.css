@@ -63,8 +63,6 @@
 }
 
 .continueProgress {
-  display: grid;
-  gap: var(--space-1);
   width: 100%;
   margin-block: var(--space-2);
 }
