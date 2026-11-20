@@ -3,10 +3,11 @@
 import { useFormatter, useTranslations } from "next-intl";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
-import { Loading } from "@/components/ui/QueryState";
+import { ErrorState, Loading } from "@/components/ui/QueryState";
 import { Skeleton } from "@/components/ui/Skeleton";
-import { usePageTitle } from "@/lib/use-page-title";
+import { ApiError } from "@/lib/api/client";
 import { useCertificate } from "@/lib/api/hooks/learning";
+import { usePageTitle } from "@/lib/use-page-title";
 import styles from "./CertificatePage.module.css";
 
 export function CertificatePage({ verificationId }: { verificationId: string }) {
@@ -24,7 +25,13 @@ export function CertificatePage({ verificationId }: { verificationId: string }) 
       </Loading>
     );
   }
-  if (certificate.isError) return <Alert tone="error">{t("notFound")}</Alert>;
+  if (certificate.isError) {
+    // Only a 404 means the ID is unknown; an outage or a lost connection can be retried.
+    if (certificate.error instanceof ApiError && certificate.error.status === 404) {
+      return <Alert tone="error">{t("notFound")}</Alert>;
+    }
+    return <ErrorState error={certificate.error} onRetry={() => certificate.refetch()} />;
+  }
   const data = certificate.data;
 
   return (
