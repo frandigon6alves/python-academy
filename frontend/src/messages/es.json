@@ -75,7 +75,7 @@
     "count": "{count, plural, =0 {Ningún término coincide} one {# término} other {# términos}}",
     "empty": "Ningún término coincide con «{query}».",
     "searchButton": "Buscar",
-    "seeAll": "Ver los {count} términos",
+    "seeAll": "Ver {count, plural, one {# término} other {los # términos}}",
     "clear": "Borrar búsqueda"
   },
   "demo": {
@@ -92,7 +92,7 @@
   "course": {
     "lessonsTitle": "Lecciones",
     "examTitle": "Examen final",
-    "examLead": "{count} preguntas. Consigue un {percent}% o más para obtener tu certificado.",
+    "examLead": "{count, plural, one {# pregunta} other {# preguntas}}. Consigue un {percent}% o más para obtener tu certificado.",
     "examLocked": "Completa todas las lecciones para desbloquear el examen.",
     "examSignIn": "Crea una cuenta gratuita o inicia sesión para seguir tus lecciones y hacer el examen.",
     "takeExam": "Hacer el examen",

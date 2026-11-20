@@ -75,7 +75,7 @@
     "count": "{count, plural, =0 {No terms match} one {# term} other {# terms}}",
     "empty": "No terms match “{query}”.",
     "searchButton": "Search",
-    "seeAll": "See all {count} terms",
+    "seeAll": "See all {count, plural, one {# term} other {# terms}}",
     "clear": "Clear search"
   },
   "demo": {
@@ -92,7 +92,7 @@
   "course": {
     "lessonsTitle": "Lessons",
     "examTitle": "Final exam",
-    "examLead": "{count} questions. Score {percent}% or more to earn your certificate.",
+    "examLead": "{count, plural, one {# question} other {# questions}}. Score {percent}% or more to earn your certificate.",
     "examLocked": "Complete every lesson to unlock the exam.",
     "examSignIn": "Create a free account or log in to track your lessons and take the exam.",
     "takeExam": "Take the exam",
