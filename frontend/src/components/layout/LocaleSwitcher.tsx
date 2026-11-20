@@ -20,8 +20,10 @@ export function LocaleSwitcher() {
   function switchTo(next: Locale) {
     // Signed-in learners keep their language across devices.
     if (me && me.language !== next) updateSettings.mutate({ language: next });
+    // Keep the query string and hash (?next= on the auth pages, ?q= on the glossary).
+    const href = `${pathname}${window.location.search}${window.location.hash}`;
     startTransition(() => {
-      router.replace(pathname, { locale: next });
+      router.replace(href, { locale: next });
     });
   }
 
