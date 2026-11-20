@@ -1,10 +1,10 @@
 import type { Theme } from "@/lib/api/types";
 
 export const THEME_STORAGE_KEY = "academy-theme";
-export const THEMES: Theme[] = ["system", "light", "dark"];
+export const THEMES = ["system", "light", "dark"] as const satisfies readonly Theme[];
 
 export function isTheme(value: unknown): value is Theme {
-  return typeof value === "string" && (THEMES as string[]).includes(value);
+  return typeof value === "string" && (THEMES as readonly string[]).includes(value);
 }
 
 export function resolveTheme(preference: Theme, prefersDark: boolean): "light" | "dark" {

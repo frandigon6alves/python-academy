@@ -19,6 +19,10 @@ interface ThemeContextValue {
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 const CHANGE_EVENT = "academy-theme-change";
 
+// When localStorage cannot be written (private mode, blocked storage), the choice lives
+// here for the lifetime of the page so the selects still reflect it.
+let unsavedPreference: Theme | null = null;
+
 // The stored preference is an external store: localStorage plus a change event.
 function subscribe(onChange: () => void) {
   window.addEventListener(CHANGE_EVENT, onChange);
@@ -30,6 +34,7 @@ function subscribe(onChange: () => void) {
 }
 
 function readPreference(): Theme {
+  if (unsavedPreference) return unsavedPreference;
   try {
     const stored = localStorage.getItem(THEME_STORAGE_KEY);
     return isTheme(stored) ? stored : "system";
@@ -64,9 +69,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const setPreference = useCallback((theme: Theme) => {
     try {
       localStorage.setItem(THEME_STORAGE_KEY, theme);
+      unsavedPreference = null;
     } catch {
-      // Storage can be unavailable (private mode); fall back to applying it for this page only.
-      applyTheme(theme);
+      unsavedPreference = theme;
     }
     window.dispatchEvent(new Event(CHANGE_EVENT));
   }, []);
