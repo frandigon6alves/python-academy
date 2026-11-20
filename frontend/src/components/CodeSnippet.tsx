@@ -1,5 +1,5 @@
 import type { ElementContent } from "hast";
-import type { ReactNode } from "react";
+import { useMemo, type ReactNode } from "react";
 import { highlightPython } from "@/lib/highlight";
 
 function toReact(nodes: ElementContent[]): ReactNode[] {
@@ -20,10 +20,12 @@ function toReact(nodes: ElementContent[]): ReactNode[] {
  * <Markdown>, without pulling the Markdown parser into pages that only show snippets.
  */
 export function CodeSnippet({ code }: { code: string }) {
+  // A quiz form re-renders on every answer; the tokens only depend on the code.
+  const tokens = useMemo(() => toReact(highlightPython(code)), [code]);
   return (
     // Code blocks can scroll sideways, so keyboard users must be able to focus them.
     <pre tabIndex={0}>
-      <code className="hljs language-python">{toReact(highlightPython(code))}</code>
+      <code className="hljs language-python">{tokens}</code>
     </pre>
   );
 }
