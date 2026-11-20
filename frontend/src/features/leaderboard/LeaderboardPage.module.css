@@ -37,6 +37,12 @@
   overflow: hidden;
   background: var(--color-surface);
   box-shadow: var(--shadow-sm);
+  transition: opacity var(--duration);
+}
+
+/* The previous period stays visible, dimmed, while the other one loads. */
+.tableWrap[aria-busy="true"] {
+  opacity: 0.6;
 }
 
 .table {
@@ -70,13 +76,14 @@
   background: var(--color-bg);
 }
 
-.rank {
+/* Scoped under .table to win over the cell rule above without !important. */
+.table .rank {
   width: 4.5rem;
-  text-align: center !important;
+  text-align: center;
 }
 
-.number {
-  text-align: right !important;
+.table .number {
+  text-align: right;
 }
 
 /* The signed-in learner's row: tinted, with a bar on the left and a "You" tag. */
@@ -124,7 +131,7 @@
   .table td {
     padding: var(--space-3) var(--space-2);
   }
-  .rank {
+  .table .rank {
     width: 3rem;
   }
 }

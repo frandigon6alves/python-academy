@@ -1,5 +1,5 @@
 // Learner-specific data: progress, quizzes, exams, gamification and certificates.
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useLocale } from "next-intl";
 import { api, apiPath } from "../client";
 import { queryKeys } from "../query-keys";
@@ -39,6 +39,8 @@ export function useLeaderboard(period: "weekly" | "all_time") {
   return useQuery({
     queryKey: queryKeys.leaderboard(period),
     queryFn: ({ signal }) => api<Leaderboard>(`/gamification/leaderboard?period=${period}`, { signal }),
+    // Switching period keeps the current table on screen until the other one arrives.
+    placeholderData: keepPreviousData,
   });
 }
 

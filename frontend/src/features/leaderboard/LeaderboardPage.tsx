@@ -19,6 +19,8 @@ export function LeaderboardPage() {
   const [period, setPeriod] = useState<Period>("weekly");
   const board = useLeaderboard(period);
   const periodName = period === "weekly" ? t("weekly") : t("allTime");
+  // While a period loads, the previous one is kept on screen (placeholder data); never next to an error.
+  const entries = board.isError ? undefined : board.data?.entries;
 
   return (
     <div className={styles.page}>
@@ -46,14 +48,14 @@ export function LeaderboardPage() {
         </Loading>
       )}
       {board.isError && <ErrorState error={board.error} onRetry={() => board.refetch()} />}
-      {board.data && board.data.entries.length === 0 && (
+      {entries?.length === 0 && (
         <p className={styles.empty}>
           <span aria-hidden="true">🏁 </span>
           {t("empty")}
         </p>
       )}
-      {board.data && board.data.entries.length > 0 && (
-        <div className={styles.tableWrap}>
+      {entries && entries.length > 0 && (
+        <div className={styles.tableWrap} aria-busy={board.isPlaceholderData}>
           <table className={styles.table}>
             <caption className="visually-hidden">
               {t("title")}: {periodName}
@@ -73,7 +75,7 @@ export function LeaderboardPage() {
               </tr>
             </thead>
             <tbody>
-              {board.data.entries.map((entry) => (
+              {entries.map((entry) => (
                 <tr
                   key={entry.rank}
                   className={entry.is_you ? styles.you : undefined}
