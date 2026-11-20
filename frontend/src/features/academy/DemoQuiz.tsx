@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CodeSnippet } from "@/components/CodeSnippet";
 import { Button, buttonClass } from "@/components/ui/Button";
 import { ErrorState, Loading } from "@/components/ui/QueryState";
@@ -22,6 +22,21 @@ export function DemoQuiz() {
   const [choice, setChoice] = useState<number | null>(null);
   const [result, setResult] = useState<QuestionResult | null>(null);
   const [score, setScore] = useState(0);
+  const liveRef = useRef<HTMLDivElement>(null);
+  const fieldsetRef = useRef<HTMLFieldSetElement>(null);
+  const nextButtonRef = useRef<HTMLButtonElement>(null);
+  const wasGraded = useRef(false);
+
+  // Checking an answer disables the button that had focus, and moving on swaps the
+  // question, which would drop keyboard focus on <body>. Keep it on the next step:
+  // the "Next" button after grading, then the first answer (or the final score).
+  useEffect(() => {
+    const graded = result !== null;
+    if (graded === wasGraded.current) return;
+    wasGraded.current = graded;
+    if (graded) nextButtonRef.current?.focus();
+    else (fieldsetRef.current?.querySelector("input") ?? liveRef.current)?.focus();
+  }, [result]);
 
   if (quiz.isPending) return <Loading />;
   if (quiz.isError) return <ErrorState error={quiz.error} onRetry={() => quiz.refetch()} />;
@@ -58,7 +73,7 @@ export function DemoQuiz() {
 
   return (
     <div className={styles.card}>
-      <div aria-live="polite" className={styles.live}>
+      <div ref={liveRef} tabIndex={-1} aria-live="polite" className={styles.live}>
         {isFinished && (
           <>
             <p className={styles.score}>{t("score", { score, total: questions.length })}</p>
@@ -89,7 +104,11 @@ export function DemoQuiz() {
         </div>
       ) : (
         question && (
-          <fieldset className={styles.question} disabled={Boolean(result) || check.isPending}>
+          <fieldset
+            ref={fieldsetRef}
+            className={styles.question}
+            disabled={Boolean(result) || check.isPending}
+          >
             <legend>
               <span className={styles.progress}>
                 {t("progress", { current: index + 1, total: questions.length })}
@@ -117,7 +136,9 @@ export function DemoQuiz() {
       {!isFinished && (
         <div className={styles.actions}>
           {result ? (
-            <Button onClick={advance}>{index + 1 < questions.length ? t("next") : t("finish")}</Button>
+            <Button ref={nextButtonRef} onClick={advance}>
+              {index + 1 < questions.length ? t("next") : t("finish")}
+            </Button>
           ) : (
             <Button onClick={submit} disabled={choice === null || check.isPending}>
               {t("check")}

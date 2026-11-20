@@ -20,7 +20,11 @@ export function RewardsPanel({ rewards, celebrate = true }: RewardsPanelProps) {
         <p>{t("xpQuiet", { xp: rewards.xp_gained })}</p>
       )}
       <ul className={styles.list}>
-        {rewards.leveled_up && <li>🆙 {t("levelUp", { level: rewards.level.level })}</li>}
+        {rewards.leveled_up && (
+          <li>
+            <span aria-hidden="true">🆙</span> {t("levelUp", { level: rewards.level.level })}
+          </li>
+        )}
         {rewards.new_badges.map((badge) => (
           <li key={badge.code}>
             <span aria-hidden="true">{badge.icon}</span> {t("badge", { name: badge.name })}

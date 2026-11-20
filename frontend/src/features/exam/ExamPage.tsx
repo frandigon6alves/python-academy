@@ -35,7 +35,10 @@ export function ExamPage({ courseSlug }: { courseSlug: string }) {
     return (
       <Alert tone="info">
         <p>{t("locked")}</p>
-        <Link href={`/courses/${courseSlug}`}>← {tLesson("backToCourse")}</Link>
+        <Link href={`/courses/${courseSlug}`}>
+          <span aria-hidden="true">← </span>
+          {tLesson("backToCourse")}
+        </Link>
       </Alert>
     );
   }

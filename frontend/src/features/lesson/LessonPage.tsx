@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import type { ReactNode } from "react";
 import { Markdown } from "@/components/Markdown";
 import { ErrorState, Loading } from "@/components/ui/QueryState";
 import { Skeleton } from "@/components/ui/Skeleton";
@@ -124,12 +125,12 @@ function LessonPager({ lesson }: { lesson: LessonDetail }) {
     <nav className={styles.pager} aria-label={t("pagerLabel")}>
       {lesson.previous ? (
         <Link href={`${base}/lessons/${lesson.previous.slug}`} rel="prev" className={styles.pagerLink}>
-          <span className={styles.pagerHint}>← {t("previous")}</span>
+          <PagerHint arrow="previous">{t("previous")}</PagerHint>
           {lesson.previous.title}
         </Link>
       ) : (
         <Link href={base} className={styles.pagerLink}>
-          <span className={styles.pagerHint}>← {t("backToCourse")}</span>
+          <PagerHint arrow="previous">{t("backToCourse")}</PagerHint>
           {lesson.course_title}
         </Link>
       )}
@@ -139,15 +140,26 @@ function LessonPager({ lesson }: { lesson: LessonDetail }) {
           rel="next"
           className={`${styles.pagerLink} ${styles.pagerNext}`}
         >
-          <span className={styles.pagerHint}>{t("next")} →</span>
+          <PagerHint arrow="next">{t("next")}</PagerHint>
           {lesson.next.title}
         </Link>
       ) : (
         <Link href={base} className={`${styles.pagerLink} ${styles.pagerNext}`}>
-          <span className={styles.pagerHint}>{t("backToCourse")} →</span>
+          <PagerHint arrow="next">{t("backToCourse")}</PagerHint>
           {lesson.course_title}
         </Link>
       )}
     </nav>
+  );
+}
+
+/** "← Previous" / "Next →": the arrow is decoration, the link text says where it goes. */
+function PagerHint({ arrow, children }: { arrow: "previous" | "next"; children: ReactNode }) {
+  return (
+    <span className={styles.pagerHint}>
+      {arrow === "previous" && <span aria-hidden="true">← </span>}
+      {children}
+      {arrow === "next" && <span aria-hidden="true"> →</span>}
+    </span>
   );
 }

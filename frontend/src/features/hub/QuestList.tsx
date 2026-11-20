@@ -22,9 +22,14 @@ export function QuestList({ quests }: { quests: Quest[] }) {
               valueText={t("questProgress", { progress: quest.progress, target: quest.target })}
             />
             <span className={styles.muted}>
-              {quest.completed
-                ? `✓ ${t("questDone")}`
-                : t("questProgress", { progress: quest.progress, target: quest.target })}
+              {quest.completed ? (
+                <>
+                  <span aria-hidden="true">✓ </span>
+                  {t("questDone")}
+                </>
+              ) : (
+                t("questProgress", { progress: quest.progress, target: quest.target })
+              )}
             </span>
           </li>
         ))}

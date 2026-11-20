@@ -35,8 +35,10 @@
   gap: var(--space-2);
 }
 
+/* Empty until the first answer is checked. Taken out of the grid rather than hidden with
+ * display: none, so the live region already exists for screen readers when it fills. */
 .live:empty {
-  display: none;
+  position: absolute;
 }
 
 .live p {
