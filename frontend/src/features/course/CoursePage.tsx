@@ -1,5 +1,6 @@
 "use client";
 
+import type { UseQueryResult } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { buttonClass } from "@/components/ui/Button";
 import { ProgressBar } from "@/components/ui/ProgressBar";
@@ -10,8 +11,8 @@ import { Link } from "@/i18n/navigation";
 import { useMe } from "@/lib/api/hooks/auth";
 import { useCourse } from "@/lib/api/hooks/content";
 import { useProgress } from "@/lib/api/hooks/learning";
+import type { CourseDetail, CourseProgress, ProgressOverview } from "@/lib/api/types";
 import { usePageTitle } from "@/lib/use-page-title";
-import type { CourseDetail, CourseProgress } from "@/lib/api/types";
 import styles from "./CoursePage.module.css";
 
 export function CoursePage({ slug }: { slug: string }) {
@@ -74,7 +75,7 @@ export function CoursePage({ slug }: { slug: string }) {
         })}
       </ol>
 
-      <ExamCard course={course.data} progress={courseProgress} />
+      <ExamCard course={course.data} progress={progress} courseProgress={courseProgress} />
     </article>
   );
 }
@@ -95,10 +96,18 @@ function CourseSkeleton() {
   );
 }
 
-function ExamCard({ course, progress }: { course: CourseDetail; progress: CourseProgress | undefined }) {
+interface ExamCardProps {
+  course: CourseDetail;
+  /** The learner's progress query; the exam stays locked until every lesson is complete. */
+  progress: UseQueryResult<ProgressOverview>;
+  courseProgress: CourseProgress | undefined;
+}
+
+function ExamCard({ course, progress, courseProgress }: ExamCardProps) {
   const t = useTranslations("course");
   const { data: me } = useMe();
-  const unlocked = progress !== undefined && progress.completed_lessons.length === progress.lesson_count;
+  const unlocked =
+    courseProgress !== undefined && courseProgress.completed_lessons.length === courseProgress.lesson_count;
 
   return (
     <section className={styles.exam} aria-labelledby="exam-title">
@@ -108,7 +117,9 @@ function ExamCard({ course, progress }: { course: CourseDetail; progress: Course
       </h2>
       <p>{t("examLead", { count: course.exam_question_count, percent: course.exam_pass_percent })}</p>
       {me === null && <SignInPrompt next={`/courses/${course.slug}`}>{t("examSignIn")}</SignInPrompt>}
-      {me && !unlocked && (
+      {/* Whether the exam is unlocked is only known once the progress has loaded. */}
+      {me && progress.isError && <ErrorState error={progress.error} onRetry={() => progress.refetch()} />}
+      {courseProgress && !unlocked && (
         <p className={styles.locked}>
           <span aria-hidden="true">🔒 </span>
           {t("examLocked")}
@@ -117,11 +128,11 @@ function ExamCard({ course, progress }: { course: CourseDetail; progress: Course
       <div className={styles.examActions}>
         {unlocked && (
           <Link href={`/courses/${course.slug}/exam`} className={buttonClass("primary")}>
-            {progress?.exam_passed ? t("retakeExam") : t("takeExam")}
+            {courseProgress.exam_passed ? t("retakeExam") : t("takeExam")}
           </Link>
         )}
-        {progress?.certificate_id && (
-          <Link href={`/certificates/${progress.certificate_id}`} className={buttonClass("secondary")}>
+        {courseProgress?.certificate_id && (
+          <Link href={`/certificates/${courseProgress.certificate_id}`} className={buttonClass("secondary")}>
             {t("viewCertificate")}
           </Link>
         )}
