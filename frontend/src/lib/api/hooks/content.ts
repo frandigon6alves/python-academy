@@ -16,7 +16,7 @@ export function useCourses() {
   const lang = useLocale();
   return useQuery({
     queryKey: queryKeys.courses(lang),
-    queryFn: () => api<CourseSummary[]>("/courses", { lang }),
+    queryFn: ({ signal }) => api<CourseSummary[]>("/courses", { lang, signal }),
   });
 }
 
@@ -24,7 +24,7 @@ export function useCourse(slug: string, enabled = true) {
   const lang = useLocale();
   return useQuery({
     queryKey: queryKeys.course(slug, lang),
-    queryFn: () => api<CourseDetail>(apiPath`/courses/${slug}`, { lang }),
+    queryFn: ({ signal }) => api<CourseDetail>(apiPath`/courses/${slug}`, { lang, signal }),
     enabled,
   });
 }
@@ -33,7 +33,8 @@ export function useLesson(courseSlug: string, lessonSlug: string) {
   const lang = useLocale();
   return useQuery({
     queryKey: queryKeys.lesson(courseSlug, lessonSlug, lang),
-    queryFn: () => api<LessonDetail>(apiPath`/courses/${courseSlug}/lessons/${lessonSlug}`, { lang }),
+    queryFn: ({ signal }) =>
+      api<LessonDetail>(apiPath`/courses/${courseSlug}/lessons/${lessonSlug}`, { lang, signal }),
   });
 }
 
@@ -41,7 +42,7 @@ export function useGlossary() {
   const lang = useLocale();
   return useQuery({
     queryKey: queryKeys.glossary(lang),
-    queryFn: () => api<GlossaryEntry[]>("/glossary", { lang }),
+    queryFn: ({ signal }) => api<GlossaryEntry[]>("/glossary", { lang, signal }),
   });
 }
 
@@ -49,7 +50,7 @@ export function useDemoQuiz() {
   const lang = useLocale();
   return useQuery({
     queryKey: queryKeys.demoQuiz(lang),
-    queryFn: () => api<Question[]>("/demo-quiz", { lang }),
+    queryFn: ({ signal }) => api<Question[]>("/demo-quiz", { lang, signal }),
   });
 }
 

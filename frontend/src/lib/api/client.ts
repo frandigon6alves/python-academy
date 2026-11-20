@@ -36,6 +36,8 @@ interface RequestOptions {
   method?: "GET" | "POST" | "PATCH" | "DELETE";
   body?: unknown;
   lang?: string;
+  /** Queries pass TanStack's signal, so a request is dropped once nothing shows its result. */
+  signal?: AbortSignal;
 }
 
 const BASE_URL = "/api/v1";
@@ -66,6 +68,7 @@ export async function api<T>(path: string, options: RequestOptions = {}): Promis
       ...(options.body !== undefined && { "Content-Type": "application/json" }),
     },
     ...(options.body !== undefined && { body: JSON.stringify(options.body) }),
+    ...(options.signal && { signal: options.signal }),
   });
 
   if (!response.ok) {

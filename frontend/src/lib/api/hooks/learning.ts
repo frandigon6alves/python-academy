@@ -20,7 +20,7 @@ export function useProgress() {
   const { data: me } = useMe();
   return useQuery({
     queryKey: queryKeys.progress(lang),
-    queryFn: () => api<ProgressOverview>("/progress/me", { lang }),
+    queryFn: ({ signal }) => api<ProgressOverview>("/progress/me", { lang, signal }),
     enabled: Boolean(me),
   });
 }
@@ -30,7 +30,7 @@ export function useGamification() {
   const { data: me } = useMe();
   return useQuery({
     queryKey: queryKeys.gamification(lang),
-    queryFn: () => api<GamificationSummary>("/gamification/me", { lang }),
+    queryFn: ({ signal }) => api<GamificationSummary>("/gamification/me", { lang, signal }),
     enabled: Boolean(me),
   });
 }
@@ -38,7 +38,7 @@ export function useGamification() {
 export function useLeaderboard(period: "weekly" | "all_time") {
   return useQuery({
     queryKey: queryKeys.leaderboard(period),
-    queryFn: () => api<Leaderboard>(`/gamification/leaderboard?period=${period}`),
+    queryFn: ({ signal }) => api<Leaderboard>(`/gamification/leaderboard?period=${period}`, { signal }),
   });
 }
 
@@ -62,7 +62,7 @@ export function useExam(courseSlug: string, enabled: boolean) {
   const lang = useLocale();
   return useQuery({
     queryKey: queryKeys.exam(courseSlug, lang),
-    queryFn: () => api<Exam>(apiPath`/exams/${courseSlug}`, { lang }),
+    queryFn: ({ signal }) => api<Exam>(apiPath`/exams/${courseSlug}`, { lang, signal }),
     enabled,
     retry: false,
   });
@@ -82,7 +82,7 @@ export function useCertificate(verificationId: string) {
   const lang = useLocale();
   return useQuery({
     queryKey: queryKeys.certificate(verificationId, lang),
-    queryFn: () => api<Certificate>(apiPath`/certificates/${verificationId}`, { lang }),
+    queryFn: ({ signal }) => api<Certificate>(apiPath`/certificates/${verificationId}`, { lang, signal }),
     retry: false,
   });
 }

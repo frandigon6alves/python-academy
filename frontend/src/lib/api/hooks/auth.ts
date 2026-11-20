@@ -7,7 +7,7 @@ import type { Locale, Theme, User } from "../types";
 export function useMe() {
   return useQuery({
     queryKey: queryKeys.me,
-    queryFn: () => api<User | null>("/auth/me"),
+    queryFn: ({ signal }) => api<User | null>("/auth/me", { signal }),
     staleTime: 5 * 60_000,
   });
 }
