@@ -39,7 +39,11 @@ export function backendHeaders(incoming: Headers, secret: string | undefined): H
   return headers;
 }
 
-/** Absolute backend URL for a /api/... path and query string. */
+/**
+ * Absolute backend URL for a /api/... path and query string. A path in `base` is kept
+ * (the same as the rewrite in next.config.ts), so the path is appended relative to it.
+ */
 export function backendUrl(base: string, pathname: string, search: string): URL {
-  return new URL(`${pathname}${search}`, base.endsWith("/") ? base : `${base}/`);
+  const root = base.endsWith("/") ? base : `${base}/`;
+  return new URL(`${pathname.replace(/^\/+/, "")}${search}`, root);
 }

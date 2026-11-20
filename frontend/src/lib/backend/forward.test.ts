@@ -40,4 +40,10 @@ describe("backendUrl", () => {
       "https://api.example.com/api/v1/health",
     );
   });
+
+  it("keeps a path prefix of the backend URL, like the fallback rewrite does", () => {
+    expect(backendUrl("https://example.com/academy", "/api/v1/health", "").href).toBe(
+      "https://example.com/academy/api/v1/health",
+    );
+  });
 });
