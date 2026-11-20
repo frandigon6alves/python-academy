@@ -7,7 +7,8 @@ interface ProgressBarProps {
 }
 
 export function ProgressBar({ value, label, valueText }: ProgressBarProps) {
-  const percent = Math.max(0, Math.min(100, Math.round(value)));
+  // NaN (e.g. a share of zero) would render "width: NaN%" and an invalid aria-valuenow.
+  const percent = Number.isFinite(value) ? Math.max(0, Math.min(100, Math.round(value))) : 0;
   return (
     <div
       className={styles.track}
