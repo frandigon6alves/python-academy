@@ -7,8 +7,8 @@ import { Button } from "@/components/ui/Button";
 import { SelectField, TextField, validateForm } from "@/components/ui/Field";
 import { authErrorKey } from "@/features/auth/error-message";
 import { usePathname, useRouter } from "@/i18n/navigation";
-import { useUpdateSettings } from "@/lib/api/hooks/settings";
 import { locales } from "@/i18n/routing";
+import { useUpdateSettings, type SettingsChanges } from "@/lib/api/hooks/settings";
 import type { User } from "@/lib/api/types";
 import { isTheme, THEMES } from "@/theme/theme";
 import { useTheme } from "@/theme/ThemeProvider";
@@ -20,19 +20,28 @@ export function ProfileForm({ user }: { user: User }) {
   const pathname = usePathname();
   const { setPreference } = useTheme();
   const update = useUpdateSettings();
-  const [form, setForm] = useState({
-    display_name: user.display_name,
-    language: user.language,
-    theme: user.theme,
-  });
+  // Only what was typed or picked here; everything else shows `user` as it is now. So a
+  // preference changed elsewhere (the theme switcher in the header, another tab) is never
+  // overwritten with a stale copy when this form is saved, and only the changes are sent.
+  const [edits, setEdits] = useState<SettingsChanges>({});
+  const displayName = edits.display_name ?? user.display_name;
+  const language = edits.language ?? user.language;
+  const theme = edits.theme ?? user.theme;
+  const changes: SettingsChanges = {
+    ...(displayName !== user.display_name && { display_name: displayName }),
+    ...(language !== user.language && { language }),
+    ...(theme !== user.theme && { theme }),
+  };
+  const hasChanges = Object.keys(changes).length > 0;
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!validateForm(event.currentTarget)) return;
-    update.mutate(form, {
+    if (!hasChanges || !validateForm(event.currentTarget)) return;
+    update.mutate(changes, {
       onSuccess: (saved) => {
-        setPreference(saved.theme);
-        if (saved.language !== user.language) router.replace(pathname, { locale: saved.language });
+        setEdits({});
+        if (changes.theme) setPreference(saved.theme);
+        if (changes.language) router.replace(pathname, { locale: saved.language });
       },
     });
   }
@@ -49,31 +58,31 @@ export function ProfileForm({ user }: { user: User }) {
         required
         minLength={2}
         maxLength={40}
-        value={form.display_name}
+        value={displayName}
         onChange={(event) => {
-          const displayName = event.target.value;
-          setForm((current) => ({ ...current, display_name: displayName }));
+          const display_name = event.target.value;
+          setEdits((current) => ({ ...current, display_name }));
         }}
       />
       <SelectField
         label={t("settings.language")}
-        value={form.language}
+        value={language}
         onChange={(event) => {
-          const language = event.target.value;
-          if (hasLocale(locales, language)) setForm((current) => ({ ...current, language }));
+          const value = event.target.value;
+          if (hasLocale(locales, value)) setEdits((current) => ({ ...current, language: value }));
         }}
         options={locales.map((code) => ({ value: code, label: t(`locale.${code}`) }))}
       />
       <SelectField
         label={t("settings.theme")}
-        value={form.theme}
+        value={theme}
         onChange={(event) => {
-          const theme = event.target.value;
-          if (isTheme(theme)) setForm((current) => ({ ...current, theme }));
+          const value = event.target.value;
+          if (isTheme(value)) setEdits((current) => ({ ...current, theme: value }));
         }}
-        options={THEMES.map((theme) => ({ value: theme, label: t(`theme.${theme}`) }))}
+        options={THEMES.map((option) => ({ value: option, label: t(`theme.${option}`) }))}
       />
-      <Button type="submit" disabled={update.isPending}>
+      <Button type="submit" disabled={!hasChanges || update.isPending}>
         {update.isPending ? t("settings.saving") : t("settings.save")}
       </Button>
     </form>
